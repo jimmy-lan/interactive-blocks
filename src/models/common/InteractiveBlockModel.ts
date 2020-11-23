@@ -70,19 +70,19 @@ export class InteractiveBlockModel<T = any> implements Serializable {
   /**
    * Serialize current attributes.
    */
-  serialize(): string {
+  serialize = (): string => {
     return JSON.stringify(this.attributes);
-  }
+  };
 
   /**
    * Replace current attributes with result from deserializing <raw>.
    * @param raw A string to be deserialized.
    */
-  deserialize(raw: string): void {
+  deserialize = (raw: string): void => {
     try {
       this.attributes.replace(JSON.parse(raw));
     } catch (e: any) {
       throw new Error(`Cannot deserialize from value ${raw}`);
     }
-  }
+  };
 }
