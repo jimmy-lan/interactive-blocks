@@ -13,7 +13,7 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
 
   /**
    * Bind model to this view component so that the view component rerender
-   * whenever the model changes.
+   * itself whenever the model changes.
    */
   bindModel = (): void => {
     this.model.on("change", () => {
@@ -21,8 +21,17 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
     });
   };
 
+  /**
+   * Return a string with html syntax that represents this view component.
+   */
   abstract get htmlStructure(): string;
 
+  /**
+   * Render the component by appending it to the parent component.
+   * @param disableClean Boolean value to indicate whether to clean all
+   *    children elements of the parent before this component is
+   *    appended. Defaults to false.
+   */
   render = (disableClean: boolean = false) => {
     // Clean up parent area
     if (!disableClean) {

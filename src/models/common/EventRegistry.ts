@@ -14,7 +14,7 @@ export class EventRegistry {
   /**
    * Register event <eventType> with <callback>.
    * @param eventType type of event to register.
-   * @param callback callback function to be invoked when event
+   * @param callback A Callback function to be invoked when event
    *    <eventType> is triggered.
    */
   register = (eventType: string, callback: EventCallback): void => {
@@ -25,7 +25,7 @@ export class EventRegistry {
 
   /**
    * Trigger event <eventType>.
-   * @param eventType type of event to be triggered.
+   * @param eventType Type of event to be triggered.
    */
   trigger = (eventType: string): void => {
     this.events[eventType]?.forEach((callback: EventCallback) => callback());

@@ -4,7 +4,7 @@
  */
 
 import { BlockComponent } from "./common/BlockComponent";
-import { MultipleChoice, MultipleChoiceProps } from "../models/MultipleChoice";
+import { MultipleChoice, MultipleChoiceProps } from "../models";
 
 export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,

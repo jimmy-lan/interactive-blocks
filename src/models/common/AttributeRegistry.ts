@@ -10,7 +10,7 @@ export class AttributeRegistry<T> {
   /**
    * Get data corresponding to <key> from attributes.
    * To get all data, use getAll.
-   * @param key key used to get property.
+   * @param key A key used to get property.
    * @see getAll
    */
   get = <K extends keyof T>(key: K): T[K] => {
