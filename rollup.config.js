@@ -7,10 +7,10 @@
  */
 
 import typescript from "rollup-plugin-typescript2";
+import cleanup from "rollup-plugin-cleanup";
 import { terser } from "rollup-plugin-terser";
 
 import pkg from "./package.json";
-import cleanupPlugin from "rollup-plugin-cleanup";
 
 const input = "src/index.js";
 
@@ -35,7 +35,7 @@ export default [
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
-      cleanupPlugin({ sourcemap: true }),
+      cleanup({ sourcemap: true }),
     ],
   },
 

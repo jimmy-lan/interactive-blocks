@@ -6,4 +6,5 @@
 import * as models from "./models";
 import * as views from "./views";
 
+// @ts-ignore
 window.Blocks = { ...models, ...views };
