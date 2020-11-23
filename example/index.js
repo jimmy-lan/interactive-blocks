@@ -1,6 +1,6 @@
-import { MultipleChoice, MultipleChoiceComponent } from "../src";
-
 const root = document.getElementById("root");
+
+const { MultipleChoice, MultipleChoiceComponent } = Blocks;
 
 const mc1 = new MultipleChoice({
   question: "What is the answer to the world, the universe, and everything?",

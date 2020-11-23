@@ -7,40 +7,47 @@
  */
 
 import typescript from "rollup-plugin-typescript2";
-import pkg from "./package.json";
 import { terser } from "rollup-plugin-terser";
 
-const input = "src/index.ts";
+import pkg from "./package.json";
+import cleanupPlugin from "rollup-plugin-cleanup";
 
-const banner = `/*!
+const input = "src/index.js";
+
+const banner = `/*! *****************************************************************************
  * interactive-blocks.js v${pkg.version}
  * ${pkg.homepage}
  * (c) ${new Date().getFullYear()} Jimmy Lan
  * Released under the MIT License
- */`;
+ ***************************************************************************** */`;
 
 export default [
   // Regular version
   {
     input,
     output: {
-      name: "Interactive Blocks",
+      name: "InteractiveBlocks",
       file: "dist/interactive-blocks.js",
       indent: false,
-      format: "umd",
+      format: "iife",
+      sourcemap: true,
       banner,
     },
-    plugins: [typescript({ rollupCommonJSResolveHack: false, cleanup: true })],
+    plugins: [
+      typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
+      cleanupPlugin({ sourcemap: true }),
+    ],
   },
 
   // Minimized version
   {
     input,
     output: {
-      name: "Interactive Blocks",
+      name: "InteractiveBlocks",
       file: "dist/interactive-blocks.min.js",
       indent: false,
-      format: "umd",
+      format: "iife",
+      sourcemap: true,
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),

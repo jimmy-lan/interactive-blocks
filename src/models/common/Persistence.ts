@@ -43,6 +43,8 @@ export class StoragePersistence<T extends Serializable> extends Persistence<T> {
    */
   read = (key: string): void => {
     const raw = this.storage.getItem(key);
-    this.model.deserialize(raw);
+    if (raw) {
+      this.model.deserialize(raw);
+    }
   };
 }

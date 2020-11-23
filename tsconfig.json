@@ -67,8 +67,16 @@
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
+  "typedocOptions": {
+    "name": "InteractiveBlocks.js",
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "includeVersion": true,
+    "inputFiles": ["./src"],
+    "out": "./dist/docs/typedoc"
+  },
   "include": [
-    "./src/**/ts",
-    "./src/**/js"
+    "./src/**/*.ts",
+    "./src/**/*.js"
   ]
 }
