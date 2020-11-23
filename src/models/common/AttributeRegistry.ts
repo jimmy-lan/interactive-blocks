@@ -4,7 +4,7 @@
  * Description: Class holding attributes regarding a model.
  */
 
-class AttributeRegistry<T> {
+export class AttributeRegistry<T> {
   constructor(private data: T) {}
 
   /**
@@ -40,5 +40,3 @@ class AttributeRegistry<T> {
    */
   replace = (newData: T): void => {};
 }
-
-export { AttributeRegistry };

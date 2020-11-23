@@ -15,7 +15,7 @@ abstract class Persistence<T> {
   abstract read(key: string): void;
 }
 
-interface Serializable<T> {
+export interface Serializable<T> {
   serialize: () => string;
   deserialize: (raw: string) => T;
 }
@@ -23,7 +23,9 @@ interface Serializable<T> {
 /**
  * Persistence class implementation that uses storage.
  */
-class StoragePersistence<T extends Serializable<T>> extends Persistence<T> {
+export class StoragePersistence<T extends Serializable<T>> extends Persistence<
+  T
+> {
   constructor(model: T, private storage: Storage) {
     super(model);
   }

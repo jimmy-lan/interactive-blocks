@@ -8,7 +8,7 @@
 type EventCallback = () => void;
 type EventsRecord = { [eventType: string]: EventCallback[] };
 
-class EventRegistry {
+export class EventRegistry {
   constructor(public events: EventsRecord = {}) {}
 
   /**
@@ -31,5 +31,3 @@ class EventRegistry {
     this.events[eventType]?.forEach((callback: EventCallback) => callback());
   };
 }
-
-export { EventRegistry };
