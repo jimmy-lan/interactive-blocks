@@ -6,14 +6,19 @@
 
 import { AttributeRegistry } from "./AttributeRegistry";
 import { EventRegistry } from "./EventRegistry";
-import { Persistence, Serializable } from "./Persistence";
+import { Persistence, Serializable, StoragePersistence } from "./Persistence";
 
-export class InteractiveBlockModel<T = any> implements Serializable {
-  constructor(
-    private attributes: AttributeRegistry<T>,
-    private events: EventRegistry,
-    private persistence?: Persistence<T>
-  ) {}
+export class InteractiveBlock<T = any> implements Serializable {
+  events: EventRegistry;
+  persistence: StoragePersistence<this>;
+
+  constructor(private attributes: AttributeRegistry<T>) {
+    // At the current project scope, it is not likely that the event and storage
+    // classes need to be substituted. Therefore, they are instantiated directly
+    // here.
+    this.events = new EventRegistry();
+    this.persistence = new StoragePersistence<this>(this, localStorage);
+  }
 
   get get() {
     return this.attributes.get;
