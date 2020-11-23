@@ -8,7 +8,7 @@
  * General class to declare the required methods and/or
  * attributes on a Persistence class.
  */
-abstract class Persistence<T> {
+export abstract class Persistence<T> {
   protected constructor(public model: T) {}
 
   abstract save(key: string): void;
