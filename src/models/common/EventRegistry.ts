@@ -31,3 +31,5 @@ class EventRegistry {
     this.events[eventType]?.forEach((callback: EventCallback) => callback());
   };
 }
+
+export { EventRegistry };
