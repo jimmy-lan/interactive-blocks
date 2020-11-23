@@ -38,5 +38,7 @@ export class AttributeRegistry<T> {
    * @param newData
    * @see set
    */
-  replace = (newData: T): void => {};
+  replace = (newData: T): void => {
+    this.data = newData;
+  };
 }
