@@ -8,7 +8,7 @@ import { AttributeRegistry } from "./AttributeRegistry";
 import { EventRegistry } from "./EventRegistry";
 import { Serializable, StoragePersistence } from "./Persistence";
 
-export class InteractiveBlock<T = any> implements Serializable {
+export class InteractiveBlockModel<T = any> implements Serializable {
   events: EventRegistry;
   persistence: StoragePersistence<this>;
 
