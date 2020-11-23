@@ -1,4 +1,4 @@
-/**
+/*
  * Created by Jimmy Lan
  * Creation Date: 2020-11-23
  * Description: Class holding attributes regarding a model.
