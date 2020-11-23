@@ -33,8 +33,8 @@ export class AttributeRegistry<T> {
   };
 
   /**
-   * Replace with <newData>. If you would like some entries
-   * from the previous state to be persisted, use set function.
+   * Replace with <newData>. If you would like to keep some entries
+   * from the previous state, use set function.
    * @param newData
    * @see set
    */
