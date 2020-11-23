@@ -9,11 +9,17 @@ import { AttributeRegistry } from "./common/AttributeRegistry";
 export interface MultipleChoiceProps {
   question: string;
   options: string[];
-  answer: number;
+  /**
+   * Index or indices in options that are correct
+   */
+  answerId: number | number[];
 }
 
 export class MultipleChoice extends InteractiveBlock<MultipleChoiceProps> {
-  constructor(attributes: MultipleChoiceProps) {
-    super(new AttributeRegistry<MultipleChoiceProps>(attributes));
+  constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
+    super(
+      new AttributeRegistry<MultipleChoiceProps>(attributes),
+      persistenceStorage
+    );
   }
 }
