@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-23
  */
 
-import { InteractiveBlockModel } from "./common/InteractiveBlockModel";
+import { BlockModel } from "./common/BlockModel";
 import { AttributeRegistry } from "./common/AttributeRegistry";
 
 export interface MultipleChoiceProps {
@@ -15,7 +15,7 @@ export interface MultipleChoiceProps {
   answerId: number | number[];
 }
 
-export class MultipleChoice extends InteractiveBlockModel<MultipleChoiceProps> {
+export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
   constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
     super(
       new AttributeRegistry<MultipleChoiceProps>(attributes),

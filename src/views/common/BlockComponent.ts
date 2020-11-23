@@ -1,21 +1,22 @@
 /*
  * Created by Jimmy Lan
  * Creation Date: 2020-11-23
- * Description: An abstract representation of a component.
+ * Description: An abstract representation of an interactive block component.
  */
 
-import { InteractiveBlockModel } from "../models/common/InteractiveBlockModel";
+import { BlockModel } from "../../models/common/BlockModel";
 
-export abstract class InteractiveBlockComponent<
-  T extends InteractiveBlockModel<K>,
-  K
-> {
-  constructor(public parent: Element, public ibModel: T) {
+export abstract class BlockComponent<T extends BlockModel<K>, K> {
+  constructor(public parent: Element, public model: T) {
     this.bindModel();
   }
 
+  /**
+   * Bind model to this view component so that the view component rerender
+   * whenever the model changes.
+   */
   bindModel = (): void => {
-    this.ibModel.on("change", () => {
+    this.model.on("change", () => {
       this.render();
     });
   };
