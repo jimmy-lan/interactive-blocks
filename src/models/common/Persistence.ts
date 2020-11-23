@@ -4,29 +4,45 @@
  * Description: File containing functionalities relating to persistence.
  */
 
+/**
+ * General class to declare the required methods and/or
+ * attributes on a Persistence class.
+ */
+abstract class Persistence<T> {
+  protected constructor(public model: T) {}
+
+  abstract save(key: string): void;
+  abstract read(key: string): void;
+}
+
 interface Serializable<T> {
   serialize: () => string;
   deserialize: (raw: string) => T;
 }
 
-class LocalPersistence<T extends Serializable<T>> {
-  constructor(public model: T) {}
+/**
+ * Persistence class implementation that uses storage.
+ */
+class StoragePersistence<T extends Serializable<T>> extends Persistence<T> {
+  constructor(model: T, private storage: Storage) {
+    super(model);
+  }
 
   /**
-   * Save model to local storage with <key> as the key.
+   * Save model to storage with <key> as the key.
    * @param key key to save model
    */
   save = (key: string): void => {
-    localStorage.setItem(key, this.model.serialize());
+    this.storage.setItem(key, this.model.serialize());
   };
 
   /**
-   * Read information from local storage with <key> and
+   * Read information from storage with <key> and
    * deserialize raw input to model.
-   * @param key key to access local storage
+   * @param key key to access storage
    */
   read = (key: string): void => {
-    const raw = localStorage.getItem(key);
+    const raw = this.storage.getItem(key);
     this.model.deserialize(raw);
   };
 }
