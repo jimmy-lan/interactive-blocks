@@ -34,6 +34,6 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
     templateElement.innerHTML = this.htmlStructure;
 
     // Append template element to parent
-    this.parent.appendChild(templateElement);
+    this.parent.appendChild(templateElement.content);
   };
 }

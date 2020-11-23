@@ -13,12 +13,13 @@ export class MultipleChoiceComponent extends BlockComponent<
   get htmlStructure(): string {
     return `
       <div>
-        <h5>${this.model.get("question")}</h5>
+        <h3>${this.model.get("question")}</h3>
         <p>Multiple Choice*</p>
         <ul>
           ${this.model
             .get("options")
-            .forEach((option: string) => `<li>${option}</li>`)}
+            .map((option: string) => `<li>${option}</li>`)
+            .join("")}
         </ul>
       </div>
     `;
