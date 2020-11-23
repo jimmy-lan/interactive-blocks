@@ -12,7 +12,7 @@ export class InteractiveBlockModel<T = any> implements Serializable {
   constructor(
     private attributes: AttributeRegistry<T>,
     private events: EventRegistry,
-    private persistence: Persistence<T>
+    private persistence?: Persistence<T>
   ) {}
 
   get get() {
@@ -36,6 +36,9 @@ export class InteractiveBlockModel<T = any> implements Serializable {
    * @param key A string key to save model
    */
   save = (key: string) => {
+    if (!this.persistence) {
+      throw new Error("No persistence is specified for this model.");
+    }
     this.events.trigger("save");
     this.persistence.save(key);
   };
@@ -45,6 +48,9 @@ export class InteractiveBlockModel<T = any> implements Serializable {
    * @param key A string key to access information relating to the model
    */
   read = (key: string) => {
+    if (!this.persistence) {
+      throw new Error("No persistence is specified for this model.");
+    }
     this.events.trigger("read");
     this.persistence.read(key);
   };
@@ -68,15 +74,15 @@ export class InteractiveBlockModel<T = any> implements Serializable {
   };
 
   /**
-   * Serialize current attributes.
+   * Serialize attributes of this model.
    */
   serialize = (): string => {
     return JSON.stringify(this.attributes);
   };
 
   /**
-   * Replace current attributes with result from deserializing <raw>.
-   * @param raw A string to be deserialized.
+   * Deserialize <raw> and replace current attributes.
+   * @param raw A string corresponding to attributes to be deserialized.
    */
   deserialize = (raw: string): void => {
     try {
