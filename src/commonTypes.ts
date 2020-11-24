@@ -13,6 +13,6 @@ export type EventCallback = () => void;
 export type EventsRecord = { [eventType: string]: EventCallback[] };
 /**
  * A map of events, where events are registered using a one-to-one relationship.
- * Descriptor must follow some special syntax so that it only describes one event.
+ * Descriptor (i.e. p, object key) must follow some special syntax so that it only describes one event.
  */
 export type EventsMap = { [descriptor: string]: EventCallback };
