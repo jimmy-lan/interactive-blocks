@@ -61,6 +61,7 @@ export default [
       postcss({
         extensions: [".css"],
         plugins: [cssnano()],
+        inject: { insertAt: "top" },
       }),
       terser({
         format: {

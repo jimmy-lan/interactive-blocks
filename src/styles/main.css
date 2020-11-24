@@ -2,5 +2,36 @@
 /* Sample Comment */
 
 .ib-container {
-  background-color: orange;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 3px 16px;
+  transition: 0.3s;
+}
+
+.ib-question-left {
+  background: #f8f9fa;
+  border-right: 3px solid #fff;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.ib-question-right {
+  background: #f8f9fa;
+  flex: 1;
+  padding: 16px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ib-question-status {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e8ebed;
+  background: #fff;
 }
