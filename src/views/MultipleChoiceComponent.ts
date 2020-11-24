@@ -25,9 +25,9 @@ export class MultipleChoiceComponent extends BlockComponent<
             .get("options")
             .map((option: string) =>
               renderCheckbox
-                ? `<label class="ib-option-label">
+                ? `<label class="ib-option-label disabled">
+                     <input type="checkbox" disabled />
                      <span class="ib-option-text">${option}</span>
-                     <input type="checkbox" checked="checked" />
                      <span class="ib-option-checkmark"></span>
                    </label>`
                 : ""
