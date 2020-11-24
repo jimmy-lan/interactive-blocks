@@ -49,12 +49,18 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
    * Return a list of options in the correct format.
    * @param optionTexts A list of texts corresponding to the texts displayed
    *    for multiple choice options.
+   * @param answerIndices A list of indices in <optionTexts> that corresponds
+   *    to the correct answer.
    */
-  static parseOptions = (optionTexts: string[]): MultipleChoiceOption[] => {
+  static parseOptions = (
+    optionTexts: string[],
+    answerIndices?: number[]
+  ): MultipleChoiceOption[] => {
     return optionTexts.map(
       (text: string, index: number): MultipleChoiceOption => ({
         id: String(index),
         text,
+        isAnswer: answerIndices?.includes(index),
       })
     );
   };

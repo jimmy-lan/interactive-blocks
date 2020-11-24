@@ -24,7 +24,6 @@ export class MultipleChoiceComponent extends BlockComponent<
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
-          <p>Multiple Choice*</p>
           ${this.model
             .get("options")
             .map(({ id, text }: MultipleChoiceOption) =>
@@ -37,6 +36,7 @@ export class MultipleChoiceComponent extends BlockComponent<
                 : ""
             )
             .join("")}
+          <button>Check Answer</button>
         </div>
       </div>
     `;
