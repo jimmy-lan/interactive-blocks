@@ -22,7 +22,7 @@ export interface MultipleChoiceProps {
   /**
    * A list storing <id> of options chosen by the user.
    */
-  userSelections: string[];
+  userSelections?: string[];
   /**
    * If true, more than one option can be selected by the user.
    * This attribute will be guessed if not specified.
