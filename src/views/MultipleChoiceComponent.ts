@@ -14,9 +14,27 @@ export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {
-  get htmlStructure(): string {
-    const renderCheckbox = true;
+  renderOptions = (): string => {
+    const renderCheckbox =
+      this.model.get("canSelectMany") || this.model.guessCanSelectMany();
+    const optionInputType = renderCheckbox ? "checkbox" : "radio";
 
+    return `${this.model
+      .get("options")
+      .map(
+        ({ id, text }: MultipleChoiceOption) =>
+          `<label class="ib-option-label">
+             <input type="${optionInputType}" value=${id} name="${this.model.get(
+            "id"
+          )}" />
+             <span class="ib-option-text">${text}</span>
+             <span class="ib-option-checkmark ${optionInputType}"></span>
+           </label>`
+      )
+      .join("")}`;
+  };
+
+  get htmlStructure(): string {
     return `
       <div class="ib-container">
         <div class="ib-question-left">
@@ -24,18 +42,7 @@ export class MultipleChoiceComponent extends BlockComponent<
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
-          ${this.model
-            .get("options")
-            .map(({ id, text }: MultipleChoiceOption) =>
-              renderCheckbox
-                ? `<label class="ib-option-label">
-                     <input type="checkbox" value=${id} />
-                     <span class="ib-option-text">${text}</span>
-                     <span class="ib-option-checkmark"></span>
-                   </label>`
-                : ""
-            )
-            .join("")}
+          <form>${this.renderOptions()}</form>
           <button>Check Answer</button>
         </div>
       </div>
