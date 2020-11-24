@@ -5,9 +5,10 @@
  */
 
 import { BlockModel } from "../../models/common/BlockModel";
+import { EventsMap } from "../../commonTypes";
 
 export abstract class BlockComponent<T extends BlockModel<K>, K> {
-  constructor(public parent: Element, public model: T) {
+  constructor(public parent: HTMLElement, public model: T) {
     this.bindModel();
   }
 
@@ -20,6 +21,12 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
       this.render();
     });
   };
+
+  get eventsMap(): EventsMap {
+    return {};
+  }
+
+  bindEvents = (fragment: DocumentFragment): void => {};
 
   /**
    * Return a string with html syntax that represents this view component.

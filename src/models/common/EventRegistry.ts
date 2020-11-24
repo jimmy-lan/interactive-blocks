@@ -5,8 +5,7 @@
  *    Event registry class to persist and trigger a set of events.
  */
 
-type EventCallback = () => void;
-type EventsRecord = { [eventType: string]: EventCallback[] };
+import { EventCallback, EventsRecord } from "../../commonTypes";
 
 export class EventRegistry {
   constructor(public events: EventsRecord = {}) {}
