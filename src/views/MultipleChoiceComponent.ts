@@ -19,14 +19,14 @@ export class MultipleChoiceComponent extends BlockComponent<
           <div class="ib-question-status"></div>
         </div>
         <div class="ib-question-right">
-          <h3>${this.model.get("question")}</h3>
+          <h3 class="ib-question-text">${this.model.get("question")}</h3>
           <p>Multiple Choice*</p>
           ${this.model
             .get("options")
             .map((option: string) =>
               renderCheckbox
-                ? `<label class="ib-option-label disabled">
-                     <input type="checkbox" disabled />
+                ? `<label class="ib-option-label">
+                     <input type="checkbox" />
                      <span class="ib-option-text">${option}</span>
                      <span class="ib-option-checkmark"></span>
                    </label>`
