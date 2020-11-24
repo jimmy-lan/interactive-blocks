@@ -11,6 +11,8 @@ export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoiceProps
 > {
   get htmlStructure(): string {
+    const renderCheckbox = typeof this.model.get("answerId") === "object";
+
     return `
       <div class="ib-container">
         <div class="ib-question-left">
@@ -19,12 +21,18 @@ export class MultipleChoiceComponent extends BlockComponent<
         <div class="ib-question-right">
           <h3>${this.model.get("question")}</h3>
           <p>Multiple Choice*</p>
-          <ul>
-            ${this.model
-              .get("options")
-              .map((option: string) => `<li>${option}</li>`)
-              .join("")}
-          </ul>
+          ${this.model
+            .get("options")
+            .map((option: string) =>
+              renderCheckbox
+                ? `<label class="ib-option-label">
+                     <span class="ib-option-text">${option}</span>
+                     <input type="checkbox" checked="checked" />
+                     <span class="ib-option-checkmark"></span>
+                   </label>`
+                : ""
+            )
+            .join("")}
         </div>
       </div>
     `;

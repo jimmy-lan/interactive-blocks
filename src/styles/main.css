@@ -7,6 +7,7 @@
   width: 100%;
   padding: 3px 16px;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 .ib-question-left {
@@ -34,4 +35,71 @@
   border-radius: 50%;
   border: 2px solid #e8ebed;
   background: #fff;
+}
+
+/* Question option checkbox and radio buttons */
+/* Styling idea taken from W3Schools, changes were made */
+
+.ib-option-label {
+  height: 24px;
+  user-select: none;
+  position: relative;
+  display: block;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  padding-left: 36px;
+}
+
+.ib-option-label > .ib-option-text {
+  height: 24px;
+  vertical-align: middle;
+}
+
+.ib-option-label > input {
+  /*display: none;*/
+  position: absolute;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ib-option-label > .ib-option-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  background: #fff;
+  border: 2px solid #e8ebed;
+}
+
+.ib-option-label:hover > .ib-option-checkmark {
+  background: #ccc;
+}
+
+.ib-option-label input[type="checkbox"]:checked ~ .ib-option-checkmark {
+  background: #36c247;
+}
+
+.ib-option-checkmark:after {
+  position: absolute;
+  display: none;
+  content: "";
+}
+
+.ib-option-label input[type="checkbox"]:checked ~ .ib-option-checkmark:after {
+  display: block;
+}
+
+/* Style checkmark */
+.ib-option-label > .ib-option-checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
 }
