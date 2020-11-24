@@ -12,7 +12,7 @@ export class MultipleChoiceComponent extends BlockComponent<
 > {
   get htmlStructure(): string {
     return `
-      <div>
+      <div class="ib-container">
         <h3>${this.model.get("question")}</h3>
         <p>Multiple Choice*</p>
         <ul>

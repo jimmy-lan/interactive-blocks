@@ -10,6 +10,9 @@ import typescript from "rollup-plugin-typescript2";
 import cleanup from "rollup-plugin-cleanup";
 import { terser } from "rollup-plugin-terser";
 
+import postcss from "rollup-plugin-postcss";
+import cssnano from "cssnano";
+
 import pkg from "./package.json";
 
 const input = "src/index.js";
@@ -35,6 +38,10 @@ export default [
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
+      postcss({
+        extensions: [".css"],
+        plugins: [cssnano()],
+      }),
       cleanup({ sourcemap: true }),
     ],
   },
@@ -51,6 +58,10 @@ export default [
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
+      postcss({
+        extensions: [".css"],
+        plugins: [cssnano()],
+      }),
       terser({
         format: {
           preamble: banner,
