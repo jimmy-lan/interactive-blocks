@@ -5,12 +5,23 @@
  */
 
 import { BlockModel } from "../../models/common/BlockModel";
-import { EventsMap, ModelChangeEventOptions } from "../../commonTypes";
+import {
+  ComponentsMap,
+  EventsMap,
+  ModelChangeEventOptions,
+} from "../../commonTypes";
 
 export abstract class BlockComponent<T extends BlockModel<K>, K> {
+  protected components: { [key: string]: Element } = {};
+
   constructor(public parent: Element, public model: T) {
     this.bindModel();
   }
+
+  /**
+   * Return a string with html syntax that represents this view component.
+   */
+  abstract get htmlStructure(): string;
 
   /**
    * Bind model to this view component so that the view component rerender
@@ -75,9 +86,32 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
   };
 
   /**
-   * Return a string with html syntax that represents this view component.
+   * A map of child components in the view component.
+   * A ComponentsMap must follow the following format:
+   * - Keys correspond to names of child components
+   * - Values correspond to selectors of child components
    */
-  abstract get htmlStructure(): string;
+  get componentsMap(): ComponentsMap {
+    return {};
+  }
+
+  mapComponents = (fragment: DocumentFragment): void => {
+    for (let key in this.componentsMap) {
+      // Ensure no unexpected prototype change
+      if (!this.componentsMap.hasOwnProperty(key)) {
+        throw new Error("Unexpected prototype change in componentsMap!");
+      }
+
+      // Translate selector to actual component and store it
+      const selector = this.componentsMap[key];
+      const component = fragment.querySelector(selector);
+      if (component) {
+        this.components[key] = component;
+      }
+    }
+  };
+
+  bindComponents(): void {}
 
   /**
    * Render the component by appending it to the parent component.
@@ -96,6 +130,8 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
     templateElement.innerHTML = this.htmlStructure;
 
     this.bindEvents(templateElement.content);
+    this.mapComponents(templateElement.content);
+    this.bindComponents();
 
     // Append template element to parent
     this.parent.appendChild(templateElement.content);

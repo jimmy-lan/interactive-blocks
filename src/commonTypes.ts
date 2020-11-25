@@ -17,6 +17,14 @@ export type EventsRecord = { [eventType: string]: EventCallback[] };
  */
 export type EventsMap = { [descriptor: string]: EventCallback };
 
+/**
+ * A map of components with object key being the name of the component and
+ * object value being the selector of the component on the DOM.
+ */
+export type ComponentsMap = { [key: string]: string };
+
+// Event options
+
 export interface ModelChangeEventOptions {
   shouldRerender: boolean;
 }
