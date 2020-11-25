@@ -48,8 +48,8 @@ export class BlockModel<T = any> implements Serializable {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
-    this.events.trigger("save");
     this.persistence.save(key);
+    this.events.trigger("save");
   };
 
   /**
@@ -60,8 +60,8 @@ export class BlockModel<T = any> implements Serializable {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
-    this.events.trigger("read");
     this.persistence.read(key);
+    this.events.trigger("read");
   };
 
   /**
@@ -69,8 +69,8 @@ export class BlockModel<T = any> implements Serializable {
    * @see AttributeRegistry.set
    */
   set = (newData: Partial<T>) => {
-    this.events.trigger("change");
     this.attributes.set(newData);
+    this.events.trigger("change");
   };
 
   /**
@@ -78,8 +78,8 @@ export class BlockModel<T = any> implements Serializable {
    * @see AttributeRegistry.replace
    */
   replace = (newData: T) => {
-    this.events.trigger("change");
     this.attributes.replace(newData);
+    this.events.trigger("change");
   };
 
   /**
