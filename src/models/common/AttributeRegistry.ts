@@ -28,7 +28,7 @@ export class AttributeRegistry<T> {
    * @param newData
    * @see replace
    */
-  set = (newData: T): void => {
+  set = (newData: Partial<T>): void => {
     Object.assign(this.data, newData);
   };
 

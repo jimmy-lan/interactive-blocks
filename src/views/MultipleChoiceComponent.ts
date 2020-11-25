@@ -18,13 +18,18 @@ export class MultipleChoiceComponent extends BlockComponent<
   get eventsMap(): EventsMap {
     return {
       "button:click": this.handleCheckAnswerClicked,
+      ".ib-option-label input:change": this.handleOptionInputChange,
     };
   }
 
   handleCheckAnswerClicked = (): void => {
-    const statusDiv = document.querySelector(".ib-question-status > div");
-    statusDiv?.classList.add("warning");
+    const statusContainer = document.querySelector<HTMLDivElement>(
+      ".ib-status-container"
+    );
+    statusContainer?.classList.add("checkmark");
   };
+
+  handleOptionInputChange = (): void => {};
 
   /**
    * Return html structure in string of the options for this
@@ -34,6 +39,7 @@ export class MultipleChoiceComponent extends BlockComponent<
     const renderCheckbox =
       this.model.get("canSelectMany") || this.model.guessCanSelectMany();
     const optionInputType = renderCheckbox ? "checkbox" : "radio";
+    const userSelections = this.model.get("userSelections") || [];
 
     return `${this.model
       .get("options")
@@ -42,7 +48,7 @@ export class MultipleChoiceComponent extends BlockComponent<
           `<label class="ib-option-label">
              <input type="${optionInputType}" value=${id} name="${this.model.get(
             "id"
-          )}" />
+          )}" ${userSelections.includes(id) && "checked"} />
              <span class="ib-option-text">${text}</span>
              <span class="ib-option-checkmark ${optionInputType}"></span>
            </label>`

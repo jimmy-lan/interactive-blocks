@@ -46,7 +46,7 @@
   transition: background 0.3s ease-in-out;
 }
 
-.checkmark.ib-status-container {
+.correct.ib-status-container {
   background: #36c247;
 }
 
@@ -60,7 +60,7 @@
   content: "";
 }
 
-.checkmark.ib-status-container:after {
+.correct.ib-status-container:after {
   left: 15px;
   top: 7px;
   width: 8px;

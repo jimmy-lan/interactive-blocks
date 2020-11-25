@@ -16,6 +16,12 @@ export interface MultipleChoiceOption {
   isAnswer?: boolean;
 }
 
+export enum QuestionStatus {
+  unanswered = "unanswered",
+  correct = "correct",
+  warning = "warning",
+}
+
 export interface MultipleChoiceProps {
   /**
    * Id used to distinguish between different questions.
@@ -28,6 +34,7 @@ export interface MultipleChoiceProps {
    * A list storing <id> of options chosen by the user.
    */
   userSelections?: string[];
+  questionStatus?: QuestionStatus;
   /**
    * If true, more than one option can be selected by the user.
    * This attribute will be guessed if not specified.

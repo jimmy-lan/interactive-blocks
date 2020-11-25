@@ -68,7 +68,7 @@ export class BlockModel<T = any> implements Serializable {
    * @param newData
    * @see AttributeRegistry.set
    */
-  set = (newData: T) => {
+  set = (newData: Partial<T>) => {
     this.events.trigger("change");
     this.attributes.set(newData);
   };
