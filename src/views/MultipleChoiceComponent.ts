@@ -3,16 +3,16 @@
  * Creation Date: 2020-11-23
  */
 
-import { BlockComponent } from "./common/BlockComponent";
 import {
   MultipleChoice,
   MultipleChoiceOption,
   MultipleChoiceProps,
-  QuestionStatus,
 } from "../models";
 import { EventsMap } from "../commonTypes";
+import { QuestionStatus } from "../models/Question";
+import { QuestionComponent } from "./QuestionComponent";
 
-export class MultipleChoiceComponent extends BlockComponent<
+export class MultipleChoiceComponent extends QuestionComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {

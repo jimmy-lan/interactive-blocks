@@ -6,6 +6,7 @@
 import { BlockModel } from "./common/BlockModel";
 import { AttributeRegistry } from "./common/AttributeRegistry";
 import { isArrayEqual } from "../utils";
+import { Question, QuestionProps } from "./Question";
 
 export interface MultipleChoiceOption {
   id: string;
@@ -17,30 +18,12 @@ export interface MultipleChoiceOption {
   isAnswer?: boolean;
 }
 
-export enum QuestionStatus {
-  unanswered = "unanswered",
-  correct = "correct",
-  warning = "warning",
-}
-
-export interface MultipleChoiceProps {
-  /**
-   * Id used to distinguish between different questions.
-   * Please ensure that this field is unique.
-   */
-  id: string;
-  question: string;
+export interface MultipleChoiceProps extends QuestionProps {
   options: MultipleChoiceOption[];
   /**
    * A list storing <id> of options chosen by the user.
    */
   userSelections?: string[];
-  /**
-   * Status of this multiple choice question.
-   * If not provided, the question is unanswered.
-   * @see QuestionStatus
-   */
-  questionStatus?: QuestionStatus;
   /**
    * If true, more than one option can be selected by the user.
    * This attribute will be guessed if not specified.
@@ -61,14 +44,7 @@ export interface MultipleChoiceProps {
   getAnswer?: () => Promise<string[]>;
 }
 
-export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
-  constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
-    super(
-      new AttributeRegistry<MultipleChoiceProps>(attributes),
-      persistenceStorage
-    );
-  }
-
+export class MultipleChoice extends Question<MultipleChoiceProps> {
   /**
    * Return a list of options in the correct format.
    * @param optionTexts A list of texts corresponding to the texts displayed
