@@ -36,6 +36,7 @@ export interface MultipleChoiceProps {
   userSelections?: string[];
   /**
    * Status of this multiple choice question.
+   * If not provided, the question is unanswered.
    * @see QuestionStatus
    */
   questionStatus?: QuestionStatus;
@@ -100,7 +101,6 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
 
     // Guess based on number of `isAnswer` set to true. If there is only one `isAnswer` attr
     // set to true, return false. Otherwise, return true.
-
     const count = this.get("options").reduce(
       (previousState: number, option: MultipleChoiceOption) => {
         if (option.isAnswer) {
