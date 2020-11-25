@@ -47,9 +47,9 @@ export interface MultipleChoiceProps {
   /**
    * If true, multiple attempts to the question is allowed until
    * the question is correctly answered. Otherwise, the question
-   * becomes disabled after one attempt.
+   * becomes disabled after one attempt. Defaults to false.
    */
-  allowMultipleAttempt?: boolean;
+  disableMultipleAttempts?: boolean;
   /**
    * Callback function to obtain a list of option <id> which corresponds to
    * the correct answer. When this attribute is not specified, the `isAnswer`

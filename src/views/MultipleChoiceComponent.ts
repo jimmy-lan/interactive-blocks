@@ -8,6 +8,7 @@ import {
   MultipleChoice,
   MultipleChoiceOption,
   MultipleChoiceProps,
+  QuestionStatus,
 } from "../models";
 import { EventsMap } from "../commonTypes";
 
@@ -17,16 +18,17 @@ export class MultipleChoiceComponent extends BlockComponent<
 > {
   get eventsMap(): EventsMap {
     return {
-      "button:click": this.handleCheckAnswerClicked,
+      "button:click": this.handleCheckAnswerClick,
       ".ib-option-label input:change": this.handleOptionInputChange,
     };
   }
 
-  handleCheckAnswerClicked = (): void => {
+  handleCheckAnswerClick = (): void => {
     const statusContainer = document.querySelector<HTMLDivElement>(
       ".ib-status-container"
     );
-    statusContainer?.classList.add("checkmark");
+    statusContainer?.classList.add("warning");
+    this.model.set({ questionStatus: QuestionStatus.warning });
   };
 
   handleOptionInputChange = (): void => {
@@ -59,15 +61,30 @@ export class MultipleChoiceComponent extends BlockComponent<
       this.model.guessAllowMultipleSelect();
     const optionInputType = renderCheckbox ? "checkbox" : "radio";
     const userSelections = this.model.get("userSelections") || [];
+    const questionStatus = this.model.get("questionStatus");
+    const disableMultipleAttempts = this.model.get("disableMultipleAttempts");
+    let disabled: boolean;
+
+    if (disableMultipleAttempts) {
+      disabled =
+        questionStatus !== undefined &&
+        questionStatus !== QuestionStatus.unanswered;
+    } else {
+      disabled =
+        questionStatus !== undefined &&
+        questionStatus === QuestionStatus.correct;
+    }
 
     return `${this.model
       .get("options")
       .map(
         ({ id, text }: MultipleChoiceOption) =>
-          `<label class="ib-option-label">
+          `<label class="ib-option-label ${disabled && "disabled"}">
              <input type="${optionInputType}" value=${id} name="${this.model.get(
             "id"
-          )}" ${userSelections.includes(id) && "checked"} />
+          )}" ${userSelections.includes(id) && "checked"} ${
+            disabled && "disabled"
+          } />
              <span class="ib-option-text">${text}</span>
              <span class="ib-option-checkmark ${optionInputType}"></span>
            </label>`
@@ -80,7 +97,9 @@ export class MultipleChoiceComponent extends BlockComponent<
       <div class="ib-container">
         <div class="ib-question-left">
           <div class="ib-question-status">
-            <div class="ib-status-container"></div>
+            <div class="ib-status-container ${this.model.get(
+              "questionStatus"
+            )}"></div>
           </div>
         </div>
         <div class="ib-question-right">
