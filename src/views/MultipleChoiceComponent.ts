@@ -24,13 +24,7 @@ export class MultipleChoiceComponent extends BlockComponent<
   }
 
   handleCheckAnswerClick = async (): Promise<void> => {
-    const getAnswer = this.model.get("getAnswer");
     let newQuestionStatus: QuestionStatus;
-
-    if (getAnswer) {
-      const correctSelections = await getAnswer();
-    } else {
-    }
 
     // Update question status
     const statusContainer = document.querySelector<HTMLDivElement>(

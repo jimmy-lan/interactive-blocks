@@ -89,8 +89,14 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
     );
   };
 
+  /**
+   * Extract correct selections from options prop.
+   */
   private extractCorrectSelectionsFromOptions = (): string[] => {
-    return [];
+    const options = this.get("options");
+    return options
+      .filter((option: MultipleChoiceOption) => option.isAnswer)
+      .map((option: MultipleChoiceOption) => option.id);
   };
 
   /**
