@@ -34,12 +34,22 @@ export interface MultipleChoiceProps {
    * A list storing <id> of options chosen by the user.
    */
   userSelections?: string[];
+  /**
+   * Status of this multiple choice question.
+   * @see QuestionStatus
+   */
   questionStatus?: QuestionStatus;
   /**
    * If true, more than one option can be selected by the user.
    * This attribute will be guessed if not specified.
    */
-  canSelectMany?: boolean;
+  allowMultipleSelect?: boolean;
+  /**
+   * If true, multiple attempts to the question is allowed until
+   * the question is correctly answered. Otherwise, the question
+   * becomes disabled after one attempt.
+   */
+  allowMultipleAttempt?: boolean;
   /**
    * Callback function to obtain a list of option <id> which corresponds to
    * the correct answer. When this attribute is not specified, the `isAnswer`
@@ -79,10 +89,10 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
 
   /**
    * Guess whether this multiple choice question accepts multiple
-   * options to be selected. Should only be invoked when `canSelectMany`
+   * options to be selected. Should only be invoked when `allowMultipleSelect`
    * attribute is not provided. Always return false if `getAnswer` functions is provided.
    */
-  guessCanSelectMany = () => {
+  guessAllowMultipleSelect = () => {
     // Always return false if `getAnswer` functions is provided.
     if (this.get("getAnswer")) {
       return false;

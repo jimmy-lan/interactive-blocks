@@ -46,7 +46,7 @@ export class MultipleChoiceComponent extends BlockComponent<
       }
     });
 
-    this.model.set({ userSelections });
+    // this.model.set({ userSelections });
   };
 
   /**
@@ -55,7 +55,8 @@ export class MultipleChoiceComponent extends BlockComponent<
    */
   renderOptions = (): string => {
     const renderCheckbox =
-      this.model.get("canSelectMany") || this.model.guessCanSelectMany();
+      this.model.get("allowMultipleSelect") ||
+      this.model.guessAllowMultipleSelect();
     const optionInputType = renderCheckbox ? "checkbox" : "radio";
     const userSelections = this.model.get("userSelections") || [];
 
