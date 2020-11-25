@@ -24,15 +24,21 @@ export class MultipleChoiceComponent extends BlockComponent<
   }
 
   handleCheckAnswerClick = async (): Promise<void> => {
-    let newQuestionStatus: QuestionStatus;
+    // Determine the next state of the question component
+    const isSelectionCorrect = await this.model.isUserSelectionsCorrect();
+    const newStatusClassName = isSelectionCorrect ? "correct" : "warning";
+    const newQuestionStatus = isSelectionCorrect
+      ? QuestionStatus.correct
+      : QuestionStatus.warning;
 
     // Update question status
     const statusContainer = document.querySelector<HTMLDivElement>(
       ".ib-status-container"
     );
-    statusContainer?.classList.add("warning");
+    statusContainer?.classList.remove("correct", "warning");
+    statusContainer?.classList.add(newStatusClassName);
     this.model.set(
-      { questionStatus: QuestionStatus.warning },
+      { questionStatus: newQuestionStatus },
       { shouldRerender: false }
     );
   };
