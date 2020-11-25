@@ -29,7 +29,25 @@ export class MultipleChoiceComponent extends BlockComponent<
     statusContainer?.classList.add("checkmark");
   };
 
-  handleOptionInputChange = (): void => {};
+  handleOptionInputChange = (): void => {
+    const optionInputs = document.querySelectorAll<HTMLInputElement>(
+      ".ib-option-label input"
+    );
+    if (!optionInputs) {
+      throw new Error(
+        "Incomplete rendering of checkboxes in Multiple Choice component."
+      );
+    }
+
+    const userSelections: string[] = [];
+    optionInputs.forEach((input: HTMLInputElement) => {
+      if (input.checked) {
+        userSelections.push(input.value);
+      }
+    });
+
+    this.model.set({ userSelections });
+  };
 
   /**
    * Return html structure in string of the options for this
