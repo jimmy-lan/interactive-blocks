@@ -5,6 +5,7 @@
 
 import { BlockModel } from "./common/BlockModel";
 import { AttributeRegistry } from "./common/AttributeRegistry";
+import { isArrayEqual } from "../utils";
 
 export interface MultipleChoiceOption {
   id: string;
@@ -88,6 +89,10 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
     );
   };
 
+  private extractCorrectSelectionsFromOptions = (): string[] => {
+    return [];
+  };
+
   /**
    * Guess whether this multiple choice question accepts multiple
    * options to be selected. Should only be invoked when `allowMultipleSelect`
@@ -112,5 +117,22 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
     );
 
     return count !== 1;
+  };
+
+  /**
+   * Return whether the user selected the correct response.
+   */
+  isUserSelectionsCorrect = async (): Promise<boolean> => {
+    const userSelections = this.get("userSelections") || [];
+    const getAnswer = this.get("getAnswer");
+
+    let correctSelections: string[];
+    if (getAnswer) {
+      correctSelections = await getAnswer();
+    } else {
+      correctSelections = this.extractCorrectSelectionsFromOptions();
+    }
+
+    return isArrayEqual(userSelections, correctSelections);
   };
 }
