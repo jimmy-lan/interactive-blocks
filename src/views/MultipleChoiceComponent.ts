@@ -9,11 +9,27 @@ import {
   MultipleChoiceOption,
   MultipleChoiceProps,
 } from "../models";
+import { EventsMap } from "../commonTypes";
 
 export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {
+  get eventsMap(): EventsMap {
+    return {
+      "button:click": this.handleCheckAnswerClicked,
+    };
+  }
+
+  handleCheckAnswerClicked = (): void => {
+    const statusDiv = document.querySelector(".ib-question-status > div");
+    statusDiv?.classList.add("warning");
+  };
+
+  /**
+   * Return html structure in string of the options for this
+   * multiple choice question.
+   */
   renderOptions = (): string => {
     const renderCheckbox =
       this.model.get("canSelectMany") || this.model.guessCanSelectMany();
@@ -38,7 +54,9 @@ export class MultipleChoiceComponent extends BlockComponent<
     return `
       <div class="ib-container">
         <div class="ib-question-left">
-          <div class="ib-question-status"></div>
+          <div class="ib-question-status">
+            <div class="ib-status-container"></div>
+          </div>
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>

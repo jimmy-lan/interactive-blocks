@@ -2,7 +2,7 @@ const root = document.getElementById("root");
 
 const { MultipleChoice, MultipleChoiceComponent } = Blocks;
 
-const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0]);
+const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0, 1]);
 console.log(options);
 
 const mc1 = new MultipleChoice({

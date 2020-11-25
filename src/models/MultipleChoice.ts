@@ -94,6 +94,6 @@ export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
       0
     );
 
-    return count === 1;
+    return count !== 1;
   };
 }

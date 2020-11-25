@@ -32,6 +32,51 @@
   border-radius: 50%;
   border: 2px solid #e8ebed;
   background: #fff;
+  position: relative;
+}
+
+.ib-status-container {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background 0.3s ease-in-out;
+}
+
+.checkmark.ib-status-container {
+  background: #36c247;
+}
+
+.warning.ib-status-container {
+  background: #e05316;
+}
+
+.ib-status-container:after {
+  position: absolute;
+  display: block;
+  content: "";
+}
+
+.checkmark.ib-status-container:after {
+  left: 15px;
+  top: 7px;
+  width: 8px;
+  height: 18px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+}
+
+.warning.ib-status-container:after {
+  left: 8px;
+  top: 8px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
 }
 
 .ib-question-text {
@@ -92,7 +137,7 @@
 }
 
 .ib-option-label input:checked ~ .ib-option-checkmark,
-.ib-option-label.disabled > input[type="checkbox"]:checked ~ .ib-option-checkmark {
+.ib-option-label.disabled > input:checked ~ .ib-option-checkmark {
   background: #36c247;
 }
 
