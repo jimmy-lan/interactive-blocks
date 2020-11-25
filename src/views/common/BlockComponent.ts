@@ -5,7 +5,7 @@
  */
 
 import { BlockModel } from "../../models/common/BlockModel";
-import { EventsMap } from "../../commonTypes";
+import { EventsMap, ModelChangeEventOptions } from "../../commonTypes";
 
 export abstract class BlockComponent<T extends BlockModel<K>, K> {
   constructor(public parent: Element, public model: T) {
@@ -17,7 +17,13 @@ export abstract class BlockComponent<T extends BlockModel<K>, K> {
    * itself whenever the model changes.
    */
   bindModel = (): void => {
-    this.model.on("change", () => {
+    this.model.on("change", (options) => {
+      if (options) {
+        const { shouldRerender } = options as ModelChangeEventOptions;
+        if (!shouldRerender) {
+          return;
+        }
+      }
       this.render();
     });
   };

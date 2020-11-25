@@ -7,6 +7,7 @@
 import { AttributeRegistry } from "./AttributeRegistry";
 import { EventRegistry } from "./EventRegistry";
 import { Serializable, StoragePersistence } from "./Persistence";
+import { ModelChangeEventOptions } from "../../commonTypes";
 
 export class BlockModel<T = any> implements Serializable {
   events: EventRegistry;
@@ -66,11 +67,12 @@ export class BlockModel<T = any> implements Serializable {
 
   /**
    * @param newData
+   * @param options
    * @see AttributeRegistry.set
    */
-  set = (newData: Partial<T>) => {
+  set = (newData: Partial<T>, options?: ModelChangeEventOptions) => {
     this.attributes.set(newData);
-    this.events.trigger("change");
+    this.events.trigger("change", options);
   };
 
   /**

@@ -6,7 +6,7 @@
 /**
  * A callback function type when an event is triggered.
  */
-export type EventCallback = () => void;
+export type EventCallback = (options?: unknown) => void;
 /**
  * A record of events, where multiple callbacks can be added for one event.
  */
@@ -16,3 +16,7 @@ export type EventsRecord = { [eventType: string]: EventCallback[] };
  * Descriptor (i.e. p, object key) must follow some special syntax so that it only describes one event.
  */
 export type EventsMap = { [descriptor: string]: EventCallback };
+
+export interface ModelChangeEventOptions {
+  shouldRerender: boolean;
+}

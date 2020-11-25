@@ -28,7 +28,10 @@ export class MultipleChoiceComponent extends BlockComponent<
       ".ib-status-container"
     );
     statusContainer?.classList.add("warning");
-    this.model.set({ questionStatus: QuestionStatus.warning });
+    this.model.set(
+      { questionStatus: QuestionStatus.warning },
+      { shouldRerender: false }
+    );
   };
 
   handleOptionInputChange = (): void => {
@@ -48,7 +51,7 @@ export class MultipleChoiceComponent extends BlockComponent<
       }
     });
 
-    // this.model.set({ userSelections });
+    this.model.set({ userSelections }, { shouldRerender: false });
   };
 
   /**
