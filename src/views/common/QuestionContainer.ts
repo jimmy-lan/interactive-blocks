@@ -48,7 +48,7 @@ export class QuestionContainer<
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
           <div class="ib-question-child"></div>
-          <button>${checkAnswerButtonText}</button>
+          <button class="ib-btn">${checkAnswerButtonText}</button>
         </div>
       </div>
     `;

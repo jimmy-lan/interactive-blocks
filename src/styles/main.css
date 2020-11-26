@@ -89,7 +89,28 @@
   margin-bottom: 24px;
 }
 
-/*Check Answer Button*/
+/* Question Form Button */
+.ib-btn {
+  border: none;
+  padding: 8px 24px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  filter: brightness(100%);
+  transition: all 0.3s ease-in;
+  border-radius: 3px;
+}
+
+.ib-btn:hover {
+  filter: brightness(90%);
+}
+
+.ib-btn:active {
+  filter: brightness(75%);
+}
 
 /* Question option checkbox and radio buttons */
 /* Styling idea taken from W3Schools, changes were made */
