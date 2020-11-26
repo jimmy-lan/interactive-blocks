@@ -10,8 +10,10 @@ import {
   EventsMap,
   ModelChangeEventOptions,
 } from "../../commonTypes";
+import { Component } from "./Component";
 
-export abstract class BlockComponent<T extends BlockModel<K>, K> {
+export abstract class BlockComponent<T extends BlockModel<K>, K>
+  implements Component {
   protected components: { [key: string]: Element } = {};
 
   constructor(public parent: Element, public model: T) {

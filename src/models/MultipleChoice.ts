@@ -3,10 +3,10 @@
  * Creation Date: 2020-11-23
  */
 
+import { isArrayEqual } from "../utils";
+import { QuestionProps } from "./Question";
 import { BlockModel } from "./common/BlockModel";
 import { AttributeRegistry } from "./common/AttributeRegistry";
-import { isArrayEqual } from "../utils";
-import { Question, QuestionProps } from "./Question";
 
 export interface MultipleChoiceOption {
   id: string;
@@ -44,7 +44,14 @@ export interface MultipleChoiceProps extends QuestionProps {
   getAnswer?: () => Promise<string[]>;
 }
 
-export class MultipleChoice extends Question<MultipleChoiceProps> {
+export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
+  constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
+    super(
+      new AttributeRegistry<MultipleChoiceProps>(attributes),
+      persistenceStorage
+    );
+  }
+
   /**
    * Return a list of options in the correct format.
    * @param optionTexts A list of texts corresponding to the texts displayed

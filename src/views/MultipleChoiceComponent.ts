@@ -10,12 +10,15 @@ import {
 } from "../models";
 import { EventsMap } from "../commonTypes";
 import { QuestionStatus } from "../models/Question";
-import { QuestionComponent } from "./QuestionComponent";
+import { BlockComponent } from "./common/BlockComponent";
+import { QuestionContainer } from "./QuestionContainer";
 
-export class MultipleChoiceComponent extends QuestionComponent<
+export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {
+  private questionContainer = new QuestionContainer(this.model.getAll());
+
   get eventsMap(): EventsMap {
     return {
       "button:click": this.handleCheckAnswerClick,
@@ -108,21 +111,6 @@ export class MultipleChoiceComponent extends QuestionComponent<
   };
 
   get htmlStructure(): string {
-    return `
-      <div class="ib-container">
-        <div class="ib-question-left">
-          <div class="ib-question-status">
-            <div class="ib-status-container ${this.model.get(
-              "questionStatus"
-            )}"></div>
-          </div>
-        </div>
-        <div class="ib-question-right">
-          <h3 class="ib-question-text">${this.model.get("question")}</h3>
-          <form>${this.renderOptions()}</form>
-          <button>Check Answer</button>
-        </div>
-      </div>
-    `;
+    return this.questionContainer.htmlStructure;
   }
 }
