@@ -36,4 +36,26 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
   get idWithPrefix() {
     return `ib-question-${this.get("id")}`;
   }
+
+  /**
+   * Determine whether this question should not accept further attempts.
+   */
+  get shouldDisable(): boolean {
+    // Obtain needed information
+    const questionStatus = this.get("questionStatus");
+    const disableMultipleAttempts = this.get("disableMultipleAttempts");
+
+    // If questionStatus is not defined, this question is unanswered,
+    // so we do not disable question.
+    let disabled: boolean = questionStatus !== undefined;
+    if (disableMultipleAttempts) {
+      // Disable as long as questionStatus is not unanswered
+      disabled = disabled && questionStatus !== QuestionStatus.unanswered;
+    } else {
+      // Disable only when question is answered correctly
+      disabled = disabled && questionStatus === QuestionStatus.correct;
+    }
+
+    return disabled;
+  }
 }
