@@ -14,7 +14,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     // Props require calculation
     let styleProp = "";
     let maxLengthProp = "";
-    let additionalClassNames = "";
+    let additionalClassNames;
     if (hintNumChars) {
       // As FillBlanks object validates all input attributes,
       // <hintNumChars> is a number after validation.
@@ -26,6 +26,8 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
       styleProp = `style="width: ${width}; background: ${background};"`;
       maxLengthProp = `maxlength="${numChars}"`;
       additionalClassNames = "hint-num-chars";
+    } else {
+      additionalClassNames = "normal";
     }
 
     return `
