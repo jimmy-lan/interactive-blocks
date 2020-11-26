@@ -6,19 +6,16 @@
 import { MultipleChoice, MultipleChoiceProps } from "../../models";
 import { ComponentsMap, EventsMap } from "../../commonTypes";
 import { QuestionStatus } from "../../models/Question";
-import { BlockComponent } from "../common/BlockComponent";
 import { QuestionContainer } from "../common/QuestionContainer";
 import { OptionsForm } from "./OptionsForm";
 
-export class MultipleChoiceComponent extends BlockComponent<
+export class MultipleChoiceComponent extends QuestionContainer<
   MultipleChoice,
   MultipleChoiceProps
 > {
-  private questionContainer = new QuestionContainer(this.model.getAll());
-
   get eventsMap(): EventsMap {
     // Selectors
-    const formButtonSelector = this.questionContainer.getSelector("button");
+    const formButtonSelector = this.selectors.button;
 
     return {
       [`${formButtonSelector}:click`]: this.handleCheckAnswerClick,
@@ -26,7 +23,7 @@ export class MultipleChoiceComponent extends BlockComponent<
   }
 
   get componentsMap(): ComponentsMap {
-    const childDivSelector = this.questionContainer.getSelector("childDiv");
+    const childDivSelector = this.selectors.childDiv;
     return {
       optionsForm: childDivSelector,
     };
@@ -55,8 +52,4 @@ export class MultipleChoiceComponent extends BlockComponent<
       { shouldRerender: false }
     );
   };
-
-  get htmlStructure(): string {
-    return this.questionContainer.htmlStructure;
-  }
 }

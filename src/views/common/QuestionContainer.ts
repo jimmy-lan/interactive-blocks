@@ -4,8 +4,8 @@
  * Description: A question container with status tab and content tab.
  */
 
-import { Component } from "./Component";
-import { QuestionProps } from "../../models/Question";
+import { Question, QuestionProps } from "../../models/Question";
+import { BlockComponent } from "./BlockComponent";
 
 export interface QuestionContainerSettings {
   checkAnswerButtonText: string;
@@ -17,46 +17,24 @@ export interface QuestionContainerSelectors {
   button: string;
 }
 
-export class QuestionContainer implements Component {
+export class QuestionContainer<
+  T extends Question<K>,
+  K extends QuestionProps
+> extends BlockComponent<T, K> {
   /**
    * A list of selectors corresponding to key child elements
    * in this question container.
    * @private
    */
-  private selectors: QuestionContainerSelectors = {
+  protected selectors: QuestionContainerSelectors = {
     childDiv: ".ib-question-child",
     statusDiv: ".ib-status-container",
     button: ".ib-question-right button",
   };
 
-  constructor(
-    public questionProps: QuestionProps,
-    public _settings?: QuestionContainerSettings
-  ) {}
-
-  get settings(): QuestionContainerSettings {
-    if (!this._settings) {
-      return { checkAnswerButtonText: "Check Answer" };
-    }
-    return this._settings;
-  }
-
-  /**
-   * Get selector of a key element in question container.
-   * @param key A string used to access the selector.
-   * @see selectors
-   */
-  getSelector(key: keyof QuestionContainerSelectors) {
-    return this.selectors[key];
-  }
-
-  /**
-   * Get all selectors of key elements in this question container.
-   * @see selectors
-   */
-  getAllSelectors() {
-    return this.selectors;
-  }
+  protected settings: QuestionContainerSettings = {
+    checkAnswerButtonText: "Check Answer",
+  };
 
   get htmlStructure(): string {
     const { checkAnswerButtonText } = this.settings;
@@ -65,11 +43,13 @@ export class QuestionContainer implements Component {
       <div class="ib-container">
         <div class="ib-question-left">
           <div class="ib-question-status">
-            <div class="ib-status-container ${this.questionProps.questionStatus}"></div>
+            <div class="ib-status-container ${this.model.get(
+              "questionStatus"
+            )}"></div>
           </div>
         </div>
         <div class="ib-question-right">
-          <h3 class="ib-question-text">${this.questionProps.question}</h3>
+          <h3 class="ib-question-text">${this.model.get("question")}</h3>
           <div class="ib-question-child"></div>
           <button>${checkAnswerButtonText}</button>
         </div>

@@ -4,8 +4,7 @@
  */
 
 import { isArrayEqual } from "../utils";
-import { QuestionProps } from "./Question";
-import { BlockModel } from "./common/BlockModel";
+import { Question, QuestionProps } from "./Question";
 import { AttributeRegistry } from "./common/AttributeRegistry";
 
 export interface MultipleChoiceOption {
@@ -44,7 +43,7 @@ export interface MultipleChoiceProps extends QuestionProps {
   getAnswer?: () => Promise<string[]>;
 }
 
-export class MultipleChoice extends BlockModel<MultipleChoiceProps> {
+export class MultipleChoice extends Question<MultipleChoiceProps> {
   constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
     super(
       new AttributeRegistry<MultipleChoiceProps>(attributes),

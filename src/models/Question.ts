@@ -3,6 +3,8 @@
  * Creation Date: 2020-11-25
  */
 
+import { BlockModel } from "./common/BlockModel";
+
 export enum QuestionStatus {
   unanswered = "unanswered",
   correct = "correct",
@@ -23,3 +25,5 @@ export interface QuestionProps {
    */
   questionStatus?: QuestionStatus;
 }
+
+export abstract class Question<T extends QuestionProps> extends BlockModel<T> {}
