@@ -1,9 +1,8 @@
-const root = document.getElementById("root");
+const mcRoot = document.getElementById("mc-root");
 
 const { MultipleChoice, MultipleChoiceComponent } = Blocks;
 
 const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0, 1]);
-console.log(options);
 
 const mc1 = new MultipleChoice({
   id: "1",
@@ -12,5 +11,18 @@ const mc1 = new MultipleChoice({
   options,
 });
 
-const mc1View = new MultipleChoiceComponent(root, mc1);
+const mc1View = new MultipleChoiceComponent(mcRoot, mc1);
 mc1View.render();
+
+const tfRoot = document.getElementById("tf-root");
+
+const tfOptions = MultipleChoice.parseOptions(["True", "False"], [0]);
+
+const tf1 = new MultipleChoice({
+  id: "2",
+  question: "Jimmy's favourite pet is cat.",
+  options: tfOptions,
+});
+
+const tf1View = new MultipleChoiceComponent(tfRoot, tf1);
+tf1View.render();
