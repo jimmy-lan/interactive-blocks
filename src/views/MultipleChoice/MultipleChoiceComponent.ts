@@ -39,7 +39,6 @@ export class MultipleChoiceComponent extends QuestionContainer<
   handleCheckAnswerClick = async (): Promise<void> => {
     // Determine the next state of the question component
     const isSelectionCorrect = await this.model.isUserSelectionsCorrect();
-    const newStatusClassName = isSelectionCorrect ? "correct" : "warning";
     const newQuestionStatus = isSelectionCorrect
       ? QuestionStatus.correct
       : QuestionStatus.warning;
@@ -50,13 +49,13 @@ export class MultipleChoiceComponent extends QuestionContainer<
       { shouldRerender: false }
     );
 
+    // Update question container display
+    this.updateQuestionContainer();
+
     // Compute if question needs to be disabled on the next state
     const shouldDisable = this.model.shouldDisable;
 
     // Select elements
-    const statusContainer = document.querySelector<HTMLDivElement>(
-      this.selectors.statusDiv
-    );
     if (!this.optionsForm) {
       throw new Error(
         "Cannot handle event because OptionsForm failed to render."
@@ -70,8 +69,6 @@ export class MultipleChoiceComponent extends QuestionContainer<
     );
 
     // Update state of the question
-    statusContainer?.classList.remove("correct", "warning");
-    statusContainer?.classList.add(newStatusClassName);
     if (shouldDisable) {
       optionInputs.forEach(
         (input: HTMLInputElement) => (input.disabled = true)

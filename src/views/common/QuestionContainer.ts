@@ -4,7 +4,7 @@
  * Description: A question container with status tab and content tab.
  */
 
-import { Question, QuestionProps } from "../../models";
+import { Question, QuestionProps, QuestionStatus } from "../../models";
 import { BlockComponent } from "./BlockComponent";
 
 export interface QuestionContainerSettings {
@@ -31,6 +31,30 @@ export class QuestionContainer<
 
   protected settings: QuestionContainerSettings = {
     checkAnswerButtonText: "Check Answer",
+  };
+
+  /**
+   * Update question container based on the current question.
+   */
+  updateQuestionContainer = () => {
+    // Select needed elements
+    const statusContainer = document.querySelector<HTMLDivElement>(
+      this.selectors.statusDiv
+    );
+    const submitButton = document.querySelector<HTMLButtonElement>(
+      this.selectors.button
+    );
+
+    // Compute next state
+    const questionStatus = this.model.get("questionStatus");
+    const newStatusClassName =
+      questionStatus === QuestionStatus.correct ? "correct" : "warning";
+    const shouldDisable = this.model.shouldDisable;
+
+    // Update component display
+    statusContainer!.classList.remove("correct", "warning");
+    statusContainer!.classList.add(newStatusClassName);
+    submitButton!.disabled = shouldDisable;
   };
 
   get htmlStructure(): string {
