@@ -112,6 +112,10 @@
   filter: brightness(75%);
 }
 
+.ib-btn:disabled {
+  cursor: default;
+}
+
 /* Question option checkbox and radio buttons */
 /* Styling idea taken from W3Schools, changes were made */
 
