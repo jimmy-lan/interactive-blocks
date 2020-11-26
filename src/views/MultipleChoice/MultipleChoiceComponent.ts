@@ -7,11 +7,11 @@ import {
   MultipleChoice,
   MultipleChoiceOption,
   MultipleChoiceProps,
-} from "../models";
-import { EventsMap } from "../commonTypes";
-import { QuestionStatus } from "../models/Question";
-import { BlockComponent } from "./common/BlockComponent";
-import { QuestionContainer } from "./QuestionContainer";
+} from "../../models";
+import { EventsMap } from "../../commonTypes";
+import { QuestionStatus } from "../../models/Question";
+import { BlockComponent } from "../common/BlockComponent";
+import { QuestionContainer } from "../common/QuestionContainer";
 
 export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,
