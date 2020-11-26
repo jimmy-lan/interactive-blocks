@@ -5,7 +5,7 @@ const {
   MultipleChoiceComponent,
   FillBlanks,
   FillBlanksComponent,
-} = Blocks;
+} = window.Blocks;
 
 const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0, 1]);
 
@@ -32,6 +32,8 @@ const tf1 = new MultipleChoice({
 
 const tf1View = new MultipleChoiceComponent(tfRoot, tf1);
 tf1View.render();
+
+tf1.get();
 
 const fbRoot = document.getElementById("fb-root");
 

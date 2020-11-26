@@ -15,7 +15,7 @@ import cssnano from "cssnano";
 
 import pkg from "./package.json";
 
-const input = "src/index.js";
+const input = "src/index.ts";
 
 const banner = `/*! *****************************************************************************
  * interactive-blocks.js v${pkg.version}
