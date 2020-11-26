@@ -27,9 +27,9 @@ export class QuestionContainer<
    * @private
    */
   protected selectors: QuestionContainerSelectors = {
-    childDiv: ".ib-question-child",
-    statusDiv: ".ib-status-container",
-    button: ".ib-question-right button",
+    childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
+    statusDiv: `#${this.model.idWithPrefix} .ib-status-container`,
+    button: `#${this.model.idWithPrefix} .ib-question-right button`,
   };
 
   protected settings: QuestionContainerSettings = {
@@ -40,7 +40,7 @@ export class QuestionContainer<
     const { checkAnswerButtonText } = this.settings;
 
     return `
-      <div class="ib-container">
+      <div id="${this.model.idWithPrefix}" class="ib-container">
         <div class="ib-question-left">
           <div class="ib-question-status">
             <div class="ib-status-container ${this.model.get(

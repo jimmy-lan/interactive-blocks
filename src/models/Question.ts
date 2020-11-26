@@ -26,4 +26,8 @@ export interface QuestionProps {
   questionStatus?: QuestionStatus;
 }
 
-export abstract class Question<T extends QuestionProps> extends BlockModel<T> {}
+export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
+  get idWithPrefix() {
+    return `ib-question-${this.get("id")}`;
+  }
+}

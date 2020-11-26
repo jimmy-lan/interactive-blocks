@@ -43,7 +43,7 @@ export class MultipleChoiceComponent extends QuestionContainer<
 
     // Update question status
     const statusContainer = document.querySelector<HTMLDivElement>(
-      ".ib-status-container"
+      this.selectors.statusDiv
     );
     statusContainer?.classList.remove("correct", "warning");
     statusContainer?.classList.add(newStatusClassName);

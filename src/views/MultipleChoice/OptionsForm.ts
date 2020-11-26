@@ -13,17 +13,25 @@ import {
 import { QuestionStatus } from "../../models/Question";
 import { EventsMap } from "../../commonTypes";
 
+export interface OptionsFormSelectors {
+  optionInputs: string;
+}
+
 export class OptionsForm extends BlockComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {
+  protected selectors: OptionsFormSelectors = {
+    optionInputs: `#${this.model.idWithPrefix} .ib-option-label input`,
+  };
+
   get eventsMap(): EventsMap {
     return { ".ib-option-label input:change": this.handleOptionInputChange };
   }
 
   handleOptionInputChange = (): void => {
     const optionInputs = document.querySelectorAll<HTMLInputElement>(
-      ".ib-option-label input"
+      this.selectors.optionInputs
     );
     if (!optionInputs) {
       throw new Error(
