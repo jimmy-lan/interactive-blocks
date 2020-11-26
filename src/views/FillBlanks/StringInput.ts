@@ -5,11 +5,36 @@
 
 import { BlockComponent } from "../common/BlockComponent";
 import { FillBlanks, FillBlanksProps } from "../../models";
+import { EventsMap } from "../../commonTypes";
+
+interface StringInputSelectors {
+  input: string;
+}
 
 export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
+  selectors: StringInputSelectors = {
+    input: `#${this.model.idWithPrefix} input.ib-fb-input`,
+  };
+
+  get eventsMap(): EventsMap {
+    return {
+      [`.ib-fb-input:input`]: this.handleInputChange,
+    };
+  }
+
+  handleInputChange = () => {
+    const inputText =
+      document.querySelector<HTMLInputElement>(this.selectors.input)!.value ||
+      "";
+
+    this.model.set({ userInput: inputText }, { shouldRerender: false });
+  };
+
   get htmlStructure(): string {
     // Information needed to render
     const hintNumChars = this.model.get("hintNumChars");
+
+    console.log(`#${this.model.idWithPrefix} input.ib-fb-input`);
 
     // Props require calculation
     let styleProp = "";

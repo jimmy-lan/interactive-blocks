@@ -115,8 +115,6 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
       correctSelections = this.extractCorrectSelectionsFromOptions();
     }
 
-    console.log(correctSelections, userSelections);
-
     return isArrayEqual(userSelections, correctSelections);
   };
 }

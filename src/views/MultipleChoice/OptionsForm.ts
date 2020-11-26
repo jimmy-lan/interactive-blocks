@@ -10,7 +10,6 @@ import {
   MultipleChoiceOption,
   MultipleChoiceProps,
 } from "../../models";
-import { QuestionStatus } from "../../models/Question";
 import { EventsMap } from "../../commonTypes";
 
 export interface OptionsFormSelectors {

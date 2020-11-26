@@ -22,6 +22,11 @@ export interface FillBlanksProps extends QuestionProps {
    */
   hintNumChars?: boolean | number;
   /**
+   * A string storing the current user response to this fill in the blanks
+   * question.
+   */
+  userInput?: string;
+  /**
    * Callback function to obtain a list of option <id> which corresponds to
    * the correct answer. When this attribute is not specified, the
    * `acceptableAnswers` property is used. Otherwise, `acceptableAnswers is
@@ -99,5 +104,9 @@ export class FillBlanks extends Question<FillBlanksProps> {
           "please pass in the number of characters to hint to 'hintNumChars' attribute."
       );
     }
+  };
+
+  isUserInputCorrect = (): boolean => {
+    return true;
   };
 }

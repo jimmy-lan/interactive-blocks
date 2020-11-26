@@ -5,7 +5,7 @@
 
 import { QuestionContainer } from "../common/QuestionContainer";
 import { FillBlanks, FillBlanksProps } from "../../models";
-import { ComponentsMap } from "../../commonTypes";
+import { ComponentsMap, EventsMap } from "../../commonTypes";
 import { StringInput } from "./StringInput";
 
 export class FillBlanksComponent extends QuestionContainer<
@@ -14,6 +14,10 @@ export class FillBlanksComponent extends QuestionContainer<
 > {
   private stringInput?: StringInput;
 
+  get eventsMap(): EventsMap {
+    return {};
+  }
+
   get componentsMap(): ComponentsMap {
     return {
       stringInput: this.selectors.childDiv,
@@ -21,8 +25,6 @@ export class FillBlanksComponent extends QuestionContainer<
   }
 
   bindComponents() {
-    console.log(this.components);
-    console.log(this.componentsMap);
     this.stringInput = new StringInput(this.components.stringInput, this.model);
     this.stringInput.render();
   }
