@@ -22,6 +22,7 @@ const tf1 = new MultipleChoice({
   id: "2",
   question: "Jimmy's favourite pet is cat.",
   options: tfOptions,
+  disableMultipleAttempts: true,
 });
 
 const tf1View = new MultipleChoiceComponent(tfRoot, tf1);
