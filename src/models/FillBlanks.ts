@@ -38,6 +38,13 @@ export class FillBlanks extends Question<FillBlanksProps> {
     this.validateAttributes();
   }
 
+  static fromStorage(key: string): FillBlanks {
+    // @ts-ignore
+    const instance = new FillBlanks({});
+    instance.read(key);
+    return instance;
+  }
+
   /**
    * Check validity of attributes in this question model.
    * Can change attributes as long as the meaning does not change.

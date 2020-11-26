@@ -9,7 +9,7 @@ const {
 
 const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0, 1]);
 
-const mc1 = MultipleChoice.fromStorage("mc1");
+const mc1 = MultipleChoice.fromStorage("mc241234");
 
 mc1.on("change", () => {
   mc1.save("mc1");
