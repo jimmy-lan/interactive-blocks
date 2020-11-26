@@ -85,6 +85,8 @@
   margin: 0 0 16px;
 }
 
+/*Check Answer Button*/
+
 /* Question option checkbox and radio buttons */
 /* Styling idea taken from W3Schools, changes were made */
 
@@ -190,13 +192,20 @@
 .ib-fb-input {
   display: block;
   margin-bottom: 24px;
-  border: none;
+  font-size: 2.5ch;
   outline: none;
-  padding: 0;
-  letter-spacing: .5ch;
-  font: 3ch "droid sans mono", consolas, monospace;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.ib-fb-input:focus {
+.ib-fb-input.hint-num-chars {
+  border: none;
+  padding: 0;
+  font-size: 3ch;
+  letter-spacing: .5ch;
+  font-family: "droid sans mono", consolas, monospace;
+}
+
+.ib-fb-input.hint-num-chars:focus {
   color: #36c247;
 }

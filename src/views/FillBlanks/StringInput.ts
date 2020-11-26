@@ -14,6 +14,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     // Props require calculation
     let styleProp = "";
     let maxLengthProp = "";
+    let additionalClassNames = "";
     if (hintNumChars) {
       // As FillBlanks object validates all input attributes,
       // <hintNumChars> is a number after validation.
@@ -24,10 +25,11 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
         `, transparent 1.5ch) 0 100%/ calc(1.5ch * ${numChars} - 0.5ch) 2px no-repeat;`;
       styleProp = `style="width: ${width}; background: ${background};"`;
       maxLengthProp = `maxlength="${numChars}"`;
+      additionalClassNames = "hint-num-chars";
     }
 
     return `
-      <input class="ib-fb-input" ${styleProp} ${maxLengthProp} />
+      <input class="ib-fb-input ${additionalClassNames}" ${styleProp} ${maxLengthProp} />
     `;
   }
 }
