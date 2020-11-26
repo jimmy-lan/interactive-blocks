@@ -21,11 +21,8 @@ export class QuestionContainer<
   T extends Question<K>,
   K extends QuestionProps
 > extends BlockComponent<T, K> {
-  /**
-   * A list of selectors corresponding to key child elements
-   * in this question container.
-   * @private
-   */
+  // Selectors begin with `this.model.idWithPrefix` so that
+  // they only select elements corresponding to this question.
   protected selectors: QuestionContainerSelectors = {
     childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
     statusDiv: `#${this.model.idWithPrefix} .ib-status-container`,

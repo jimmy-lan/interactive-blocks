@@ -21,6 +21,8 @@ export class OptionsForm extends BlockComponent<
   MultipleChoice,
   MultipleChoiceProps
 > {
+  // Selectors begin with `this.model.idWithPrefix` so that
+  // they only select elements corresponding to this question.
   protected selectors: OptionsFormSelectors = {
     optionInputs: `#${this.model.idWithPrefix} .ib-option-label input`,
   };

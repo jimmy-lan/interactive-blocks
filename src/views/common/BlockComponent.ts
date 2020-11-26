@@ -15,6 +15,11 @@ import { Component } from "./Component";
 export abstract class BlockComponent<T extends BlockModel<K>, K>
   implements Component {
   protected components: { [key: string]: Element } = {};
+  /**
+   * An object mapping name to component selector for key elements
+   * in this BlockComponent.
+   */
+  protected selectors: Object = {};
 
   constructor(public parent: Element, public model: T) {
     this.bindModel();
