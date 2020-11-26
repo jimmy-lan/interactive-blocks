@@ -3,4 +3,5 @@
  * Creation Date: 2020-11-23
  */
 
-export * from "./MultipleChoice/MultipleChoiceComponent";
+export * from "./MultipleChoice";
+export * from "./FillBlanks";

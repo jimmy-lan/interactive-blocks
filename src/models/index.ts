@@ -4,3 +4,5 @@
  */
 
 export * from "./MultipleChoice";
+export * from "./FillBlanks";
+export * from "./Question";

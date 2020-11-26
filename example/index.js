@@ -1,6 +1,11 @@
 const mcRoot = document.getElementById("mc-root");
 
-const { MultipleChoice, MultipleChoiceComponent } = Blocks;
+const {
+  MultipleChoice,
+  MultipleChoiceComponent,
+  FillBlanks,
+  FillBlanksComponent,
+} = Blocks;
 
 const options = MultipleChoice.parseOptions(["42", "43", "44", "45"], [0, 1]);
 
@@ -27,3 +32,14 @@ const tf1 = new MultipleChoice({
 
 const tf1View = new MultipleChoiceComponent(tfRoot, tf1);
 tf1View.render();
+
+const fbRoot = document.getElementById("fb-root");
+
+const fb1 = new FillBlanks({
+  id: "3",
+  question: "What is the answer to the world, universe, and everything?",
+  acceptableAnswers: ["42", "forty two"],
+});
+
+const fb1View = new FillBlanksComponent(fbRoot, fb1);
+fb1View.render();
