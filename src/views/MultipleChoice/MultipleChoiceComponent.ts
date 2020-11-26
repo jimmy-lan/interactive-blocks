@@ -5,7 +5,7 @@
 
 import { MultipleChoice, MultipleChoiceProps } from "../../models";
 import { ComponentsMap, EventsMap } from "../../commonTypes";
-import { QuestionStatus } from "../../models/Question";
+import { QuestionStatus } from "../../models";
 import { QuestionContainer } from "../common/QuestionContainer";
 import { OptionsForm } from "./OptionsForm";
 

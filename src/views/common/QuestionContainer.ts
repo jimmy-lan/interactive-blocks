@@ -4,7 +4,7 @@
  * Description: A question container with status tab and content tab.
  */
 
-import { Question, QuestionProps } from "../../models/Question";
+import { Question, QuestionProps } from "../../models";
 import { BlockComponent } from "./BlockComponent";
 
 export interface QuestionContainerSettings {

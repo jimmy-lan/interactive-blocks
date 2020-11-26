@@ -112,9 +112,12 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
       // Translate selector to actual component and store it
       const selector = this.componentsMap[key];
       const component = fragment.querySelector(selector);
-      if (component) {
-        this.components[key] = component;
+      if (!component) {
+        throw new Error(
+          `Cannot find component using selector ${selector} when working with key name ${key}.`
+        );
       }
+      this.components[key] = component;
     }
   };
 
