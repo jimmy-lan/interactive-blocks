@@ -85,6 +85,10 @@
   margin: 0 0 16px;
 }
 
+.ib-question-child {
+  margin-bottom: 24px;
+}
+
 /*Check Answer Button*/
 
 /* Question option checkbox and radio buttons */
@@ -191,7 +195,6 @@
 /*Fill in the blanks*/
 .ib-fb-input {
   display: block;
-  margin-bottom: 24px;
   font-size: 2.5ch;
   outline: none;
   width: 100%;
