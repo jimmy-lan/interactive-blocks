@@ -106,7 +106,23 @@ export class FillBlanks extends Question<FillBlanksProps> {
     }
   };
 
-  isUserInputCorrect = (): boolean => {
-    return true;
+  /**
+   * Return whether the user input is correct with respect to this
+   * question.
+   */
+  isUserInputCorrect = async (): Promise<boolean> => {
+    // Obtain information
+    const userInput = this.get("userInput") || "";
+    const acceptableAnswers = this.get("acceptableAnswers");
+    const getAnswer = this.get("getAnswer");
+
+    let correctAnswers: string[];
+    if (getAnswer) {
+      correctAnswers = await getAnswer();
+    } else {
+      correctAnswers = acceptableAnswers || [];
+    }
+
+    return correctAnswers.includes(userInput);
   };
 }
