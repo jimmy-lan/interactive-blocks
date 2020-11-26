@@ -88,7 +88,7 @@ export class BlockModel<T = any> implements Serializable {
    * Serialize attributes of this model.
    */
   serialize = (): string => {
-    return JSON.stringify(this.attributes);
+    return JSON.stringify(this.attributes.getAll());
   };
 
   /**
@@ -97,7 +97,7 @@ export class BlockModel<T = any> implements Serializable {
    */
   deserialize = (raw: string): void => {
     try {
-      this.attributes.replace(JSON.parse(raw));
+      this.replace(JSON.parse(raw));
     } catch (e: any) {
       throw new Error(`Cannot deserialize from value ${raw}`);
     }

@@ -30,6 +30,15 @@ export interface QuestionProps {
    * becomes disabled after one attempt. Defaults to false.
    */
   disableMultipleAttempts?: boolean;
+  /**
+   * Return a promise which resolves in a boolean value to indicate whether
+   * <userResponse> is correct. This function is called when the user clicks
+   * on the submit button in the form.
+   * When this attribute is not specified, the question will determine whether
+   * the user's answer is correct based on other attributes. Otherwise, only
+   * the result from this function is used.
+   */
+  checkAnswer?: (userResponse: any) => Promise<boolean>;
 }
 
 export abstract class Question<T extends QuestionProps> extends BlockModel<T> {

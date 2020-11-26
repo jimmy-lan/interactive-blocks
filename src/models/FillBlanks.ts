@@ -16,9 +16,6 @@ export interface FillBlanksProps extends QuestionProps {
    * characters in the correct answer. If this option is provided and
    * set to a number (or true), all answers in <acceptableAnswers> must have
    * the same length, or <acceptableAnswers> should only contain one string.
-   * If you are checking answers using <getAnswer> function, make sure
-   * to return a list of string in the required format. Otherwise, the
-   * feature will fail to work.
    */
   hintNumChars?: boolean | number;
   /**
@@ -27,12 +24,9 @@ export interface FillBlanksProps extends QuestionProps {
    */
   userInput?: string;
   /**
-   * Callback function to obtain a list of option <id> which corresponds to
-   * the correct answer. When this attribute is not specified, the
-   * `acceptableAnswers` property is used. Otherwise, `acceptableAnswers is
-   * ignored.
+   * @see QuestionProps.checkAnswer
    */
-  getAnswer?: () => Promise<string[]>;
+  checkAnswer?: (p: string) => Promise<boolean>;
 }
 
 export class FillBlanks extends Question<FillBlanksProps> {
@@ -52,17 +46,17 @@ export class FillBlanks extends Question<FillBlanksProps> {
    *  pausing execution.
    */
   private validateAttributes = (): void => {
-    const { acceptableAnswers, hintNumChars, getAnswer } = this.getAll();
+    const { acceptableAnswers, hintNumChars, checkAnswer } = this.getAll();
 
-    if (!acceptableAnswers && !getAnswer) {
+    if (!acceptableAnswers && !checkAnswer) {
       throw new Error(
-        "FillBlanks must contain one of the attributes: 'acceptableAnswers' | 'getAnswer'"
+        "FillBlanks must contain one of the attributes: 'acceptableAnswers' | 'checkAnswer'"
       );
     }
 
     if (
       acceptableAnswers !== undefined &&
-      !getAnswer &&
+      !checkAnswer &&
       !acceptableAnswers.length
     ) {
       console.warn(
@@ -96,7 +90,7 @@ export class FillBlanks extends Question<FillBlanksProps> {
       );
     }
 
-    if (getAnswer !== undefined && typeof hintNumChars === "boolean") {
+    if (checkAnswer !== undefined && typeof hintNumChars === "boolean") {
       throw new Error(
         "FillBlanks '" +
           this.get("id") +
@@ -111,17 +105,16 @@ export class FillBlanks extends Question<FillBlanksProps> {
    * question.
    */
   isUserInputCorrect = async (): Promise<boolean> => {
-    // Obtain information
+    // Obtain required information
     const userInput = this.get("userInput") || "";
     const acceptableAnswers = this.get("acceptableAnswers");
-    const getAnswer = this.get("getAnswer");
+    const checkAnswer = this.get("checkAnswer");
 
-    let correctAnswers: string[];
-    if (getAnswer) {
-      correctAnswers = await getAnswer();
-    } else {
-      correctAnswers = acceptableAnswers || [];
+    if (checkAnswer) {
+      return await checkAnswer(userInput);
     }
+
+    const correctAnswers = acceptableAnswers || [];
 
     return correctAnswers.includes(userInput);
   };

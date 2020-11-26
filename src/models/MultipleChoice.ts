@@ -29,12 +29,9 @@ export interface MultipleChoiceProps extends QuestionProps {
    */
   allowMultipleSelect?: boolean;
   /**
-   * Callback function to obtain a list of option <id> which corresponds to
-   * the correct answer. When this attribute is not specified, the `isAnswer`
-   * property in `options` is used. Otherwise, `isAnswer` in `options`
-   * is ignored.
+   * @see QuestionProps.checkAnswer
    */
-  getAnswer?: () => Promise<string[]>;
+  checkAnswer?: (p: string[]) => Promise<boolean>;
 }
 
 export class MultipleChoice extends Question<MultipleChoiceProps> {
@@ -43,6 +40,13 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
       new AttributeRegistry<MultipleChoiceProps>(attributes),
       persistenceStorage
     );
+  }
+
+  static fromStorage(key: string): MultipleChoice {
+    // @ts-ignore
+    const instance = new MultipleChoice({});
+    instance.read(key);
+    return instance;
   }
 
   /**
@@ -78,11 +82,11 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
   /**
    * Guess whether this multiple choice question accepts multiple
    * options to be selected. Should only be invoked when `allowMultipleSelect`
-   * attribute is not provided. Always return false if `getAnswer` functions is provided.
+   * attribute is not provided. Always return false if `checkAnswer` function is provided.
    */
   guessAllowMultipleSelect = () => {
-    // Always return false if `getAnswer` functions is provided.
-    if (this.get("getAnswer")) {
+    // Always return false if `checkAnswer` function is provided.
+    if (this.get("checkAnswer")) {
       return false;
     }
 
@@ -106,14 +110,13 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
    */
   isUserSelectionsCorrect = async (): Promise<boolean> => {
     const userSelections = this.get("userSelections") || [];
-    const getAnswer = this.get("getAnswer");
+    const checkAnswer = this.get("checkAnswer");
 
-    let correctSelections: string[];
-    if (getAnswer) {
-      correctSelections = await getAnswer();
-    } else {
-      correctSelections = this.extractCorrectSelectionsFromOptions();
+    if (checkAnswer) {
+      return await checkAnswer(userSelections);
     }
+
+    const correctSelections = this.extractCorrectSelectionsFromOptions();
 
     return isArrayEqual(userSelections, correctSelections);
   };
