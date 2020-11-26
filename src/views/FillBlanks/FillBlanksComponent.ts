@@ -15,7 +15,12 @@ export class FillBlanksComponent extends QuestionContainer<
   private stringInput?: StringInput;
 
   get eventsMap(): EventsMap {
-    return {};
+    // Selectors
+    const formButtonSelector = this.selectors.button;
+
+    return {
+      [`${formButtonSelector}:click`]: this.handleCheckAnswerButtonClick,
+    };
   }
 
   get componentsMap(): ComponentsMap {
@@ -28,4 +33,9 @@ export class FillBlanksComponent extends QuestionContainer<
     this.stringInput = new StringInput(this.components.stringInput, this.model);
     this.stringInput.render();
   }
+
+  handleCheckAnswerButtonClick = async (): Promise<void> => {
+    const isInputCorrect = await this.model.isUserInputCorrect();
+    this.model.updateQuestionStatus(isInputCorrect);
+  };
 }

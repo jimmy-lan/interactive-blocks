@@ -5,7 +5,6 @@
 
 import { MultipleChoice, MultipleChoiceProps } from "../../models";
 import { ComponentsMap, EventsMap } from "../../commonTypes";
-import { QuestionStatus } from "../../models";
 import { QuestionContainer } from "../common/QuestionContainer";
 import { OptionsForm } from "./OptionsForm";
 
@@ -39,15 +38,7 @@ export class MultipleChoiceComponent extends QuestionContainer<
   handleCheckAnswerClick = async (): Promise<void> => {
     // Determine the next state of the question component
     const isSelectionCorrect = await this.model.isUserSelectionsCorrect();
-    const newQuestionStatus = isSelectionCorrect
-      ? QuestionStatus.correct
-      : QuestionStatus.warning;
-
-    // Set new state
-    this.model.set(
-      { questionStatus: newQuestionStatus },
-      { shouldRerender: false }
-    );
+    this.model.updateQuestionStatus(isSelectionCorrect);
 
     // Update question container display
     this.updateQuestionContainer();

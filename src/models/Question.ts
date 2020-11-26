@@ -38,6 +38,20 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
   }
 
   /**
+   * Update question status based on <isCorrect>
+   * @param isCorrect A boolean value indicating whether the
+   *    question is answered correctly.
+   */
+  updateQuestionStatus = (isCorrect: boolean) => {
+    const newQuestionStatus = isCorrect
+      ? QuestionStatus.correct
+      : QuestionStatus.warning;
+
+    // @ts-ignore
+    this.set({ questionStatus: newQuestionStatus }, { shouldRerender: false });
+  };
+
+  /**
    * Determine whether this question should not accept further attempts.
    */
   get shouldDisable(): boolean {
