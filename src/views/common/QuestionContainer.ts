@@ -18,6 +18,11 @@ export interface QuestionContainerSelectors {
 }
 
 export class QuestionContainer implements Component {
+  /**
+   * A list of selectors corresponding to key child elements
+   * in this question container.
+   * @private
+   */
   private selectors: QuestionContainerSelectors = {
     childDiv: ".ib-question-child",
     statusDiv: ".ib-status-container",
@@ -36,10 +41,19 @@ export class QuestionContainer implements Component {
     return this._settings;
   }
 
+  /**
+   * Get selector of a key element in question container.
+   * @param key A string used to access the selector.
+   * @see selectors
+   */
   getSelector(key: keyof QuestionContainerSelectors) {
     return this.selectors[key];
   }
 
+  /**
+   * Get all selectors of key elements in this question container.
+   * @see selectors
+   */
   getAllSelectors() {
     return this.selectors;
   }
