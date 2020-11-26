@@ -11,11 +11,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     // Styles require calculation
 
     return `
-      <input class="ib-fb-input" style="width: calc(1.5ch * ${
-        this.model.get("acceptableAnswers")[1].length
-      })" maxlength="${this.model.get("acceptableAnswers")[1].length}" value="${
-      this.model.get("acceptableAnswers")[1]
-    }" />
+      <input class="ib-fb-input" style="width: calc(1.5ch * ${9})" maxlength="${9}" value="forty two" />
     `;
   }
 }
