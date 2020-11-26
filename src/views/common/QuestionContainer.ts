@@ -23,7 +23,7 @@ export class QuestionContainer<
 > extends BlockComponent<T, K> {
   // Selectors begin with `this.model.idWithPrefix` so that
   // they only select elements corresponding to this question.
-  protected selectors: QuestionContainerSelectors = {
+  selectors: QuestionContainerSelectors = {
     childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
     statusDiv: `#${this.model.idWithPrefix} .ib-status-container`,
     button: `#${this.model.idWithPrefix} .ib-question-right button`,

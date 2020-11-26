@@ -13,6 +13,8 @@ export class MultipleChoiceComponent extends QuestionContainer<
   MultipleChoice,
   MultipleChoiceProps
 > {
+  private optionsForm?: OptionsForm;
+
   get eventsMap(): EventsMap {
     // Selectors
     const formButtonSelector = this.selectors.button;
@@ -30,7 +32,8 @@ export class MultipleChoiceComponent extends QuestionContainer<
   }
 
   bindComponents = (): void => {
-    new OptionsForm(this.components.optionsForm, this.model).render();
+    this.optionsForm = new OptionsForm(this.components.optionsForm, this.model);
+    this.optionsForm.render();
   };
 
   handleCheckAnswerClick = async (): Promise<void> => {
@@ -41,15 +44,41 @@ export class MultipleChoiceComponent extends QuestionContainer<
       ? QuestionStatus.correct
       : QuestionStatus.warning;
 
-    // Update question status
-    const statusContainer = document.querySelector<HTMLDivElement>(
-      this.selectors.statusDiv
-    );
-    statusContainer?.classList.remove("correct", "warning");
-    statusContainer?.classList.add(newStatusClassName);
+    // Set new state
     this.model.set(
       { questionStatus: newQuestionStatus },
       { shouldRerender: false }
     );
+
+    // Compute if question needs to be disabled on the next state
+    const shouldDisable = this.model.shouldDisable;
+
+    // Select elements
+    const statusContainer = document.querySelector<HTMLDivElement>(
+      this.selectors.statusDiv
+    );
+    if (!this.optionsForm) {
+      throw new Error(
+        "Cannot handle event because OptionsForm failed to render."
+      );
+    }
+    const optionInputs = document.querySelectorAll<HTMLInputElement>(
+      this.optionsForm.selectors.optionInputs
+    );
+    const optionLabels = document.querySelectorAll<HTMLLabelElement>(
+      this.optionsForm.selectors.optionLabels
+    );
+
+    // Update state of the question
+    statusContainer?.classList.remove("correct", "warning");
+    statusContainer?.classList.add(newStatusClassName);
+    if (shouldDisable) {
+      optionInputs.forEach(
+        (input: HTMLInputElement) => (input.disabled = true)
+      );
+      optionLabels.forEach((label: HTMLLabelElement) =>
+        label.classList.add("disabled")
+      );
+    }
   };
 }

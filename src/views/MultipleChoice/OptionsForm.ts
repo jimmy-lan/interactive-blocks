@@ -15,6 +15,7 @@ import { EventsMap } from "../../commonTypes";
 
 export interface OptionsFormSelectors {
   optionInputs: string;
+  optionLabels: string;
 }
 
 export class OptionsForm extends BlockComponent<
@@ -23,8 +24,9 @@ export class OptionsForm extends BlockComponent<
 > {
   // Selectors begin with `this.model.idWithPrefix` so that
   // they only select elements corresponding to this question.
-  protected selectors: OptionsFormSelectors = {
+  selectors: OptionsFormSelectors = {
     optionInputs: `#${this.model.idWithPrefix} .ib-option-label input`,
+    optionLabels: `#${this.model.idWithPrefix} .ib-option-label`,
   };
 
   get eventsMap(): EventsMap {
@@ -54,35 +56,23 @@ export class OptionsForm extends BlockComponent<
   get htmlStructure(): string {
     // Obtain needed information from model
     const userSelections = this.model.get("userSelections") || [];
-    const questionStatus = this.model.get("questionStatus");
     const allowMultipleSelect = this.model.get("allowMultipleSelect");
-    const disableMultipleAttempts = this.model.get("disableMultipleAttempts");
 
     // Determine render method
     const renderCheckbox =
       allowMultipleSelect || this.model.guessAllowMultipleSelect();
     const optionInputType = renderCheckbox ? "checkbox" : "radio";
-
-    // If questionStatus is not defined, this question is unanswered,
-    // so we do not disable question.
-    let disabled: boolean = questionStatus !== undefined;
-    if (disableMultipleAttempts) {
-      // Disable as long as questionStatus is not unanswered
-      disabled = disabled && questionStatus !== QuestionStatus.unanswered;
-    } else {
-      // Disable only when question is answered correctly
-      disabled = disabled && questionStatus === QuestionStatus.correct;
-    }
+    const shouldDisable = this.model.shouldDisable;
 
     return `${this.model
       .get("options")
       .map(
         ({ id, text }: MultipleChoiceOption) =>
-          `<label class="ib-option-label ${disabled && "disabled"}">
+          `<label class="ib-option-label ${shouldDisable ? "disabled" : ""}">
              <input type="${optionInputType}" value=${id} name="${this.model.get(
             "id"
-          )}" ${userSelections.includes(id) && "checked"} ${
-            disabled && "disabled"
+          )}" ${userSelections.includes(id) ? "checked" : ""} ${
+            shouldDisable ? "disabled" : ""
           } />
              <span class="ib-option-text">${text}</span>
              <span class="ib-option-checkmark ${optionInputType}"></span>
