@@ -35,7 +35,23 @@ export class FillBlanksComponent extends QuestionContainer<
   }
 
   handleCheckAnswerButtonClick = async (): Promise<void> => {
+    // Check response correctness
     const isInputCorrect = await this.model.isUserInputCorrect();
     this.model.updateQuestionStatus(isInputCorrect);
+    this.updateQuestionContainer();
+
+    // Compute if question needs to be disabled on the next state
+    const shouldDisable = this.model.shouldDisable;
+
+    // Select elements
+    if (!this.stringInput) {
+      throw Error("Cannot handle event because StringInput failed to render.");
+    }
+    const input = document.querySelector<HTMLInputElement>(
+      this.stringInput.selectors.input
+    );
+
+    // Update component state
+    input!.disabled = shouldDisable;
   };
 }

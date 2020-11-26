@@ -36,7 +36,7 @@ export class MultipleChoiceComponent extends QuestionContainer<
   };
 
   handleCheckAnswerClick = async (): Promise<void> => {
-    // Determine the next state of the question component
+    // Determine if question is answered correctly
     const isSelectionCorrect = await this.model.isUserSelectionsCorrect();
     this.model.updateQuestionStatus(isSelectionCorrect);
 

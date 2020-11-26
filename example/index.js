@@ -41,6 +41,8 @@ const fb1 = new FillBlanks({
   id: "3",
   question: "What is the answer to the world, universe, and everything?",
   acceptableAnswers: ["hello world"],
+  hintNumChars: true,
+  disableMultipleAttempts: true,
 });
 
 const fb1View = new FillBlanksComponent(fbRoot, fb1);
