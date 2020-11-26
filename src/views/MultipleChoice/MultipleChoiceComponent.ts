@@ -3,14 +3,12 @@
  * Creation Date: 2020-11-23
  */
 
-import {
-  MultipleChoice,
-  MultipleChoiceProps,
-} from "../../models";
-import { EventsMap } from "../../commonTypes";
+import { MultipleChoice, MultipleChoiceProps } from "../../models";
+import { ComponentsMap, EventsMap } from "../../commonTypes";
 import { QuestionStatus } from "../../models/Question";
 import { BlockComponent } from "../common/BlockComponent";
 import { QuestionContainer } from "../common/QuestionContainer";
+import { OptionsForm } from "./OptionsForm";
 
 export class MultipleChoiceComponent extends BlockComponent<
   MultipleChoice,
@@ -19,10 +17,24 @@ export class MultipleChoiceComponent extends BlockComponent<
   private questionContainer = new QuestionContainer(this.model.getAll());
 
   get eventsMap(): EventsMap {
+    // Selectors
+    const formButtonSelector = this.questionContainer.getSelector("button");
+
     return {
-      "button:click": this.handleCheckAnswerClick,
+      [`${formButtonSelector}:click`]: this.handleCheckAnswerClick,
     };
   }
+
+  get componentsMap(): ComponentsMap {
+    const childDivSelector = this.questionContainer.getSelector("childDiv");
+    return {
+      optionsForm: childDivSelector,
+    };
+  }
+
+  bindComponents = (): void => {
+    new OptionsForm(this.components.optionsForm, this.model).render();
+  };
 
   handleCheckAnswerClick = async (): Promise<void> => {
     // Determine the next state of the question component

@@ -11,7 +11,19 @@ export interface QuestionContainerSettings {
   checkAnswerButtonText: string;
 }
 
+export interface QuestionContainerSelectors {
+  childDiv: string;
+  statusDiv: string;
+  button: string;
+}
+
 export class QuestionContainer implements Component {
+  private selectors: QuestionContainerSelectors = {
+    childDiv: ".ib-question-child",
+    statusDiv: ".ib-status-container",
+    button: ".ib-question-right button",
+  };
+
   constructor(
     public questionProps: QuestionProps,
     public _settings?: QuestionContainerSettings
@@ -22,6 +34,14 @@ export class QuestionContainer implements Component {
       return { checkAnswerButtonText: "Check Answer" };
     }
     return this._settings;
+  }
+
+  getSelector(key: keyof QuestionContainerSelectors) {
+    return this.selectors[key];
+  }
+
+  getAllSelectors() {
+    return this.selectors;
   }
 
   get htmlStructure(): string {
