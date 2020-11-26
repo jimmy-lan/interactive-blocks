@@ -194,10 +194,6 @@
   outline: none;
   padding: 0;
   letter-spacing: .5ch;
-  background: repeating-linear-gradient(90deg,
-  dimgrey 0, dimgrey 1ch,
-  transparent 0, transparent 1.5ch)
-  0 100%/ 13ch 2px no-repeat;
   font: 3ch "droid sans mono", consolas, monospace;
 }
 

@@ -41,7 +41,10 @@ export class FillBlanks extends Question<FillBlanksProps> {
 
   /**
    * Check validity of attributes in this question model.
-   * Can change the current attributes so that the meaning of them stay the same.
+   * Can change attributes as long as the meaning does not change.
+   * Post-condition: After validation, 'hintNumChars' attribute will
+   *  become a number if it is specified. Or, an error will be thrown,
+   *  pausing execution.
    */
   private validateAttributes = (): void => {
     const { acceptableAnswers, hintNumChars, getAnswer } = this.getAll();
@@ -82,6 +85,19 @@ export class FillBlanks extends Question<FillBlanksProps> {
           );
         }
       });
+      this.set(
+        { hintNumChars: acceptableAnswerLength },
+        { shouldRerender: false }
+      );
+    }
+
+    if (getAnswer !== undefined && typeof hintNumChars === "boolean") {
+      throw new Error(
+        "FillBlanks '" +
+          this.get("id") +
+          "': When using 'hintNumChars' and a callback function to check answers, " +
+          "please pass in the number of characters to hint to 'hintNumChars' attribute."
+      );
     }
   };
 }
