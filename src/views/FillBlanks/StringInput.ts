@@ -8,11 +8,13 @@ import { FillBlanks, FillBlanksProps } from "../../models";
 
 export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
   get htmlStructure(): string {
+    // Styles require calculation
+
     return `
-      <input class="ib-fb-input" style="calc(1ch * ${
-        this.model.get("acceptableAnswers")[0].length
-      })" maxlength="${this.model.get("acceptableAnswers")[0].length}" value="${
-      this.model.get("acceptableAnswers")[0]
+      <input class="ib-fb-input" style="width: calc(1.5ch * ${
+        this.model.get("acceptableAnswers")[1].length
+      })" maxlength="${this.model.get("acceptableAnswers")[1].length}" value="${
+      this.model.get("acceptableAnswers")[1]
     }" />
     `;
   }

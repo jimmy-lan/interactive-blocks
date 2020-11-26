@@ -189,7 +189,7 @@
 /*Fill in the blanks*/
 .ib-fb-input {
   display: block;
-  margin: 1em 0;
+  margin-bottom: 24px;
   border: none;
   outline: none;
   padding: 0;
@@ -197,8 +197,8 @@
   background: repeating-linear-gradient(90deg,
   dimgrey 0, dimgrey 1ch,
   transparent 0, transparent 1.5ch)
-  0 100%/ 2.5ch 2px no-repeat;
-  font: 5ch droid sans mono, consolas, monospace;
+  0 100%/ 13ch 2px no-repeat;
+  font: 3ch "droid sans mono", consolas, monospace;
 }
 
 .ib-fb-input:focus {
