@@ -24,6 +24,12 @@ export interface QuestionProps {
    * @see QuestionStatus
    */
   questionStatus?: QuestionStatus;
+  /**
+   * If true, multiple attempts to the question is allowed until
+   * the question is correctly answered. Otherwise, the question
+   * becomes disabled after one attempt. Defaults to false.
+   */
+  disableMultipleAttempts?: boolean;
 }
 
 export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
