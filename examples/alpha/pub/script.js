@@ -102,7 +102,7 @@ try {
 } catch (error) {
   const options = MultipleChoice.parseOptions(
     ["useCSC309", "useUofT", "useEffect", "useReactComponent"],
-    [3]
+    [2]
   );
   mc3 = new MultipleChoice({
     id: "6",
