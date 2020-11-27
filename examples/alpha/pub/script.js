@@ -66,3 +66,54 @@ const fbComponentNoHint = new FillBlanksComponent(
   fb2
 );
 fbComponentNoHint.render();
+
+// Automatic rerender section
+const multipleChoiceDiv2 = document.getElementById("mc2");
+
+const mc2 = new MultipleChoice({
+  id: "5",
+  question: "Which of the following files are provided by Interactive Blocks?",
+  options: [
+    { id: "1", text: "interactive.js" },
+    { id: "2", text: "interactive-blocks.js" },
+    { id: "3", text: "interactive-blocks.min.js" },
+    { id: "4", text: "interactive-blocks.js.map" },
+  ],
+  allowMultipleSelect: true,
+  checkAnswer: () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        mc2.set({ userSelections: ["2", "3", "4"] });
+        resolve(true);
+      }, 1000);
+    });
+  },
+});
+
+const mcComponent2 = new MultipleChoiceComponent(multipleChoiceDiv2, mc2);
+mcComponent2.render();
+
+// Storage and Sync
+const multipleChoiceDiv3 = document.getElementById("mc3");
+
+let mc3;
+try {
+  mc3 = MultipleChoice.fromStorage("mc3");
+} catch (error) {
+  const options = MultipleChoice.parseOptions(
+    ["useCSC309", "useUofT", "useEffect", "useReactComponent"],
+    [3]
+  );
+  mc3 = new MultipleChoice({
+    id: "6",
+    question: "Which of the following is a valid hook provided by React?",
+    options,
+  });
+}
+
+mc3.on("change", () => {
+  mc3.save("mc3");
+});
+
+const mcComponent3 = new MultipleChoiceComponent(multipleChoiceDiv3, mc3);
+mcComponent3.render();

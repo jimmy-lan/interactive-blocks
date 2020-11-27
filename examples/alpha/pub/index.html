@@ -69,6 +69,8 @@
         </p>
       </section>
 
+      <div class="spacer"></div>
+
       <section id="getting-started">
         <h2 class="title">Getting Started</h2>
         <p>
@@ -286,11 +288,159 @@ fbComponentNoHint.render();
         </p>
       </section>
 
+      <div class="spacer"></div>
+
       <section id="retrieving-attributes">
         <h2 class="title">Retrieving Attributes</h2>
+        <p>There are two methods to retrieve an attribute from an Interactive Block Component.</p>
+        <ul>
+          <li>Use "get"</li>
+          <li>Use "getAll"</li>
+        </ul>
+        <p>Please note that the following code output value "undefined", because "options" is not found in "mc".</p>
+        <pre>
+          <code class="javascript">
+const mc1 = new MultipleChoice({
+  id: "1",
+  question: "Which of the following files are provided by Interactive Blocks?",
+  options: [
+    { id: "1", text: "interactive.js" },
+    { id: "2", text: "interactive-blocks.js", isAnswer: true },
+    { id: "3", text: "interactive-blocks.min.js", isAnswer: true },
+    { id: "4", text: "interactive-blocks.js.map", isAnswer: true },
+  ],
+});
+
+console.log(mc1.options);
+          </code>
+        </pre>
+        <p>Instead, you should use</p>
+        <pre>
+          <code class="javascript">
+mc.get("options");
+          </code>
+        </pre>
+        <p>or</p>
+        <pre>
+          <code class="javascript">
+mc.getAll().options;
+          </code>
+        </pre>
+        <p>Which will give you a list of options. The same applies for other attributes and other question type.</p>
+        <p>
+          Type declaration files should be provided with the library code. By correctly
+          adding the type declaration files, detecting typos become easier.
+        </p>
       </section>
 
+      <div class="spacer"></div>
 
+      <section id="automatic-rerender">
+        <h2 class="title">Automatic Rerender</h2>
+        <p>You only need to call <span class="bold">render</span> once for each component.</p>
+        <p>For example, we mount the following question: </p>
+        <pre>
+          <code class="javascript">
+const multipleChoiceDiv2 = document.getElementById("mc2");
+
+const mc2 = new MultipleChoice({
+  id: "5",
+  question: "Which of the following files are provided by Interactive Blocks?",
+  options: [
+    { id: "1", text: "interactive.js" },
+    { id: "2", text: "interactive-blocks.js" },
+    { id: "3", text: "interactive-blocks.min.js" },
+    { id: "4", text: "interactive-blocks.js.map" },
+  ],
+  allowMultipleSelect: true,
+  checkAnswer: () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        mc2.set({ userSelections: ["2", "3", "4"] });
+        resolve(true);
+      }, 1000);
+    });
+  },
+});
+
+const mcComponent2 = new MultipleChoiceComponent(multipleChoiceDiv2, mc2);
+mcComponent2.render();
+          </code>
+        </pre>
+        <h3>Output</h3>
+        <div id="mc2"></div>
+        <div class="spacer"></div>
+        <p>
+          Note that the moment that we set <code>mc2</code>, the view component
+          is re-rendered automatically by itself.
+          We did not explicitly call <code>render</code> again in our code above.
+        </p>
+      </section>
+
+      <div class="spacer"></div>
+
+      <section id="events">
+        <h2 class="title">Events</h2>
+        <p>
+          You can add event listeners to an Interactive Block Component.
+          Currently, I support "change", "save", and "read" events. You can
+          add event listeners like this:
+        </p>
+        <pre>
+          <code class="javascript">
+mc.on("change", () => {...});
+          </code>
+        </pre>
+      </section>
+
+      <div class="spacer"></div>
+
+      <section id="storage-sync">
+        <h2 class="title">Storage and Sync</h2>
+        <p>
+          Let's have some more fun in this section. We will create a multiple choice question
+          that saves to the user's machine.
+        </p>
+        <pre>
+          <code class="javascript">
+const multipleChoiceDiv3 = document.getElementById("mc3");
+
+let mc3;
+try {
+  mc3 = MultipleChoice.fromStorage("mc3");
+} catch (error) {
+  const options = MultipleChoice.parseOptions(
+    ["useCSC309", "useUofT", "useEffect", "useReactComponent"],
+    [3]
+  );
+  mc3 = new MultipleChoice({
+    id: "6",
+    question: "Which of the following is a valid hook provided by React?",
+    options,
+  });
+}
+
+mc3.on("change", () => {
+  mc3.save("mc3");
+});
+
+const mcComponent3 = new MultipleChoiceComponent(multipleChoiceDiv3, mc3);
+mcComponent3.render();
+          </code>
+        </pre>
+        <h3>Output</h3>
+        <div id="mc3"></div>
+        <div class="spacer"></div>
+        <p>
+          Try click on an option (do not click check answer yet!) then refresh the page.
+          Try answer the question incorrectly, then refresh the page.
+          Also try answer the question correctly, then refresh the page.
+        </p>
+      </section>
+
+      <div class="spacer"></div>
+
+      <p>This is the end of this example page. I hope you had some fun with my library! :)</p>
 
       <!-- Used to inject html string to this html file -->
       <script src="inject-html-code-snippets.js"></script>
