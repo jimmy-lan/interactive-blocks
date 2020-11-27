@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+  font-weight: 300;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 9px 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+ul {
+  margin: 0;
+}
+
+a {
+  color: #009aed;
+  text-decoration: none;
+}
+
+li {
+  margin-bottom: 3px;
+}
+
+hr {
+  color: #808080;
+  height: 2px;
+  margin-bottom: 16px;
+}
+
+code {
+  font-size: 16px;
+}
+
+div.header-container {
+  background-color: #b5e5ff;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+div.header {
+  width: 100%;
+  padding: 20px 10%;
+}
+
+div.content-container {
+  padding: 16px 20%;
+}
+
+.title {
+  font-weight: 500;
+}
+
+div.spacer {
+  height: 15px;
+}
+
+.subtitle {
+  color: #808080;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.info-container {
+  border-left: 3px solid #009aed;
+  padding: 9px 15px;
+}
+
+.warning-container {
+  background-color: lightyellow;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin-bottom: 16px;
+}
+
+.warning-container.mobile {
+  display: none;
+}
+
+@media only screen and (max-device-width: 768px) {
+  div.header {
+    padding: 20px;
+  }
+  div.content-container {
+    padding: 16px 5%;
+  }
+  .warning-container.mobile {
+    display: block;
+  }
+}
+
+pre {
+  margin: 0;
+}
+
+#installation pre {
+  height: 60px;
+}
