@@ -206,7 +206,7 @@ tfComponent.render();
           Did you realize that the two questions above continue to accept answers
           until a correct answer is reached? We can change this behaviour and let
           the question become disabled after one attempt. To do this, we set the prop
-          <span class="bold">"disableMultipleAttempts"</span> to false.
+          <span class="bold">"disableMultipleAttempts"</span> to true.
         </p>
         <pre>
           <code class="javascript">
@@ -297,7 +297,7 @@ fbComponentNoHint.render();
           <li>Use "get"</li>
           <li>Use "getAll"</li>
         </ul>
-        <p>Please note that the following code output value "undefined", because "options" is not found in "mc".</p>
+        <p>Please note that the following code output value "undefined", because "options" is not found in "mc1".</p>
         <pre>
           <code class="javascript">
 const mc1 = new MultipleChoice({
@@ -317,19 +317,19 @@ console.log(mc1.options);
         <p>Instead, you should use</p>
         <pre>
           <code class="javascript">
-mc.get("options");
+mc1.get("options");
           </code>
         </pre>
         <p>or</p>
         <pre>
           <code class="javascript">
-mc.getAll().options;
+mc1.getAll().options;
           </code>
         </pre>
         <p>Which will give you a list of options. The same applies for other attributes and other question type.</p>
         <p>
           Type declaration files should be provided with the library code. By correctly
-          adding the type declaration files, detecting typos become easier.
+          adding the type declaration files, detecting typos becomes easier.
         </p>
       </section>
 
