@@ -65,6 +65,7 @@ export class QuestionContainer<
     const hintButton = document.querySelector<HTMLButtonElement>(
       this.selectors.hintButton
     );
+    console.log(hintButton);
     const errorLabel = document.querySelector<HTMLLabelElement>(
       this.selectors.errorLabel
     );
@@ -79,7 +80,9 @@ export class QuestionContainer<
     statusContainer!.classList.remove("correct", "warning");
     statusContainer!.classList.add(newStatusClassName);
     checkAnswerButton!.disabled = shouldDisable;
-    hintButton!.disabled = shouldDisable;
+    if (hintButton) {
+      hintButton.disabled = shouldDisable;
+    }
 
     // Clear any errors that the hint label shows
     errorLabel!.classList.remove("visible");
