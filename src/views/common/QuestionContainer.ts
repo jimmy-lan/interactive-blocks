@@ -59,8 +59,11 @@ export class QuestionContainer<
     const statusContainer = document.querySelector<HTMLDivElement>(
       this.selectors.statusDiv
     );
-    const submitButton = document.querySelector<HTMLButtonElement>(
+    const checkAnswerButton = document.querySelector<HTMLButtonElement>(
       this.selectors.checkAnswerButton
+    );
+    const hintButton = document.querySelector<HTMLButtonElement>(
+      this.selectors.hintButton
     );
     const errorLabel = document.querySelector<HTMLLabelElement>(
       this.selectors.errorLabel
@@ -75,7 +78,8 @@ export class QuestionContainer<
     // Update component display
     statusContainer!.classList.remove("correct", "warning");
     statusContainer!.classList.add(newStatusClassName);
-    submitButton!.disabled = shouldDisable;
+    checkAnswerButton!.disabled = shouldDisable;
+    hintButton!.disabled = shouldDisable;
 
     // Clear any errors that the hint label shows
     errorLabel!.classList.remove("visible");
@@ -135,7 +139,10 @@ export class QuestionContainer<
 
   get htmlStructure(): string {
     const { checkAnswerButtonText } = this.settings;
+
     const shouldDisable = this.model.shouldDisable;
+    const disabledString = shouldDisable ? "disabled" : "";
+
     const hint = this.model.get("hint") || "";
     const isShowingHint = this.model.get("isShowingHint");
 
@@ -153,10 +160,12 @@ export class QuestionContainer<
           <h4 class="ib-question-hint">${isShowingHint ? hint : ""}</h4>
           <div class="ib-question-child"></div>
           <div>
-            <button class="ib-btn primary check-answer" ${
-              shouldDisable ? "disabled" : ""
-            }>${checkAnswerButtonText}</button>
-            <button class="ib-btn hint">Hint</button>
+            <button class="ib-btn primary check-answer" ${disabledString}>${checkAnswerButtonText}</button>
+            ${
+              hint
+                ? `<button class="ib-btn hint" ${disabledString}>Hint</button>`
+                : ""
+            }
           </div>
           <h4 class="ib-question-error">* Please provide a valid response to this question!</h4>
         </div>

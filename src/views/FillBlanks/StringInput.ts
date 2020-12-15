@@ -34,8 +34,6 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     // Information needed to render
     const hintNumChars = this.model.get("hintNumChars");
 
-    console.log(`#${this.model.idWithPrefix} input.ib-fb-input`);
-
     // Props require calculation
     let styleProp = "";
     let maxLengthProp = "";

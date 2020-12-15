@@ -7,11 +7,6 @@
   --primary: #2196f3;
 }
 
-/* Utility Classes */
-.visible {
-  display: block;
-}
-
 /* Question Container */
 
 .ib-container {
@@ -118,6 +113,10 @@
   display: none;
 }
 
+.visible.ib-question-error {
+  display: block;
+}
+
 .ib-question-child {
   margin-bottom: 18px;
 }
@@ -132,7 +131,7 @@
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease-in;
+  transition: all 0.2s ease;
   border-radius: 3px;
 }
 
@@ -164,8 +163,13 @@
   filter: brightness(75%);
 }
 
-.ib-btn:disabled {
+.ib-btn:disabled,
+.ib-btn.primary:disabled:hover {
   cursor: default;
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%);
+  box-shadow: none;
 }
 
 /* Question Specific Buttons */
