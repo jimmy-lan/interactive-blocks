@@ -4,6 +4,7 @@ const {
   FillBlanks,
   FillBlanksComponent,
   StoragePersistence,
+  Persistence,
 } = Blocks;
 
 const div = document.getElementById("root");
@@ -40,16 +41,8 @@ const fb = new FillBlanks({
   question:
     "What is the ultimate answer to the world, the universe, and everything?",
   acceptableAnswers: ["forty two"],
-  hint: "Have you ever heard of the movie?",
-  disableMultipleAttempts: true,
   hintNumChars: true,
 });
-
-fb.persistence = new StoragePersistence(fb, sessionStorage);
-
-try {
-  fb.read("fb");
-} catch (error) {}
 
 new FillBlanksComponent(div, fb).render();
 

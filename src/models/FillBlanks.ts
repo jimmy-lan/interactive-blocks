@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-25
  */
 import { Question, QuestionProps } from "./Question";
-import { AttributeRegistry, Persistence } from "./common";
+import { AttributeRegistry } from "./common";
 
 export interface FillBlanksProps extends QuestionProps {
   /**
@@ -19,6 +19,11 @@ export interface FillBlanksProps extends QuestionProps {
    */
   hintNumChars?: boolean | number;
   /**
+   * Indicates whether the answers to this question are case-sensitive.
+   * Defaults to false.
+   */
+  caseSensitive?: boolean;
+  /**
    * A string storing the current user response to this fill in the blanks
    * question.
    */
@@ -30,11 +35,11 @@ export interface FillBlanksProps extends QuestionProps {
 }
 
 export class FillBlanks extends Question<FillBlanksProps> {
-  constructor(
-    attributes: FillBlanksProps,
-    persistence?: Storage | Persistence
-  ) {
-    super(new AttributeRegistry<FillBlanksProps>(attributes), persistence);
+  constructor(attributes: FillBlanksProps, persistenceStorage?: Storage) {
+    super(
+      new AttributeRegistry<FillBlanksProps>(attributes),
+      persistenceStorage
+    );
     this.validateAttributes();
   }
 
@@ -113,6 +118,7 @@ export class FillBlanks extends Question<FillBlanksProps> {
     // Obtain required information
     const userInput = this.get("userInput") || "";
     const acceptableAnswers = this.get("acceptableAnswers");
+    const caseSensitive = this.get("caseSensitive");
     const checkAnswer = this.get("checkAnswer");
 
     if (checkAnswer) {
@@ -120,7 +126,14 @@ export class FillBlanks extends Question<FillBlanksProps> {
     }
 
     const correctAnswers = acceptableAnswers || [];
+    let interpretAnswer = userInput;
 
-    return correctAnswers.includes(userInput);
+    // Convert case if solutions are not case sensitive
+    if (!caseSensitive) {
+      correctAnswers.map((answer: string) => answer.toLowerCase());
+      interpretAnswer = userInput.toLowerCase();
+    }
+
+    return correctAnswers.includes(interpretAnswer);
   };
 }
