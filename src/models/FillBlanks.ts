@@ -38,13 +38,6 @@ export class FillBlanks extends Question<FillBlanksProps> {
     this.validateAttributes();
   }
 
-  static fromStorage(key: string): FillBlanks {
-    // @ts-ignore
-    const instance = new FillBlanks({ acceptableAnswers: [""] });
-    instance.read(key);
-    return instance;
-  }
-
   get isAnswered(): boolean {
     const userInput = this.get("userInput") || "";
     return userInput.length !== 0;

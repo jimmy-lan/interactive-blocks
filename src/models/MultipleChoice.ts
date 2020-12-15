@@ -42,13 +42,6 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
     );
   }
 
-  static fromStorage(key: string): MultipleChoice {
-    // @ts-ignore
-    const instance = new MultipleChoice({});
-    instance.read(key);
-    return instance;
-  }
-
   /**
    * Return a list of options in the correct format.
    * @param optionTexts A list of texts corresponding to the texts displayed
