@@ -42,10 +42,12 @@ export class QuestionContainer<
 
   eventsMap(): EventsMap {
     // Selectors
-    const formButtonSelector = this.selectors.checkAnswerButton;
+    const hintButtonSelector = this.selectors.hintButton;
+    const checkAnswerButtonSelector = this.selectors.checkAnswerButton;
 
     return {
-      [`${formButtonSelector}:click`]: this.handleCheckAnswerClick,
+      [`${checkAnswerButtonSelector}:click`]: this.handleCheckAnswerClick,
+      [`${hintButtonSelector}:click`]: this.handleHintClick,
     };
   }
 
@@ -112,10 +114,30 @@ export class QuestionContainer<
     this.onCheckAnswerClick();
   };
 
+  handleHintClick = async () => {
+    const hintText = this.model.get("hint");
+    const isShowingHint = this.model.get("isShowingHint");
+    const hintLabel = document.querySelector(this.selectors.hintLabel)!;
+
+    // Toggle hint display
+    if (isShowingHint) {
+      hintLabel.innerHTML = "";
+    } else {
+      hintLabel.innerHTML = hintText!;
+    }
+
+    this.model.set(
+      // @ts-ignore
+      { isShowingHint: !isShowingHint },
+      { shouldRerender: false }
+    );
+  };
+
   get htmlStructure(): string {
     const { checkAnswerButtonText } = this.settings;
     const shouldDisable = this.model.shouldDisable;
     const hint = this.model.get("hint") || "";
+    const isShowingHint = this.model.get("isShowingHint");
 
     return `
       <div id="${this.model.idWithPrefix}" class="ib-container">
@@ -128,7 +150,7 @@ export class QuestionContainer<
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
-          <h4 class="ib-question-hint">${hint}</h4>
+          <h4 class="ib-question-hint">${isShowingHint ? hint : ""}</h4>
           <div class="ib-question-child"></div>
           <div>
             <button class="ib-btn primary check-answer" ${

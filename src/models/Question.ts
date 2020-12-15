@@ -23,6 +23,12 @@ export interface QuestionProps {
    */
   hint?: string;
   /**
+   * A boolean value indicating whether the question is currently
+   * showing hint to the user. Users can toggle hint displays when a hint
+   * text is provided. This attribute determines a state. Defaults to false.
+   */
+  isShowingHint?: boolean;
+  /**
    * Status of this question.
    * If not provided, the question is unanswered.
    * @see QuestionStatus

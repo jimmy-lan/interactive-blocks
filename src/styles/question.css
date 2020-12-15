@@ -7,6 +7,11 @@
   --primary: #2196f3;
 }
 
+/* Utility Classes */
+.visible {
+  display: block;
+}
+
 /* Question Container */
 
 .ib-container {
@@ -111,10 +116,6 @@
   color: var(--warning-color);
   margin: 8px 0 0;
   display: none;
-}
-
-.visible.ib-question-error {
-  display: block;
 }
 
 .ib-question-child {
