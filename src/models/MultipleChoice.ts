@@ -5,7 +5,7 @@
 
 import { isArrayEqual } from "../utils";
 import { Question, QuestionProps } from "./Question";
-import { AttributeRegistry, Persistence } from "./common";
+import { AttributeRegistry } from "./common";
 
 export interface MultipleChoiceOption {
   id: string;
@@ -35,11 +35,11 @@ export interface MultipleChoiceProps extends QuestionProps {
 }
 
 export class MultipleChoice extends Question<MultipleChoiceProps> {
-  constructor(
-    attributes: MultipleChoiceProps,
-    persistence?: Storage | Persistence
-  ) {
-    super(new AttributeRegistry<MultipleChoiceProps>(attributes), persistence);
+  constructor(attributes: MultipleChoiceProps, persistenceStorage?: Storage) {
+    super(
+      new AttributeRegistry<MultipleChoiceProps>(attributes),
+      persistenceStorage
+    );
   }
 
   /**
