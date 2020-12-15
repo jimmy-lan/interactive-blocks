@@ -19,7 +19,11 @@ export interface QuestionProps {
   id: string;
   question: string;
   /**
-   * Status of this multiple choice question.
+   * A hint string to be displayed below the question text.
+   */
+  hint?: string;
+  /**
+   * Status of this question.
    * If not provided, the question is unanswered.
    * @see QuestionStatus
    */
@@ -30,6 +34,12 @@ export interface QuestionProps {
    * becomes disabled after one attempt. Defaults to false.
    */
   disableMultipleAttempts?: boolean;
+  /**
+   * If true, this question accepts empty response.
+   * Otherwise, this question prevents users from submitting an
+   * empty answer to the question. Defaults to false.
+   */
+  allowEmptyResponse?: boolean;
   /**
    * Return a promise which resolves in a boolean value to indicate whether
    * <userResponse> is correct. This function is called when the user clicks
@@ -61,6 +71,11 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
   };
 
   /**
+   * Return whether this question has been answered by the user.
+   */
+  abstract get isAnswered(): boolean;
+
+  /**
    * Determine whether this question should not accept further attempts.
    */
   get shouldDisable(): boolean {
@@ -80,5 +95,17 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
     }
 
     return disabled;
+  }
+
+  /**
+   * Determine whether an unanswered error should be shown based on
+   * the current state of the question.
+   */
+  get shouldShowEmptyError(): boolean {
+    const allowEmptyResponse = this.get("allowEmptyResponse");
+    const isAnswered = this.isAnswered;
+
+    // When question does not allow empty response and is not answered
+    return !allowEmptyResponse && !isAnswered;
   }
 }

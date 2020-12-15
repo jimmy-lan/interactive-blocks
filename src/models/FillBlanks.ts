@@ -45,6 +45,11 @@ export class FillBlanks extends Question<FillBlanksProps> {
     return instance;
   }
 
+  get isAnswered(): boolean {
+    const userInput = this.get("userInput") || "";
+    return userInput.length !== 0;
+  }
+
   /**
    * Check validity of attributes in this question model.
    * Can change attributes as long as the meaning does not change.

@@ -60,6 +60,7 @@ export class QuestionContainer<
   get htmlStructure(): string {
     const { checkAnswerButtonText } = this.settings;
     const shouldDisable = this.model.shouldDisable;
+    const hint = this.model.get("hint") || "";
 
     return `
       <div id="${this.model.idWithPrefix}" class="ib-container">
@@ -72,6 +73,7 @@ export class QuestionContainer<
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
+          <h4 class="ib-question-hint"><em>${hint}</em></h4>
           <div class="ib-question-child"></div>
           <button class="ib-btn" ${
             shouldDisable ? "disabled" : ""

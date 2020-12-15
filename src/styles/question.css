@@ -97,11 +97,20 @@
 .ib-question-text {
   font-weight: normal;
   line-height: 1.5;
+  margin: 0 0 9px;
+}
+
+.ib-question-hint {
+  font-weight: normal;
   margin: 0 0 16px;
 }
 
+.error.ib-question-hint {
+  color: var(--warning-color);
+}
+
 .ib-question-child {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 /* Question Form Button */

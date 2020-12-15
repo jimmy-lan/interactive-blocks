@@ -69,6 +69,11 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
     );
   };
 
+  get isAnswered(): boolean {
+    const userSelections = this.get("userSelections") || [];
+    return userSelections.length !== 0;
+  }
+
   /**
    * Extract correct selections from options prop.
    */
@@ -109,8 +114,14 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
    * Return whether the user selected the correct response.
    */
   isUserSelectionsCorrect = async (): Promise<boolean> => {
+    // Obtain needed attributes
     const userSelections = this.get("userSelections") || [];
     const checkAnswer = this.get("checkAnswer");
+    const allowEmptyResponse = this.get("allowEmptyResponse");
+
+    // Notify user for empty response
+    if (!allowEmptyResponse && !userSelections.length) {
+    }
 
     if (checkAnswer) {
       return await checkAnswer(userSelections);
