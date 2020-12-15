@@ -5,6 +5,8 @@ const {
   FillBlanksComponent,
   StoragePersistence,
   Persistence,
+  PointsPanel,
+  PointsPanelComponent,
 } = Blocks;
 
 const div = document.getElementById("root");
@@ -50,3 +52,6 @@ new FillBlanksComponent(div, fb).render();
 fb.on("change", () => {
   fb.save("fb");
 });
+
+const panel = new PointsPanel({ questions: [fb] });
+new PointsPanelComponent(document.querySelector("#panel"), panel).render();

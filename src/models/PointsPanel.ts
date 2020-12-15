@@ -13,7 +13,7 @@ export interface PointsPanelProps {
    * If false, a numeric value representing score would be shown.
    * Defaults to false.
    */
-  displayPercentage: boolean;
+  displayPercentage?: boolean;
 }
 
 export class PointsPanel extends BlockModel<PointsPanelProps> {

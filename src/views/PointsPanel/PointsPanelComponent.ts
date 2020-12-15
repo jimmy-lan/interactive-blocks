@@ -12,7 +12,7 @@ export class PointsPanelComponent extends BlockComponent<
   get htmlStructure(): string {
     return `
       <div class="ib-points-panel">
-        <h5>1 / 2</h5>
+        <h5 class="ib-points-text">0 / 100</h5>
       </div>
     `;
   }
