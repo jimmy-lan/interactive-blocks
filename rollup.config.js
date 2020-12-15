@@ -15,6 +15,7 @@ import cssnano from "cssnano";
 import cssvariables from "postcss-css-variables";
 
 import pkg from "./package.json";
+import { variables } from "./src/config/cssvariables";
 
 const input = "src/index.ts";
 
@@ -41,7 +42,12 @@ export default [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
       postcss({
         extensions: [".css"],
-        plugins: [cssnano(), cssvariables()],
+        plugins: [
+          cssnano(),
+          cssvariables({
+            variables,
+          }),
+        ],
       }),
       cleanup({ sourcemap: true }),
     ],
@@ -61,7 +67,12 @@ export default [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
       postcss({
         extensions: [".css"],
-        plugins: [cssnano()],
+        plugins: [
+          cssnano(),
+          cssvariables({
+            variables,
+          }),
+        ],
         inject: { insertAt: "top" },
       }),
       terser({
