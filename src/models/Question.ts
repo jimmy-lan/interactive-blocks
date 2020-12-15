@@ -40,6 +40,7 @@ export interface QuestionProps {
    * empty answer to the question. Defaults to false.
    */
   allowEmptyResponse?: boolean;
+
   /**
    * Return a promise which resolves in a boolean value to indicate whether
    * <userResponse> is correct. This function is called when the user clicks
@@ -74,6 +75,12 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
    * Return whether this question has been answered by the user.
    */
   abstract get isAnswered(): boolean;
+
+  /**
+   * Return a promise which resolves to a boolean value indicating
+   * whether the question has been correctly answered.
+   */
+  abstract determineCorrectness(): Promise<boolean>;
 
   /**
    * Determine whether this question should not accept further attempts.

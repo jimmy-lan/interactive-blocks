@@ -6,6 +6,7 @@
 
 import { Question, QuestionProps, QuestionStatus } from "../../models";
 import { BlockComponent } from "./BlockComponent";
+import { EventsMap } from "../../commonTypes";
 
 export interface QuestionContainerSettings {
   checkAnswerButtonText: string;
@@ -14,6 +15,8 @@ export interface QuestionContainerSettings {
 export interface QuestionContainerSelectors {
   childDiv: string;
   statusDiv: string;
+  hintLabel: string;
+  errorLabel: string;
   button: string;
 }
 
@@ -26,6 +29,8 @@ export class QuestionContainer<
   selectors: QuestionContainerSelectors = {
     childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
     statusDiv: `#${this.model.idWithPrefix} .ib-status-container`,
+    hintLabel: `#${this.model.idWithPrefix} .ib-question-hint`,
+    errorLabel: `#${this.model.idWithPrefix} .ib-question-error`,
     button: `#${this.model.idWithPrefix} .ib-question-right button`,
   };
 
@@ -33,16 +38,28 @@ export class QuestionContainer<
     checkAnswerButtonText: "Check Answer",
   };
 
+  eventsMap(): EventsMap {
+    // Selectors
+    const formButtonSelector = this.selectors.button;
+
+    return {
+      [`${formButtonSelector}:click`]: this.handleCheckAnswerClick,
+    };
+  }
+
   /**
    * Update question container based on the current question.
    */
-  updateQuestionContainer = () => {
+  updateQuestionContainer = (): void => {
     // Select needed elements
     const statusContainer = document.querySelector<HTMLDivElement>(
       this.selectors.statusDiv
     );
     const submitButton = document.querySelector<HTMLButtonElement>(
       this.selectors.button
+    );
+    const errorLabel = document.querySelector<HTMLLabelElement>(
+      this.selectors.errorLabel
     );
 
     // Compute next state
@@ -55,6 +72,42 @@ export class QuestionContainer<
     statusContainer!.classList.remove("correct", "warning");
     statusContainer!.classList.add(newStatusClassName);
     submitButton!.disabled = shouldDisable;
+
+    // Clear any errors that the hint label shows
+    errorLabel!.classList.remove("visible");
+  };
+
+  /**
+   * Update question container display to show an error informing
+   * the user that this question is unanswered.
+   */
+  showEmptyError = (): void => {
+    const errorLabel = document.querySelector<HTMLLabelElement>(
+      this.selectors.errorLabel
+    )!;
+    if (!errorLabel.classList.contains("visible")) {
+      errorLabel.classList.add("visible");
+    }
+  };
+
+  protected onCheckAnswerClick() {}
+
+  handleCheckAnswerClick = async (): Promise<void> => {
+    // Display unanswered error if appropriate
+    const shouldShowEmptyError = this.model.shouldShowEmptyError;
+    if (shouldShowEmptyError) {
+      return this.showEmptyError();
+    }
+
+    // Determine if question is answered correctly
+    const isSelectionCorrect = await this.model.determineCorrectness();
+    this.model.updateQuestionStatus(isSelectionCorrect);
+
+    // Update question container display
+    this.updateQuestionContainer();
+
+    // Trigger event hook
+    this.onCheckAnswerClick();
   };
 
   get htmlStructure(): string {
@@ -73,11 +126,12 @@ export class QuestionContainer<
         </div>
         <div class="ib-question-right">
           <h3 class="ib-question-text">${this.model.get("question")}</h3>
-          <h4 class="ib-question-hint"><em>${hint}</em></h4>
+          <h4 class="ib-question-hint">${hint}</h4>
           <div class="ib-question-child"></div>
-          <button class="ib-btn" ${
+          <button class="ib-btn primary" ${
             shouldDisable ? "disabled" : ""
           }>${checkAnswerButtonText}</button>
+          <h4 class="ib-question-error">* Please provide a valid response to this question!</h4>
         </div>
       </div>
     `;

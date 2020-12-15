@@ -5,6 +5,7 @@
   --correct-color: #36c247;
   --warning-color: #e05316;
   --textbox-border: #1c1c1c;
+  --primary: #2196f3;
 }
 
 /* Question Container */
@@ -101,12 +102,20 @@
 }
 
 .ib-question-hint {
+  font-style: italic;
   font-weight: normal;
   margin: 0 0 16px;
 }
 
-.error.ib-question-hint {
+.ib-question-error {
+  font-weight: normal;
   color: var(--warning-color);
+  margin: 8px 0 0;
+  display: none;
+}
+
+.visible.ib-question-error {
+  display: block;
 }
 
 .ib-question-child {
@@ -126,6 +135,20 @@
   filter: brightness(100%);
   transition: all 0.3s ease-in;
   border-radius: 3px;
+}
+
+.ib-btn.primary {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.ib-btn.primary:hover {
+ filter: brightness(110%);
+}
+
+.ib-btn.primary:active {
+  filter: brightness(125%);
 }
 
 .ib-btn:hover {
@@ -194,7 +217,8 @@
 
 .ib-option-label input:checked ~ .ib-option-checkmark,
 .ib-option-label.disabled > input:checked ~ .ib-option-checkmark {
-  background: var(--correct-color);
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .ib-option-checkmark:after {
@@ -276,5 +300,5 @@
 }
 
 .ib-fb-input.hint-num-chars:focus {
-  color: var(--correct-color);
+  color: var(--primary);
 }

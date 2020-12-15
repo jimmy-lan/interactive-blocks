@@ -16,7 +16,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     input: `#${this.model.idWithPrefix} input.ib-fb-input`,
   };
 
-  get eventsMap(): EventsMap {
+  eventsMap(): EventsMap {
     return {
       [`.ib-fb-input:input`]: this.handleInputChange,
     };

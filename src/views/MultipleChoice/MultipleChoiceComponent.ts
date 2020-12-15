@@ -4,7 +4,7 @@
  */
 
 import { MultipleChoice, MultipleChoiceProps } from "../../models";
-import { ComponentsMap, EventsMap } from "../../commonTypes";
+import { ComponentsMap } from "../../commonTypes";
 import { QuestionContainer } from "../common/QuestionContainer";
 import { OptionsForm } from "./OptionsForm";
 
@@ -14,16 +14,7 @@ export class MultipleChoiceComponent extends QuestionContainer<
 > {
   private optionsForm?: OptionsForm;
 
-  get eventsMap(): EventsMap {
-    // Selectors
-    const formButtonSelector = this.selectors.button;
-
-    return {
-      [`${formButtonSelector}:click`]: this.handleCheckAnswerClick,
-    };
-  }
-
-  get componentsMap(): ComponentsMap {
+  componentsMap(): ComponentsMap {
     const childDivSelector = this.selectors.childDiv;
     return {
       optionsForm: childDivSelector,
@@ -35,14 +26,7 @@ export class MultipleChoiceComponent extends QuestionContainer<
     this.optionsForm.render();
   };
 
-  handleCheckAnswerClick = async (): Promise<void> => {
-    // Determine if question is answered correctly
-    const isSelectionCorrect = await this.model.isUserSelectionsCorrect();
-    this.model.updateQuestionStatus(isSelectionCorrect);
-
-    // Update question container display
-    this.updateQuestionContainer();
-
+  onCheckAnswerClick = async (): Promise<void> => {
     // Compute if question needs to be disabled on the next state
     const shouldDisable = this.model.shouldDisable;
 

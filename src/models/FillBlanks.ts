@@ -116,7 +116,7 @@ export class FillBlanks extends Question<FillBlanksProps> {
    * Return whether the user input is correct with respect to this
    * question.
    */
-  isUserInputCorrect = async (): Promise<boolean> => {
+  determineCorrectness = async (): Promise<boolean> => {
     // Obtain required information
     const userInput = this.get("userInput") || "";
     const acceptableAnswers = this.get("acceptableAnswers");

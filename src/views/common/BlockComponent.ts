@@ -4,7 +4,7 @@
  * Description: An abstract representation of an interactive block component.
  */
 
-import { BlockModel } from "../../models/common/BlockModel";
+import { BlockModel } from "../../models";
 import {
   ComponentsMap,
   EventsMap,
@@ -54,7 +54,7 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * - Follow by a column (:).
    * - End by the event type to register. The event type to register is one of the DOM events.
    */
-  get eventsMap(): EventsMap {
+  eventsMap(): EventsMap {
     return {};
   }
 
@@ -63,11 +63,12 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * @param fragment Document fragment corresponding to this view component.
    */
   bindEvents = (fragment: DocumentFragment): void => {
-    for (let descriptor in this.eventsMap) {
+    const eventsMap = this.eventsMap();
+    for (let descriptor in eventsMap) {
       // This check is to ensure that there is no unexpected
       // prototype change on the eventsMap object, which can lead
       // to hard-to-find issues.
-      if (!this.eventsMap.hasOwnProperty(descriptor)) {
+      if (!eventsMap.hasOwnProperty(descriptor)) {
         throw new Error(
           "Unexpected prototype change in eventsMap. Please " +
             "always provide a callback function for each event descriptor!"
@@ -87,7 +88,7 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
       }
 
       fragment.querySelectorAll(selector).forEach((element: Element) => {
-        element.addEventListener(eventType, this.eventsMap[descriptor]);
+        element.addEventListener(eventType, eventsMap[descriptor]);
       });
     }
   };
@@ -98,19 +99,21 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * - Keys correspond to names of child components
    * - Values correspond to selectors of child components
    */
-  get componentsMap(): ComponentsMap {
+  componentsMap(): ComponentsMap {
     return {};
   }
 
   mapComponents = (fragment: DocumentFragment): void => {
-    for (let key in this.componentsMap) {
+    const componentsMap = this.componentsMap();
+
+    for (let key in componentsMap) {
       // Ensure no unexpected prototype change
-      if (!this.componentsMap.hasOwnProperty(key)) {
+      if (!componentsMap.hasOwnProperty(key)) {
         throw new Error("Unexpected prototype change in componentsMap!");
       }
 
       // Translate selector to actual component and store it
-      const selector = this.componentsMap[key];
+      const selector = componentsMap[key];
       const component = fragment.querySelector(selector);
       if (!component) {
         throw new Error(

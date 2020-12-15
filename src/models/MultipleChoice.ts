@@ -113,7 +113,7 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
   /**
    * Return whether the user selected the correct response.
    */
-  isUserSelectionsCorrect = async (): Promise<boolean> => {
+  determineCorrectness = async (): Promise<boolean> => {
     // Obtain needed attributes
     const userSelections = this.get("userSelections") || [];
     const checkAnswer = this.get("checkAnswer");

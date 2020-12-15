@@ -28,7 +28,7 @@ export class OptionsForm extends BlockComponent<
     optionLabels: `#${this.model.idWithPrefix} .ib-option-label`,
   };
 
-  get eventsMap(): EventsMap {
+  eventsMap(): EventsMap {
     return { ".ib-option-label input:change": this.handleOptionInputChange };
   }
 
