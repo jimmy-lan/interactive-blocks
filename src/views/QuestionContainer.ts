@@ -149,7 +149,7 @@ export class QuestionContainer<
     const isShowingHint = this.model.get("isShowingHint");
 
     return `
-      <div id="${this.model.idWithPrefix}" class="ib-container">
+      <div id="${this.model.idWithPrefix}" class="ib-question-container">
         <div class="ib-question-left">
           <div class="ib-question-status">
             <div class="ib-status-container ${this.model.get(

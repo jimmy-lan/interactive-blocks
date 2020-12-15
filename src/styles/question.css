@@ -9,7 +9,7 @@
 
 /* Question Container */
 
-.ib-container {
+.ib-question-container {
   display: flex;
   flex-direction: row;
   width: 100%;
