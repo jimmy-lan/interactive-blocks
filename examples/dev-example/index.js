@@ -3,6 +3,7 @@ const {
   MultipleChoiceComponent,
   FillBlanks,
   FillBlanksComponent,
+  StoragePersistence,
 } = Blocks;
 
 const div = document.getElementById("root");
@@ -34,24 +35,21 @@ const div = document.getElementById("root");
 //   mc.save("mc");
 // });
 
-let fb;
+const fb = new FillBlanks({
+  id: "fill-blanks",
+  question:
+    "What is the ultimate answer to the world, the universe, and everything?",
+  acceptableAnswers: ["forty two"],
+  hint: "Have you ever heard of the movie?",
+  disableMultipleAttempts: true,
+  hintNumChars: true,
+});
+
+fb.persistence = new StoragePersistence(fb, sessionStorage);
 
 try {
-  fb = FillBlanks.fromStorage("fb");
-} catch (error) {
-  fb = new FillBlanks(
-    {
-      id: "fill-blanks",
-      question:
-        "What is the ultimate answer to the world, the universe, and everything?",
-      acceptableAnswers: ["forty two"],
-      hint: "Have you ever heard of the movie?",
-      disableMultipleAttempts: true,
-      hintNumChars: true,
-    },
-    sessionStorage
-  );
-}
+  fb.read("fb");
+} catch (error) {}
 
 new FillBlanksComponent(div, fb).render();
 

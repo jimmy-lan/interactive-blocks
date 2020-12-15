@@ -6,12 +6,12 @@
 
 import { AttributeRegistry } from "./AttributeRegistry";
 import { EventRegistry } from "./EventRegistry";
-import { Serializable, StoragePersistence } from "./Persistence";
+import { Persistence, Serializable, StoragePersistence } from "./Persistence";
 import { ModelChangeEventOptions } from "../../commonTypes";
 
 export class BlockModel<T = any> implements Serializable {
   events: EventRegistry;
-  persistence: StoragePersistence<this>;
+  persistence: Persistence<this>;
 
   constructor(
     private attributes: AttributeRegistry<T>,

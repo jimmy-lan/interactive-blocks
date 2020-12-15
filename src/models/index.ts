@@ -6,4 +6,4 @@
 export * from "./MultipleChoice";
 export * from "./FillBlanks";
 export * from "./Question";
-export * from "./common/BlockModel";
+export * from "./common";

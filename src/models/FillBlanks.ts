@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-25
  */
 import { Question, QuestionProps } from "./Question";
-import { AttributeRegistry } from "./common/AttributeRegistry";
+import { AttributeRegistry, Persistence } from "./common";
 
 export interface FillBlanksProps extends QuestionProps {
   /**
@@ -30,11 +30,11 @@ export interface FillBlanksProps extends QuestionProps {
 }
 
 export class FillBlanks extends Question<FillBlanksProps> {
-  constructor(attributes: FillBlanksProps, persistenceStorage?: Storage) {
-    super(
-      new AttributeRegistry<FillBlanksProps>(attributes),
-      persistenceStorage
-    );
+  constructor(
+    attributes: FillBlanksProps,
+    persistence?: Storage | Persistence
+  ) {
+    super(new AttributeRegistry<FillBlanksProps>(attributes), persistence);
     this.validateAttributes();
   }
 

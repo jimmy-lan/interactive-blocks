@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-25
  */
 
-import { BlockModel } from "./common/BlockModel";
+import { BlockModel } from "./common";
 
 export enum QuestionStatus {
   unanswered = "unanswered",

@@ -9,7 +9,7 @@
  * attributes on a Persistence class.
  */
 export abstract class Persistence<T> {
-  protected constructor(public model: T) {}
+  protected constructor(protected model: T) {}
 
   abstract save(key: string): void;
   abstract read(key: string): void;
