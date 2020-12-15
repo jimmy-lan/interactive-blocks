@@ -6,4 +6,5 @@
 export * from "./MultipleChoice";
 export * from "./FillBlanks";
 export * from "./Question";
+export * from "./PointsPanel";
 export * from "./common";
