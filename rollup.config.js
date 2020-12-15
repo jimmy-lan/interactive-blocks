@@ -12,6 +12,7 @@ import { terser } from "rollup-plugin-terser";
 
 import postcss from "rollup-plugin-postcss";
 import cssnano from "cssnano";
+import cssvariables from "postcss-css-variables";
 
 import pkg from "./package.json";
 
@@ -40,7 +41,7 @@ export default [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
       postcss({
         extensions: [".css"],
-        plugins: [cssnano()],
+        plugins: [cssnano(), cssvariables()],
       }),
       cleanup({ sourcemap: true }),
     ],
