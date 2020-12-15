@@ -65,7 +65,6 @@ export class QuestionContainer<
     const hintButton = document.querySelector<HTMLButtonElement>(
       this.selectors.hintButton
     );
-    console.log(hintButton);
     const errorLabel = document.querySelector<HTMLLabelElement>(
       this.selectors.errorLabel
     );
