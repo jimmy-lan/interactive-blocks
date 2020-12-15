@@ -8,7 +8,7 @@ import * as models from "./models";
 import * as views from "./views";
 
 // stylesheets
-import "./styles/main.css";
+import "./styles/question.css";
 
 const Blocks = { ...models, ...views };
 
