@@ -5,7 +5,7 @@
 
 import { MultipleChoice, MultipleChoiceProps } from "../../models";
 import { ComponentsMap } from "../../commonTypes";
-import { QuestionContainer } from "../common/QuestionContainer";
+import { QuestionContainer } from "../QuestionContainer";
 import { OptionsForm } from "./OptionsForm";
 
 export class MultipleChoiceComponent extends QuestionContainer<

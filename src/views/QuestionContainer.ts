@@ -4,9 +4,9 @@
  * Description: A question container with status tab and content tab.
  */
 
-import { Question, QuestionProps, QuestionStatus } from "../../models";
-import { BlockComponent } from "./BlockComponent";
-import { EventsMap } from "../../commonTypes";
+import { Question, QuestionProps, QuestionStatus } from "../models";
+import { BlockComponent } from "./common/BlockComponent";
+import { EventsMap } from "../commonTypes";
 
 export interface QuestionContainerSettings {
   checkAnswerButtonText: string;

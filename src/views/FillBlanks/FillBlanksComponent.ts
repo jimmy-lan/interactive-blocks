@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-25
  */
 
-import { QuestionContainer } from "../common/QuestionContainer";
+import { QuestionContainer } from "../QuestionContainer";
 import { FillBlanks, FillBlanksProps } from "../../models";
 import { ComponentsMap } from "../../commonTypes";
 import { StringInput } from "./StringInput";

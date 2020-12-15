@@ -42,6 +42,7 @@ const fb = new FillBlanks({
     "What is the ultimate answer to the world, the universe, and everything?",
   acceptableAnswers: ["forty two"],
   hintNumChars: true,
+  caseSensitive: true,
 });
 
 new FillBlanksComponent(div, fb).render();
