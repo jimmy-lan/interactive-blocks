@@ -4,5 +4,5 @@
  */
 
 export interface Component {
-  htmlStructure: string | Function;
+  render: Function;
 }
