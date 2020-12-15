@@ -1,11 +1,13 @@
 /* Variables */
-.question {
+:root {
   --option-border: #e8ebed;
   --container-background: #f8f9fa;
   --correct-color: #36c247;
   --warning-color: #e05316;
   --textbox-border: #1c1c1c;
 }
+
+/* Question Container */
 
 .ib-container {
   display: flex;
@@ -17,7 +19,7 @@
 }
 
 .ib-question-left {
-  background: #f8f9fa;
+  background: var(--container-background);
   border-right: 3px solid #fff;
   width: 70px;
   display: flex;
@@ -28,7 +30,7 @@
 }
 
 .ib-question-right {
-  background: #f8f9fa;
+  background: var(--container-background);
   flex: 1;
   padding: 24px;
   border-top-right-radius: 10px;
@@ -39,9 +41,10 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #e8ebed;
+  border: 2px solid var(--option-border);
   background: #fff;
   position: relative;
+  box-sizing: content-box;
 }
 
 .ib-status-container {
@@ -56,17 +59,18 @@
 }
 
 .correct.ib-status-container {
-  background: #36c247;
+  background: var(--correct-color);
 }
 
 .warning.ib-status-container {
-  background: #e05316;
+  background: var(--warning-color);
 }
 
 .ib-status-container:after {
   position: absolute;
   display: block;
   content: "";
+  box-sizing: content-box;
 }
 
 .correct.ib-status-container:after {
@@ -87,6 +91,8 @@
   background: #fff;
   border-radius: 50%;
 }
+
+/* Common Question Components */
 
 .ib-question-text {
   font-weight: normal;
@@ -160,8 +166,9 @@
   height: 20px;
   width: 20px;
   background: #fff;
-  border: 2px solid #e8ebed;
+  border: 2px solid var(--option-border);
   transition: 0.3s;
+  box-sizing: content-box;
 }
 
 .ib-option-label > .checkbox.ib-option-checkmark {
@@ -178,13 +185,14 @@
 
 .ib-option-label input:checked ~ .ib-option-checkmark,
 .ib-option-label.disabled > input:checked ~ .ib-option-checkmark {
-  background: #36c247;
+  background: var(--correct-color);
 }
 
 .ib-option-checkmark:after {
   position: absolute;
   display: none;
   content: "";
+  box-sizing: content-box;
 }
 
 .ib-option-label input:checked ~ .ib-option-checkmark:after {
@@ -223,7 +231,7 @@
 }
 
 .ib-option-label.disabled > input ~ .ib-option-checkmark {
-  background: #e8ebed;
+  background: var(--option-border);
 }
 
 /*Fill in the blanks*/
@@ -243,11 +251,11 @@
 }
 
 .ib-fb-input.normal:focus {
-  border: 1px solid #1c1c1c;
+  border: 1px solid var(--textbox-border);
 }
 
 .ib-fb-input.normal:hover {
-  border: 1px solid #1c1c1c;
+  border: 1px solid var(--textbox-border);
 }
 
 .ib-fb-input.hint-num-chars {
@@ -259,5 +267,5 @@
 }
 
 .ib-fb-input.hint-num-chars:focus {
-  color: #36c247;
+  color: var(--correct-color);
 }

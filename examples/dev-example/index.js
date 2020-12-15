@@ -8,7 +8,6 @@ const mc = new MultipleChoice({
   id: "multiple-choice-react",
   question: "Which of the following is a valid hook in React?",
   options,
-  allowMultipleSelect: true,
 });
 
 const div = document.getElementById("root");
