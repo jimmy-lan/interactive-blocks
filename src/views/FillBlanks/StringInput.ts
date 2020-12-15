@@ -33,6 +33,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
   get htmlStructure(): string {
     // Information needed to render
     const hintNumChars = this.model.get("hintNumChars");
+    const userInput = this.model.get("userInput") || "";
 
     // Props require calculation
     let styleProp = "";
@@ -54,7 +55,7 @@ export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
     }
 
     return `
-      <input class="ib-fb-input ${additionalClassNames}" ${styleProp} ${maxLengthProp} />
+      <input class="ib-fb-input ${additionalClassNames}" ${styleProp} ${maxLengthProp} value="${userInput}" />
     `;
   }
 }

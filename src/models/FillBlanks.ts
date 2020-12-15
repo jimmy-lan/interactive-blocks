@@ -40,7 +40,7 @@ export class FillBlanks extends Question<FillBlanksProps> {
 
   static fromStorage(key: string): FillBlanks {
     // @ts-ignore
-    const instance = new FillBlanks({});
+    const instance = new FillBlanks({ acceptableAnswers: [""] });
     instance.read(key);
     return instance;
   }

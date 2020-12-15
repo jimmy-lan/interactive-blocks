@@ -35,6 +35,11 @@ export interface QuestionProps {
    */
   questionStatus?: QuestionStatus;
   /**
+   * Number of points this question is worth. This can be displayed on
+   * a score panel. If not provided, defaults to 1.
+   */
+  worthPoints?: number;
+  /**
    * If true, multiple attempts to the question is allowed until
    * the question is correctly answered. Otherwise, the question
    * becomes disabled after one attempt. Defaults to false.
@@ -46,7 +51,6 @@ export interface QuestionProps {
    * empty answer to the question. Defaults to false.
    */
   allowEmptyResponse?: boolean;
-
   /**
    * Return a promise which resolves in a boolean value to indicate whether
    * <userResponse> is correct. This function is called when the user clicks
