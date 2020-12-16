@@ -18,8 +18,8 @@ export class PointsPanelComponent extends BlockComponent<
   PointsPanelProps
 > {
   selectors: PointsPanelSelectors = {
-    pointsLabel: `.ib-points-panel.label`,
-    questionList: `.ib-points-panel.question`,
+    pointsLabel: `${this.model.idWithPrefix} .ib-points.label`,
+    questionList: `${this.model.idWithPrefix} .ib-points.question`,
   };
 
   componentsMap(): ComponentsMap {
@@ -35,9 +35,15 @@ export class PointsPanelComponent extends BlockComponent<
   };
 
   get htmlStructure(): string {
+    const idAttr = this.model.idWithPrefix
+      ? `id="${this.model.idWithPrefix}"`
+      : "";
+
     return `
-      <div class="ib-points-panel label"></div>
-      <div class="ib-points-panel question"></div>
+      <div ${idAttr}>
+        <div class="ib-points label"></div>
+        <div class="ib-points question"></div>
+      </div>
     `;
   }
 }

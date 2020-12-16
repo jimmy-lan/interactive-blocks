@@ -50,13 +50,15 @@ export class QuestionList extends BlockComponent<
     const questions = this.model.get("questions");
 
     return `
-      <div class="ib-question-list-header">
-        <h3 class="ib-question-list-title">Questions</h3>
-        <button class="ib-btn white icon">
-          <img src="${arrowRightIcon}" alt="close panel icon" />
-        </button>
+      <div class="ib-points-question-panel">
+        <div class="ib-question-list-header">
+          <h3 class="ib-question-list-title">Questions</h3>
+          <button class="ib-btn white icon">
+            <img src="${arrowRightIcon}" alt="close panel icon" />
+          </button>
+        </div>
+        ${questions.map((question) => this.getListItem(question))}
       </div>
-      ${questions.map((question) => this.getListItem(question))}
     `;
   }
 }

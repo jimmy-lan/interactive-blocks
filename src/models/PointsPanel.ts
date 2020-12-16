@@ -7,6 +7,10 @@ import { Question, QuestionProps } from "./Question";
 import { AttributeRegistry, BlockModel } from "./common";
 
 export interface PointsPanelProps {
+  /**
+   * Id of this points panel.
+   */
+  id?: string;
   questions: Question<QuestionProps>[];
   /**
    * Indicates whether a percentage should be shown in this panel.
@@ -24,6 +28,11 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     );
   }
 
+  get idWithPrefix(): string {
+    const id = this.get("id");
+    return id ? `ib-points-${id}` : "";
+  }
+
   /**
    * Return total number of points of that the questions in the array are worth.
    */
@@ -31,7 +40,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     const questions = this.get("questions");
     return questions.reduce(
       (accumulatedPoints, question) =>
-        (accumulatedPoints += question.get("worthPoints") || 1),
+        accumulatedPoints + (question.get("worthPoints") || 1),
       0
     );
   }
@@ -44,7 +53,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     const questions = this.get("questions");
     return questions.reduce(
       (accumulatedPoints, question) =>
-        (accumulatedPoints += question.currentPoints),
+        accumulatedPoints + question.currentPoints,
       0
     );
   }
