@@ -28,6 +28,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transform: translateX(690px);
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+
+.question.visible.ib-points-panel {
+  transform: translateX(0);
 }
 
 /* Score Panel */
