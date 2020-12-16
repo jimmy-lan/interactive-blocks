@@ -31,7 +31,7 @@ export interface MultipleChoiceProps extends QuestionProps {
   /**
    * @see QuestionProps.checkAnswer
    */
-  checkAnswer?: (p: string[]) => Promise<boolean>;
+  checkAnswer?: (p: string[]) => Promise<boolean | number>;
 }
 
 export class MultipleChoice extends Question<MultipleChoiceProps> {
@@ -106,7 +106,7 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
   /**
    * Return whether the user selected the correct response.
    */
-  determineCorrectness = async (): Promise<boolean> => {
+  determineCorrectness = async (): Promise<boolean | number> => {
     // Obtain needed attributes
     const userSelections = this.get("userSelections") || [];
     const checkAnswer = this.get("checkAnswer");

@@ -5,7 +5,7 @@
  */
 
 import { Question, QuestionProps, QuestionStatus } from "../models";
-import { BlockComponent } from "./common/BlockComponent";
+import { BlockComponent } from "./common";
 import { EventsMap } from "../commonTypes";
 
 export interface QuestionContainerSettings {
@@ -109,9 +109,8 @@ export class QuestionContainer<
       return this.showEmptyError();
     }
 
-    // Determine if question is answered correctly
-    const isSelectionCorrect = await this.model.determineCorrectness();
-    this.model.updateQuestionStatus(isSelectionCorrect);
+    // Update question status
+    await this.model.updateQuestionStatus();
 
     // Update question container display
     this.updateQuestionContainer();

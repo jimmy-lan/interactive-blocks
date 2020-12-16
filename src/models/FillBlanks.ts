@@ -31,7 +31,7 @@ export interface FillBlanksProps extends QuestionProps {
   /**
    * @see QuestionProps.checkAnswer
    */
-  checkAnswer?: (p: string) => Promise<boolean>;
+  checkAnswer?: (p: string) => Promise<boolean | number>;
 }
 
 export class FillBlanks extends Question<FillBlanksProps> {
@@ -114,7 +114,7 @@ export class FillBlanks extends Question<FillBlanksProps> {
    * Return whether the user input is correct with respect to this
    * question.
    */
-  determineCorrectness = async (): Promise<boolean> => {
+  determineCorrectness = async (): Promise<boolean | number> => {
     // Obtain required information
     const userInput = this.get("userInput") || "";
     const acceptableAnswers = this.get("acceptableAnswers");

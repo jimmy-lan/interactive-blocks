@@ -45,6 +45,14 @@ export interface QuestionProps {
    */
   worthPoints?: number;
   /**
+   * Number of points that the current user achieves in this question.
+   * By the definition of correctness, when a question has a correct
+   * status, <currentPoints> is assumed to equal <worthPoints>.
+   * You do not have to provide this value if no partial marks will be
+   * assigned.
+   */
+  currentPoints?: number;
+  /**
    * If true, multiple attempts to the question is allowed until
    * the question is correctly answered. Otherwise, the question
    * becomes disabled after one attempt. Defaults to false.
@@ -64,7 +72,7 @@ export interface QuestionProps {
    * the user's answer is correct based on other attributes. Otherwise, only
    * the result from this function is used.
    */
-  checkAnswer?: (userResponse: any) => Promise<boolean>;
+  checkAnswer?: (userResponse: any) => Promise<boolean | number>;
 }
 
 export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
@@ -73,29 +81,55 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
   }
 
   /**
-   * Update question status based on <isCorrect>
-   * @param isCorrect A boolean value indicating whether the
-   *    question is answered correctly.
+   * Return a boolean value indicating whether the question has been
+   * correctly answered using local checks.
    */
-  updateQuestionStatus = (isCorrect: boolean) => {
+  protected abstract determineCorrectness(): Promise<boolean | number>;
+
+  /**
+   * Update question status based the current question attributes.
+   */
+  updateQuestionStatus = async () => {
+    // Check if the question is answered correctly
+    let isCorrect: boolean;
+    let currentPoints: number;
+
+    const result = await this.determineCorrectness();
+    const worthPoints = this.getAll().worthPoints || 1;
+
+    if (typeof result === "boolean") {
+      isCorrect = result;
+      currentPoints = worthPoints;
+    } else {
+      if (result > worthPoints) {
+        throw new Error(
+          `Question ${this.get(
+            "id"
+          )}: checkAnswer callback returns a number that is larger than ` +
+            "the number of points this question is worth. " +
+            `checkAnswer: ${result}, worthPoints: ${worthPoints}.`
+        );
+      }
+      currentPoints = result;
+      isCorrect = result === worthPoints;
+    }
+
+    // Update question status and current points
     const newQuestionStatus = isCorrect
       ? QuestionStatus.correct
       : QuestionStatus.warning;
 
-    // @ts-ignore
-    this.set({ questionStatus: newQuestionStatus }, { shouldRerender: false });
+    this.set(
+      // @ts-ignore
+      { questionStatus: newQuestionStatus, currentPoints },
+      { shouldRerender: false }
+    );
   };
 
   /**
    * Return whether this question has been answered by the user.
    */
   abstract get isAnswered(): boolean;
-
-  /**
-   * Return a promise which resolves to a boolean value indicating
-   * whether the question has been correctly answered.
-   */
-  abstract determineCorrectness(): Promise<boolean>;
 
   /**
    * Determine whether this question should not accept further attempts.

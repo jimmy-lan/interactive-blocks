@@ -18,31 +18,33 @@ export class QuestionList extends BlockComponent<
   PointsPanelProps
 > {
   /**
-   * Return html structure for list items.
+   * Return html structure for a question list item
    */
-  private getListItems = (): string => {
-    const questions = this.model.get("questions");
-    return `${questions.map((question: Question<QuestionProps>) => {
-      const title = question.get("title");
-      const questionText = question.get("question");
-      const worthPoints = question.get("worthPoints");
-      const id = question.idWithPrefix;
+  private getListItem = (question: Question<QuestionProps>): string => {
+    // Obtain needed information
+    const id = question.idWithPrefix;
+    const title = question.get("title");
+    const questionText = question.get("question");
+    const questionStatus = question.get("questionStatus");
+    const worthPoints = question.get("worthPoints");
+    const currentPoints = question.get("currentPoints");
 
-      return `
-          <div class="ib-question-list-item">
-            <p class="ib-question-list-item-title">${
-              title ? title : questionText
-            }</p>
-            <div class="ib-question-list-item-panel">
-              <a href="#${id}" class="ib-btn primary">Go to question</a>
-              <p class="ib-question-score"><span class="score">25</span> / ${worthPoints}</p>
-            </div>
-          </div>
-        `;
-    })}`;
+    return `
+      <div class="ib-question-list-item">
+        <p class="ib-question-list-item-title">${
+          title ? title : questionText
+        }</p>
+        <div class="ib-question-list-item-panel">
+          <a href="#${id}" class="ib-btn primary">Go to question</a>
+          <p class="ib-question-score"><span class="score">25</span> / ${worthPoints}</p>
+        </div>
+      </div>
+    `;
   };
 
   get htmlStructure(): string {
+    const questions = this.model.get("questions");
+
     return `
       <div class="ib-question-list-header">
         <h3 class="ib-question-list-title">Questions</h3>
@@ -50,7 +52,7 @@ export class QuestionList extends BlockComponent<
           <img src="${arrowRightIcon}" alt="close panel icon" />
         </button>
       </div>
-      ${this.getListItems()}
+      ${questions.map((question) => this.getListItem(question))}
     `;
   }
 }
