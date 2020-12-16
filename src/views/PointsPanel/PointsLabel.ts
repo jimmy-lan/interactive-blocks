@@ -8,6 +8,9 @@ import { PointsPanel, PointsPanelProps } from "../../models";
 
 export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
   get htmlStructure(): string {
-    return `<h5 class="ib-points-score-label">0 / 100</h5>`;
+    const worthPoints = this.model.totalWorthPoints;
+    const earnedPoints = this.model.totalEarnedPoints;
+
+    return `<h5 class="ib-points-score-label">${earnedPoints} / ${worthPoints}</h5>`;
   }
 }
