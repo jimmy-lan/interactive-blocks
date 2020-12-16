@@ -23,4 +23,29 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
       persistenceStorage
     );
   }
+
+  /**
+   * Return total number of points of that the questions in the array are worth.
+   */
+  get totalWorthPoints(): number {
+    const questions = this.get("questions");
+    return questions.reduce(
+      (accumulatedPoints, question) =>
+        (accumulatedPoints += question.get("worthPoints") || 1),
+      0
+    );
+  }
+
+  /**
+   * Return total number of points that the user has earned for answering the questions
+   * in the list.
+   */
+  get totalEarnedPoints(): number {
+    const questions = this.get("questions");
+    return questions.reduce(
+      (accumulatedPoints, question) =>
+        (accumulatedPoints += question.currentPoints),
+      0
+    );
+  }
 }
