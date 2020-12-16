@@ -23,6 +23,7 @@ mc1 = new MultipleChoice(
   {
     id: "multiple-choice-react",
     question: "Which of the following is a valid hook in React?",
+    worthPoints: 25,
     options,
     hint: "<b>Hint:</b> React hooks has nothing to do with UofT.",
     isShowingHint: true,
@@ -42,6 +43,7 @@ const fb1 = new FillBlanks({
   id: "fill-blanks",
   question:
     "What is the ultimate answer to the world, the universe, and everything?",
+  worthPoints: 25,
   acceptableAnswers: ["forty two"],
   hintNumChars: true,
   caseSensitive: true,
@@ -55,7 +57,15 @@ const mc2 = new MultipleChoice({
   id: "mc-2",
   question:
     "Some random question here, I can't think of any right now. This is just a test!",
-  options: MultipleChoice.parseOptions(["Hi", "There", "Good", "Job"], [1]),
+  worthPoints: 25,
+  options: MultipleChoice.parseOptions(["Hi", "There", "Good", "Job"]),
+  allowMultipleSelect: true,
+  checkAnswer: (userSelection) => {
+    console.log(userSelection);
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(userSelection.includes("1")), 3000);
+    });
+  },
 });
 
 new MultipleChoiceComponent(mc2Div, mc2).render();
@@ -64,8 +74,3 @@ const panel = new PointsPanel({ questions: [mc1, fb1, mc2] });
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
 
 new QuestionList(document.querySelector("#points"), panel).render();
-
-setTimeout(() => {
-  console.log("Time out");
-  panel.set({ questions: [mc1] });
-}, 5 * 1000);
