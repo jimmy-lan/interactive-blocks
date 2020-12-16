@@ -50,11 +50,11 @@ export class EventRegistry {
   /**
    * Trigger event <eventType>.
    * @param eventType Type of event to be triggered.
-   * @param options Event options to be passed to the callback function.
+   * @param args Event options to be passed to the callback function.
    */
-  trigger = (eventType: string, options?: unknown): void => {
+  trigger = (eventType: string, ...args: unknown[]): void => {
     this.events[eventType]?.forEach((callback: EventCallback) =>
-      callback(options)
+      callback(...args)
     );
   };
 }

@@ -7,6 +7,10 @@ import { BlockComponent } from "../common";
 import { PointsPanel, PointsPanelProps } from "../../models";
 
 export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
+  componentDidRender() {
+    // Bind dependencies
+  }
+
   get htmlStructure(): string {
     const worthPoints = this.model.totalWorthPoints;
     const earnedPoints = this.model.totalEarnedPoints;

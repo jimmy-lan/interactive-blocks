@@ -37,6 +37,10 @@ export class BlockModel<T = any> implements Serializable {
     return this.events.register;
   }
 
+  get unregister() {
+    return this.events.unregister;
+  }
+
   get trigger() {
     return this.events.trigger;
   }
@@ -45,61 +49,61 @@ export class BlockModel<T = any> implements Serializable {
    * Save current model as value to <key> in persistence.
    * @param key A string key to save model
    */
-  save = (key: string) => {
+  save(key: string): void {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
     this.persistence.save(key);
     this.events.trigger("save");
-  };
+  }
 
   /**
    * Read model from persistence in location <key>.
    * @param key A string key to access information relating to the model
    */
-  read = (key: string) => {
+  read(key: string): void {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
     this.persistence.read(key);
     this.events.trigger("read");
-  };
+  }
 
   /**
    * @param newData
    * @param options
    * @see AttributeRegistry.set
    */
-  set = (newData: Partial<T>, options?: ModelChangeEventOptions) => {
+  set(newData: Partial<T>, options?: ModelChangeEventOptions): void {
     this.attributes.set(newData);
-    this.events.trigger("change", options);
-  };
+    this.events.trigger("change", newData, options);
+  }
 
   /**
    * @param newData
    * @see AttributeRegistry.replace
    */
-  replace = (newData: T) => {
+  replace(newData: T): void {
     this.attributes.replace(newData);
     this.events.trigger("change");
-  };
+  }
 
   /**
    * Serialize attributes of this model.
    */
-  serialize = (): string => {
+  serialize(): string {
     return JSON.stringify(this.attributes.getAll());
-  };
+  }
 
   /**
    * Deserialize <raw> and replace current attributes.
    * @param raw A string corresponding to attributes to be deserialized.
    */
-  deserialize = (raw: string): void => {
+  deserialize(raw: string): void {
     try {
       this.replace(JSON.parse(raw));
     } catch (e: any) {
       throw new Error(`Cannot deserialize from value ${raw}`);
     }
-  };
+  }
 }

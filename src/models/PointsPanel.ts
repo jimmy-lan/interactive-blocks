@@ -5,6 +5,7 @@
 
 import { Question, QuestionProps } from "./Question";
 import { AttributeRegistry, BlockModel } from "./common";
+import { ModelChangeEventOptions } from "../commonTypes";
 
 export interface PointsPanelProps {
   /**
@@ -26,6 +27,48 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
       new AttributeRegistry<PointsPanelProps>(attributes),
       persistenceStorage
     );
+    this.watchForQuestionsChange();
+  }
+
+  /**
+   * Watch for changes in question models.
+   */
+  watchForQuestionsChange = () => {
+    const questions = this.get("questions");
+    questions.map((question) =>
+      question.on("change", this.handleQuestionElementChange)
+    );
+  };
+
+  handleQuestionElementChange = (changedProps: unknown) => {
+    const {
+      questionStatus,
+      worthPoints,
+      partialPoints,
+    } = changedProps as QuestionProps;
+
+    // Trigger change event if attributes relating
+    // to PointsPanel were changed
+    if (questionStatus || worthPoints || partialPoints) {
+      this.trigger("change");
+    }
+  };
+
+  set(newData: Partial<PointsPanelProps>, options?: ModelChangeEventOptions) {
+    // Remove old listeners
+    if (newData.questions) {
+      const questions = this.get("questions");
+      questions.map((question) =>
+        question.unregister("change", this.handleQuestionElementChange)
+      );
+    }
+
+    super.set(newData, options);
+
+    // Add new listeners
+    if (newData.questions) {
+      this.watchForQuestionsChange();
+    }
   }
 
   get idWithPrefix(): string {

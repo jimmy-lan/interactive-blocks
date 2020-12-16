@@ -6,7 +6,7 @@
 /**
  * A callback function type when an event is triggered.
  */
-export type EventCallback = (options?: unknown) => void;
+export type EventCallback = (...args: unknown[]) => void;
 /**
  * A record of events, where multiple callbacks can be added for one event.
  */

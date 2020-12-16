@@ -39,7 +39,7 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * itself whenever the model changes.
    */
   bindModel = (): void => {
-    this.model.on("change", (options) => {
+    this.model.on("change", (previousProps, options) => {
       if (options) {
         const { shouldRerender } = options as ModelChangeEventOptions;
         if (!shouldRerender) {
