@@ -45,13 +45,13 @@ export interface QuestionProps {
    */
   worthPoints?: number;
   /**
-   * Number of points that the current user achieves in this question.
+   * Partial points that the user obtains for this question.
    * By the definition of correctness, when a question has a correct
-   * status, <currentPoints> is assumed to equal <worthPoints>.
-   * You do not have to provide this value if no partial marks will be
-   * assigned.
+   * status, <partialPoints> is assumed to equal <worthPoints>.
+   * You do not have to provide this value if the user currently has 0 points, or
+   * the question has a correct status, or you do not plan to assign partial points.
    */
-  currentPoints?: number;
+  partialPoints?: number;
   /**
    * If true, multiple attempts to the question is allowed until
    * the question is correctly answered. Otherwise, the question
@@ -130,6 +130,20 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
    * Return whether this question has been answered by the user.
    */
   abstract get isAnswered(): boolean;
+
+  /**
+   * Return umber of points that the current user achieves in this question.
+   */
+  get currentPoints(): number {
+    const questionStatus = this.get("questionStatus");
+    const worthPoints = this.getAll().worthPoints || 1;
+    const currentPoints = this.getAll().partialPoints || 0;
+
+    if (questionStatus === QuestionStatus.correct) {
+      return worthPoints;
+    }
+    return currentPoints;
+  }
 
   /**
    * Determine whether this question should not accept further attempts.

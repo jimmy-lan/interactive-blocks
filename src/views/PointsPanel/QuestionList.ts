@@ -9,7 +9,6 @@ import {
   PointsPanelProps,
   Question,
   QuestionProps,
-  QuestionStatus,
 } from "../../models";
 // @ts-ignore
 import arrowRightIcon from "../../graphics/arrow-right.svg";
@@ -26,14 +25,12 @@ export class QuestionList extends BlockComponent<
     const id = question.idWithPrefix;
     const title = question.get("title");
     const questionText = question.get("question");
-    const questionStatus = question.get("questionStatus");
     const worthPoints = question.get("worthPoints");
-    const currentPoints = question.get("currentPoints");
+    const currentPoints = question.currentPoints;
 
     // Parse information
     const listItemTitle = title ? title : questionText;
-    const listItemCurrentPoints =
-      questionStatus === QuestionStatus.correct ? worthPoints : currentPoints;
+    const listItemCurrentPoints = currentPoints === 0 ? null : currentPoints;
     const listItemWorthPoints = worthPoints || 1;
 
     return `
