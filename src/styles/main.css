@@ -48,3 +48,10 @@
   filter: grayscale(100%);
   box-shadow: none;
 }
+
+/* Icon Button */
+
+.ib-btn .icon {
+  height: 80%;
+  width: 80%;
+}

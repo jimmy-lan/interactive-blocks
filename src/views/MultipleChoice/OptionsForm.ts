@@ -4,7 +4,7 @@
  * Description: A form with radio buttons or checkboxes.
  */
 
-import { BlockComponent } from "../common/BlockComponent";
+import { BlockComponent } from "../common";
 import {
   MultipleChoice,
   MultipleChoiceOption,

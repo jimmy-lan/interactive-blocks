@@ -1,22 +1,31 @@
 .ib-points-panel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 90px;
   right: 0;
   height: 60px;
-  padding: 0 15px;
   background-color: var(--secondary);
   color: #fff;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 4px 8px 2px rgba(0, 0, 0, 0.12);
+}
+
+.label.ib-points-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  cursor: pointer;
   z-index: 5;
 }
 
-.ib-points-text {
+.question.ib-points-panel {
+  width: 600px;
+  padding: 16px;
+  z-index: 6;
+}
+
+.ib-points-score-label {
   font-size: 16px;
   margin: 0;
   line-height: 1.2;
