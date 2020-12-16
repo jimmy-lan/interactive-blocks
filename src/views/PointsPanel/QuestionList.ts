@@ -29,7 +29,12 @@ export class QuestionList extends BlockComponent<
     };
   }
 
-  handleCloseButtonClick = (): void => {};
+  handleCloseButtonClick = (): void => {
+    const questionList = document.querySelector(this.selectors.questionList)!;
+    if (questionList.classList.contains("visible")) {
+      questionList.classList.remove("visible");
+    }
+  };
 
   /**
    * Return html structure for a question list item
