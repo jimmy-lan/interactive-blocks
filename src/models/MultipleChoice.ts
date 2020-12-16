@@ -110,11 +110,6 @@ export class MultipleChoice extends Question<MultipleChoiceProps> {
     // Obtain needed attributes
     const userSelections = this.get("userSelections") || [];
     const checkAnswer = this.get("checkAnswer");
-    const allowEmptyResponse = this.get("allowEmptyResponse");
-
-    // Notify user for empty response
-    if (!allowEmptyResponse && !userSelections.length) {
-    }
 
     if (checkAnswer) {
       return await checkAnswer(userSelections);
