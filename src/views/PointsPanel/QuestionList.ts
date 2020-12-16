@@ -9,6 +9,7 @@ import {
   PointsPanelProps,
   Question,
   QuestionProps,
+  QuestionStatus,
 } from "../../models";
 // @ts-ignore
 import arrowRightIcon from "../../graphics/arrow-right.svg";
@@ -29,14 +30,20 @@ export class QuestionList extends BlockComponent<
     const worthPoints = question.get("worthPoints");
     const currentPoints = question.get("currentPoints");
 
+    // Parse information
+    const listItemTitle = title ? title : questionText;
+    const listItemCurrentPoints =
+      questionStatus === QuestionStatus.correct ? worthPoints : currentPoints;
+    const listItemWorthPoints = worthPoints || 1;
+
     return `
       <div class="ib-question-list-item">
-        <p class="ib-question-list-item-title">${
-          title ? title : questionText
-        }</p>
+        <p class="ib-question-list-item-title">${listItemTitle}</p>
         <div class="ib-question-list-item-panel">
           <a href="#${id}" class="ib-btn primary">Go to question</a>
-          <p class="ib-question-score"><span class="score">25</span> / ${worthPoints}</p>
+          <p class="ib-question-score"><span class="score">${
+            listItemCurrentPoints ? listItemCurrentPoints : ""
+          }</span> / ${listItemWorthPoints}</p>
         </div>
       </div>
     `;
