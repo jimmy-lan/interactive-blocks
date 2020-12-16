@@ -10,6 +10,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 3px;
+  height: 36px;
+  box-sizing: border-box;
 }
 
 .ib-btn.primary {
@@ -52,6 +54,31 @@
 /* Icon Button */
 
 .ib-btn .icon {
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
+}
+
+.icon.ib-btn {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.icon.ib-btn:hover {
+  filter: none;
+}
+
+.white.icon.ib-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.icon.ib-btn:active {
+  filter: none;
+}
+
+.white.icon.ib-btn:active {
+  background: rgba(255, 255, 255, 0.25);
 }

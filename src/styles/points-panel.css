@@ -1,16 +1,18 @@
+/* Panels */
 .ib-points-panel {
   position: fixed;
   top: 90px;
   right: 0;
-  height: 60px;
   background-color: var(--secondary);
   color: #fff;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 4px 8px 2px rgba(0, 0, 0, 0.12);
+  font-weight: normal;
 }
 
 .label.ib-points-panel {
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,11 +25,73 @@
   width: 600px;
   padding: 16px;
   z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
+
+/* Score Panel */
 
 .ib-points-score-label {
   font-size: 16px;
   margin: 0;
   line-height: 1.2;
   font-family: "Roboto", "Helvetica", sans-serif;
+}
+
+/* Question List Panel */
+
+.ib-question-list-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ib-question-list-header .ib-question-list-title {
+  margin: 0;
+  font-weight: normal;
+}
+
+.ib-question-list-header .icon.ib-btn {
+  width: 48px;
+  height: 48px;
+}
+
+.ib-question-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ib-question-list-item-title {
+  color: #fff;
+  margin-right: 24px;
+}
+
+.ib-question-list-item-panel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.ib-question-list-item-panel .ib-btn {
+  position: relative;
+  white-space: nowrap;
+}
+
+.ib-question-list-item-panel p.ib-question-score {
+  height: 100%;
+  padding: 6px 8px;
+  margin: 0 0 0 10px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  text-align: right;
+  min-width: 54px;
+  white-space: nowrap;
+  box-sizing: border-box;
 }

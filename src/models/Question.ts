@@ -23,6 +23,11 @@ export interface QuestionProps {
    */
   hint?: string;
   /**
+   * A short, descriptive title associating to this question.
+   * Can be used to display a menu of questions.
+   */
+  title?: string;
+  /**
    * A boolean value indicating whether the question is currently
    * showing hint to the user. Users can toggle hint displays when a hint
    * text is provided. This attribute determines a state. Defaults to false.
