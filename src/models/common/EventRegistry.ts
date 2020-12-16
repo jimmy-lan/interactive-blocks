@@ -18,6 +18,12 @@ export class EventRegistry {
    */
   register = (eventType: string, callback: EventCallback): void => {
     const eventCallbacks = this.events[eventType] || [];
+
+    // Prevent duplicate callbacks
+    if (eventCallbacks.includes(callback)) {
+      return;
+    }
+
     eventCallbacks.push(callback);
     this.events[eventType] = eventCallbacks;
   };
