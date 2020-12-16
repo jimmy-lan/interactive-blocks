@@ -25,11 +25,13 @@ export class QuestionContainer<
   T extends Question<K>,
   K extends QuestionProps
 > extends BlockComponent<T, K> {
+  private _loading = false;
+
   // Selectors begin with `this.model.idWithPrefix` so that
   // they only select elements corresponding to this question.
   selectors: QuestionContainerSelectors = {
     childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
-    statusDiv: `#${this.model.idWithPrefix} .ib-status-container`,
+    statusDiv: `#${this.model.idWithPrefix} .ib-question-status`,
     hintLabel: `#${this.model.idWithPrefix} .ib-question-hint`,
     errorLabel: `#${this.model.idWithPrefix} .ib-question-error`,
     checkAnswerButton: `#${this.model.idWithPrefix} .ib-question-right button.check-answer`,
@@ -102,7 +104,24 @@ export class QuestionContainer<
 
   protected onCheckAnswerClick() {}
 
+  displayLoadingState = (isLoading: boolean) => {
+    const statusDiv = document.querySelector(this.selectors.statusDiv)!;
+    statusDiv.classList.remove("loading", ...Object.values(QuestionStatus));
+    this._loading = isLoading;
+
+    if (isLoading) {
+      statusDiv.classList.add("loading");
+    } else {
+      statusDiv.classList.remove("loading");
+    }
+  };
+
   handleCheckAnswerClick = async (): Promise<void> => {
+    // Don't do anything if in loading state
+    if (this._loading) {
+      return;
+    }
+
     // Display unanswered error if appropriate
     const shouldShowEmptyError = this.model.shouldShowEmptyError;
     if (shouldShowEmptyError) {
@@ -110,7 +129,9 @@ export class QuestionContainer<
     }
 
     // Update question status
+    this.displayLoadingState(true);
     await this.model.updateQuestionStatus();
+    this.displayLoadingState(false);
 
     // Update question container display
     this.updateQuestionContainer();
@@ -150,10 +171,10 @@ export class QuestionContainer<
     return `
       <div id="${this.model.idWithPrefix}" class="ib-question-container">
         <div class="ib-question-left">
-          <div class="ib-question-status">
-            <div class="ib-status-container ${this.model.get(
-              "questionStatus"
-            )}"></div>
+          <div class="ib-question-status ${
+            this.model.get("questionStatus") || ""
+          }">
+            <div class="ib-status-container"></div>
           </div>
         </div>
         <div class="ib-question-right">

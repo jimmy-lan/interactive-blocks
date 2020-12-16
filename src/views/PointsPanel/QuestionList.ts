@@ -76,7 +76,7 @@ export class QuestionList extends BlockComponent<
             <img src="${arrowRightIcon}" alt="close panel icon" />
           </button>
         </div>
-        ${questions.map((question) => this.getListItem(question))}
+        ${questions.map((question) => this.getListItem(question)).join("")}
       </div>
     `;
   }

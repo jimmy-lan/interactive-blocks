@@ -45,7 +45,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
       questionStatus,
       worthPoints,
       partialPoints,
-    } = changedProps as QuestionProps;
+    } = changedProps as Partial<QuestionProps>;
 
     // Trigger change event if attributes relating
     // to PointsPanel were changed
