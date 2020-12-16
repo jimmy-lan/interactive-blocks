@@ -12,11 +12,25 @@ import {
 } from "../../models";
 // @ts-ignore
 import arrowRightIcon from "../../graphics/arrow-right.svg";
+import { EventsMap } from "../../commonTypes";
 
 export class QuestionList extends BlockComponent<
   PointsPanel,
   PointsPanelProps
 > {
+  selectors = {
+    closeButton: `${this.model.idWithPrefix} .ib-question-list-header .ib-btn`,
+    questionList: `${this.model.idWithPrefix} .ib-points.question`,
+  };
+
+  eventsMap(): EventsMap {
+    return {
+      [`${this.selectors.closeButton}:click`]: this.handleCloseButtonClick,
+    };
+  }
+
+  handleCloseButtonClick = (): void => {};
+
   /**
    * Return html structure for a question list item
    */

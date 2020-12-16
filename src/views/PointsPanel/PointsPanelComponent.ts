@@ -4,22 +4,30 @@
  */
 import { BlockComponent } from "../common";
 import { PointsPanel, PointsPanelProps } from "../../models";
-import { ComponentsMap } from "../../commonTypes";
+import { ComponentsMap, EventsMap } from "../../commonTypes";
 import { PointsLabel } from "./PointsLabel";
 import { QuestionList } from "./QuestionList";
-
-export interface PointsPanelSelectors {
-  pointsLabel: string;
-  questionList: string;
-}
 
 export class PointsPanelComponent extends BlockComponent<
   PointsPanel,
   PointsPanelProps
 > {
-  selectors: PointsPanelSelectors = {
+  selectors = {
     pointsLabel: `${this.model.idWithPrefix} .ib-points.label`,
     questionList: `${this.model.idWithPrefix} .ib-points.question`,
+  };
+
+  eventsMap(): EventsMap {
+    return {
+      [`${this.selectors.pointsLabel}:click`]: this.handleLabelClick,
+    };
+  }
+
+  handleLabelClick = (): void => {
+    const questionList = document.querySelector(this.selectors.questionList)!;
+    if (!questionList.classList.contains("visible")) {
+      questionList.classList.add("visible");
+    }
   };
 
   componentsMap(): ComponentsMap {

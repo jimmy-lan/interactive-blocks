@@ -88,8 +88,8 @@
 }
 
 .ib-question-list-item-title {
-  color: #fff;
   margin-right: 24px;
+  color: inherit;
 }
 
 .ib-question-list-item-panel {

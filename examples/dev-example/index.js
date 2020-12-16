@@ -7,6 +7,8 @@ const {
   Persistence,
   PointsPanel,
   PointsPanelComponent,
+  PointsLabel,
+  QuestionList,
 } = Blocks;
 
 const div = document.getElementById("root");
@@ -55,3 +57,5 @@ fb.on("change", () => {
 
 const panel = new PointsPanel({ questions: [fb] });
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
+
+new QuestionList(document.querySelector("#points"), panel).render();
