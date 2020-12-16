@@ -25,6 +25,10 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
     this.bindModel();
   }
 
+  // Life cycle methods
+  componentDidRender(): void {}
+  componentWillRender(): void {}
+
   /**
    * Return a string with html syntax that represents this view component.
    */
@@ -138,6 +142,9 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
       this.parent.innerHTML = "";
     }
 
+    // Call life-cycle method
+    this.componentWillRender();
+
     // Create template element to host html for this component
     const templateElement = document.createElement("template");
     templateElement.innerHTML = this.htmlStructure;
@@ -145,6 +152,9 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
     this.bindEvents(templateElement.content);
     this.mapComponents(templateElement.content);
     this.bindComponents();
+
+    // Call life-cycle method
+    this.componentDidRender();
 
     // Append template element to parent
     this.parent.appendChild(templateElement.content);
