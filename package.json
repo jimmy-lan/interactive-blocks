@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/csc309-fall-2020/js-library-lanyanxi#readme",
   "devDependencies": {
+    "@rollup/plugin-image": "^2.0.6",
     "cssnano": "^4.1.10",
     "postcss-css-variables": "^0.17.0",
     "postcss-simple-vars": "^6.0.1",

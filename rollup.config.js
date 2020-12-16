@@ -12,6 +12,7 @@ import { terser } from "rollup-plugin-terser";
 
 import postcss from "rollup-plugin-postcss";
 import cssnano from "cssnano";
+import image from "@rollup/plugin-image";
 import cssvariables from "postcss-css-variables";
 
 import pkg from "./package.json";
@@ -50,6 +51,7 @@ export default [
         ],
       }),
       cleanup({ sourcemap: true }),
+      image(),
     ],
   },
 
@@ -75,6 +77,7 @@ export default [
         ],
         inject: { insertAt: "top" },
       }),
+      image(),
       terser({
         format: {
           comments: false,
