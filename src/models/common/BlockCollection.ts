@@ -26,41 +26,41 @@ export class BlockCollection<T extends BlockModel> implements Serializable {
     return this.events.trigger;
   }
 
-  get = (index: number) => {
+  get(index: number) {
     return this.elements[index];
-  };
+  }
 
-  getAll = () => {
+  getAll() {
     return [...this.elements];
-  };
+  }
 
-  set = (index: number, model: T) => {
+  set(index: number, model: T): void {
     this.elements[index] = model;
     this.events.trigger("change");
-  };
+  }
 
-  replace = (models: T[]) => {
+  replace(models: T[]): void {
     this.elements = [...models];
     this.events.trigger("change");
-  };
+  }
 
-  save = (key: string) => {
+  save(key: string): void {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
     this.persistence.save(key);
     this.events.trigger("save");
-  };
+  }
 
-  read = (key: string) => {
+  read(key: string): void {
     if (!this.persistence) {
       throw new Error("No persistence is specified for this model.");
     }
     this.persistence.read(key);
     this.events.trigger("read");
-  };
+  }
 
-  deserialize = (raw: string): void => {
+  deserialize(raw: string): void {
     let rawElements: string[];
     try {
       rawElements = JSON.parse(raw);
@@ -78,13 +78,13 @@ export class BlockCollection<T extends BlockModel> implements Serializable {
     for (let i = 0; i < this.elements.length; i++) {
       this.elements[i].deserialize(rawElements[i]);
     }
-  };
+  }
 
-  serialize = (): string => {
+  serialize(): string {
     const toSerialize = [];
     for (let element of this.elements) {
       toSerialize.push(element.serialize());
     }
     return JSON.stringify(toSerialize);
-  };
+  }
 }
