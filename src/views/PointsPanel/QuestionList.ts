@@ -19,8 +19,8 @@ export class QuestionList extends BlockComponent<
   PointsPanelProps
 > {
   selectors = {
-    closeButton: `${this.model.idWithPrefix} .ib-question-list-header .ib-btn`,
-    questionList: `${this.model.idWithPrefix} .ib-points.question`,
+    closeButton: `${this.model.idSelector} .ib-question-list-header .ib-btn`,
+    questionList: `${this.model.idSelector} .ib-points.question`,
   };
 
   componentDidRender() {

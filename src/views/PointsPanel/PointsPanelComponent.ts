@@ -13,8 +13,25 @@ export class PointsPanelComponent extends BlockComponent<
   PointsPanelProps
 > {
   selectors = {
-    pointsLabel: `${this.model.idWithPrefix} .ib-points.label`,
-    questionList: `${this.model.idWithPrefix} .ib-points.question`,
+    root: `${this.model.idSelector}.ib-points-panel`,
+    pointsLabel: `${this.model.idSelector} .ib-points.label`,
+    questionList: `${this.model.idSelector} .ib-points.question`,
+  };
+
+  componentDidRender() {
+    this.model.on("question-change", this.handleQuestionChange);
+  }
+
+  handleQuestionChange = () => {
+    const earnedPoints = this.model.totalEarnedPoints;
+    const worthPoints = this.model.totalWorthPoints;
+
+    const root = document.querySelector(this.selectors.root)!;
+    if (earnedPoints === worthPoints) {
+      root.classList.add("correct");
+    } else {
+      root.classList.remove("correct");
+    }
   };
 
   eventsMap(): EventsMap {
@@ -48,7 +65,7 @@ export class PointsPanelComponent extends BlockComponent<
       : "";
 
     return `
-      <div ${idAttr}>
+      <div ${idAttr} class="ib-points-panel">
         <div class="ib-points label"></div>
         <div class="ib-points question"></div>
       </div>

@@ -8,7 +8,7 @@ import { PointsPanel, PointsPanelProps } from "../../models";
 
 export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
   selectors = {
-    label: `${this.model.idWithPrefix} .ib-points-score-label`,
+    label: `${this.model.idSelector} .ib-points-score-label`,
   };
 
   componentDidRender() {
