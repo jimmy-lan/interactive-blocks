@@ -15,26 +15,29 @@ export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
     this.model.on("question-change", this.updatePointsLabel);
   }
 
+  get display(): string {
+    const displayPercentage = this.model.get("displayPercentage");
+    const worthPoints = this.model.totalWorthPoints;
+    const earnedPoints = this.model.totalEarnedPoints;
+
+    return displayPercentage
+      ? `${(earnedPoints / worthPoints).toFixed(2)} %`
+      : `${earnedPoints} / ${worthPoints}`;
+  }
+
   /**
    * Update points label display based on current state.
    */
   updatePointsLabel = () => {
-    // Needed information
-    const worthPoints = this.model.totalWorthPoints;
-    const earnedPoints = this.model.totalEarnedPoints;
-
     // Change label display
     const label = document.querySelector(this.selectors.label)!;
-    label.textContent = `${earnedPoints} / ${worthPoints}`;
+    label.textContent = this.display;
   };
 
   get htmlStructure(): string {
-    const worthPoints = this.model.totalWorthPoints;
-    const earnedPoints = this.model.totalEarnedPoints;
-
     return `
       <div class="ib-points-label-panel">
-        <h5 class="ib-points-score-label">${earnedPoints} / ${worthPoints}</h5>
+        <h5 class="ib-points-score-label">${this.display}</h5>
       </div>
     `;
   }
