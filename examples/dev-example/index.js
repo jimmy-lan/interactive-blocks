@@ -31,13 +31,13 @@ mc1 = new MultipleChoice(
   localStorage
 );
 
-try {
-  mc1.read("mc-key");
-} catch (error) {}
-
-mc1.on("change", () => {
-  mc1.save("mc-key");
-});
+// try {
+//   mc1.read("mc-key");
+// } catch (error) {}
+//
+// mc1.on("change", () => {
+//   mc1.save("mc-key");
+// });
 
 new MultipleChoiceComponent(mc1Div, mc1).render();
 
@@ -73,7 +73,11 @@ const mc2 = new MultipleChoice({
 
 new MultipleChoiceComponent(mc2Div, mc2).render();
 
-const panel = new PointsPanel({ id: "hello", questions: [mc1, fb1, mc2] });
+const panel = new PointsPanel({
+  id: "hello",
+  questions: [mc1, fb1, mc2],
+  displayPercentage: true,
+});
 
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
 

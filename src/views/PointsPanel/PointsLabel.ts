@@ -16,13 +16,22 @@ export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
   }
 
   get display(): string {
+    // Obtain needed information
     const displayPercentage = this.model.get("displayPercentage");
     const worthPoints = this.model.totalWorthPoints;
     const earnedPoints = this.model.totalEarnedPoints;
 
-    return displayPercentage
-      ? `${(earnedPoints / worthPoints).toFixed(2)} %`
-      : `${earnedPoints} / ${worthPoints}`;
+    // Parse info
+    let display: string;
+
+    if (displayPercentage) {
+      const percentage = (earnedPoints / worthPoints) * 100;
+      display = `${percentage.toFixed(2)} %`;
+    } else {
+      display = `${earnedPoints} / ${worthPoints}`;
+    }
+
+    return display;
   }
 
   /**
