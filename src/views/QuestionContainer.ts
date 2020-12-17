@@ -102,8 +102,6 @@ export class QuestionContainer<
     }
   };
 
-  protected onCheckAnswerClick() {}
-
   displayLoadingState = (isLoading: boolean) => {
     const statusDiv = document.querySelector(this.selectors.statusDiv)!;
     statusDiv.classList.remove("loading", ...Object.values(QuestionStatus));
@@ -115,6 +113,8 @@ export class QuestionContainer<
       statusDiv.classList.remove("loading");
     }
   };
+
+  protected onCheckAnswerClick() {}
 
   handleCheckAnswerClick = async (): Promise<void> => {
     // Don't do anything if in loading state
