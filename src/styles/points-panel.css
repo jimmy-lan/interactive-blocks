@@ -11,6 +11,10 @@
   font-weight: normal;
 }
 
+.correct .ib-points {
+  background-color: var(--green);
+}
+
 .label.ib-points {
   height: 60px;
   min-width: 64px;

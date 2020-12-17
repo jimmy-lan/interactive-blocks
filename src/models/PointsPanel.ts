@@ -42,6 +42,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
 
   handleQuestionElementChange = (changedProps: unknown) => {
     const {
+      question,
       questionStatus,
       worthPoints,
       partialPoints,
@@ -49,8 +50,8 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
 
     // Trigger change event if attributes relating
     // to PointsPanel were changed
-    if (questionStatus || worthPoints || partialPoints) {
-      this.trigger("change");
+    if (question || questionStatus || worthPoints || partialPoints) {
+      this.trigger("question-change", changedProps);
     }
   };
 
