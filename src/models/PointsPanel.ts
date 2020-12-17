@@ -102,6 +102,11 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     return id ? `ib-points-${id}` : "";
   }
 
+  get idSelector(): string {
+    const id = this.get("id");
+    return id ? `#ib-points-${id}` : "";
+  }
+
   /**
    * Return total number of points of that the questions in the array are worth.
    */
