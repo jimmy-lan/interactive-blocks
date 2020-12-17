@@ -34,7 +34,7 @@ export class QuestionList extends BlockComponent<
 
   eventsMap(): EventsMap {
     return {
-      [`${this.selectors.closeButton}:click`]: this.handleCloseButtonClick,
+      [`.ib-question-list-header .ib-btn:click`]: this.handleCloseButtonClick,
     };
   }
 

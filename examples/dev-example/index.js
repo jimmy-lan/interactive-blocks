@@ -73,9 +73,7 @@ const mc2 = new MultipleChoice({
 
 new MultipleChoiceComponent(mc2Div, mc2).render();
 
-const panel = new PointsPanel({ questions: [mc1, fb1, mc2] });
-
-panel.read("test-panel");
+const panel = new PointsPanel({ id: "hello", questions: [mc1, fb1, mc2] });
 
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
 
