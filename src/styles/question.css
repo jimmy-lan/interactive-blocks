@@ -1,8 +1,8 @@
 :root {
   --option-border: #e8ebed;
   --container-background: #f8f9fa;
-  --correct-color: var(--green);
-  --warning-color: var(--red);
+  --correct-color: var(--success-color);
+  --warning-color: var(--warning-color);
   --textbox-border: #1c1c1c;
 }
 
@@ -57,7 +57,7 @@
     border-color: var(--option-border);
   }
   50% {
-    border-color: var(--primary);
+    border-color: var(--primary-color);
   }
   100% {
     border-color: var(--option-border);
@@ -206,8 +206,8 @@
 
 .ib-option-label input:checked ~ .ib-option-checkmark,
 .ib-option-label.disabled > input:checked ~ .ib-option-checkmark {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .ib-option-checkmark:after {
@@ -289,5 +289,5 @@
 }
 
 .ib-fb-input.hint-num-chars:focus {
-  color: var(--primary);
+  color: var(--primary-color);
 }

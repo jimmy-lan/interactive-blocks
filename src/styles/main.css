@@ -20,7 +20,7 @@
 
 .ib-btn.primary {
   box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
-  background-color: var(--primary);
+  background-color: var(--primary-color);
   color: #fff;
 }
 
