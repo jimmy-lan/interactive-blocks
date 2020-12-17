@@ -71,7 +71,8 @@ const mc2 = new MultipleChoice({
   },
 });
 
-new MultipleChoiceComponent(mc2Div, mc2).render();
+const mc2View = new MultipleChoiceComponent(mc2Div, mc2);
+mc2View.render();
 
 const panel = new PointsPanel({
   id: "hello",

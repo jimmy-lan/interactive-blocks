@@ -8,10 +8,6 @@ import { Question, QuestionProps, QuestionStatus } from "../models";
 import { BlockComponent } from "./common";
 import { EventsMap } from "../commonTypes";
 
-export interface QuestionContainerSettings {
-  checkAnswerButtonText: string;
-}
-
 export interface QuestionContainerSelectors {
   childDiv: string;
   statusDiv: string;
@@ -38,8 +34,9 @@ export class QuestionContainer<
     hintButton: `#${this.model.idWithPrefix} .ib-question-right button.hint`,
   };
 
-  protected settings: QuestionContainerSettings = {
+  settings = {
     checkAnswerButtonText: "Check Answer",
+    hintButtonText: "Hint",
   };
 
   eventsMap(): EventsMap {
@@ -160,7 +157,7 @@ export class QuestionContainer<
   };
 
   get htmlStructure(): string {
-    const { checkAnswerButtonText } = this.settings;
+    const { checkAnswerButtonText, hintButtonText } = this.settings;
 
     const shouldDisable = this.model.shouldDisable;
     const disabledString = shouldDisable ? "disabled" : "";
@@ -185,7 +182,7 @@ export class QuestionContainer<
             <button class="ib-btn primary check-answer" ${disabledString}>${checkAnswerButtonText}</button>
             ${
               hint
-                ? `<button class="ib-btn hint" ${disabledString}>Hint</button>`
+                ? `<button class="ib-btn hint" ${disabledString}>${hintButtonText}</button>`
                 : ""
             }
           </div>
