@@ -44,9 +44,11 @@ export default [
             container: "head",
             singleTag: true,
             prepend: true,
-            attributes: { id: "ib-styles" },
+            minimize: true,
+            // attributes: { id: "ib-styles" },
           },
         ],
+        minimize: true,
       }),
       cleanup({ sourcemap: true }),
       image(),
@@ -69,12 +71,13 @@ export default [
         mode: [
           "inject",
           {
-            container: "body",
+            container: "head",
             singleTag: true,
             prepend: true,
-            attributes: { id: "global" },
+            // attributes: { id: "ib-styles" },
           },
         ],
+        minimize: true,
       }),
       image(),
       terser({
