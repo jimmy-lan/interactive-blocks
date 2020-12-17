@@ -51,7 +51,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     // Trigger change event if attributes relating
     // to PointsPanel were changed
     if (question || questionStatus || worthPoints || partialPoints) {
-      this.trigger("question-change");
+      this.trigger("question-change", changedProps);
     }
   };
 
@@ -72,14 +72,34 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     }
   }
 
+  serialize(): string {
+    const props: Partial<PointsPanelProps> = this.getAll();
+    delete props.questions;
+    return JSON.stringify(props);
+  }
+
+  deserialize(raw: string) {
+    let parsedObject;
+    try {
+      parsedObject = JSON.parse(raw);
+    } catch (error) {
+      throw new Error(`Cannot deserialize from value ${raw}`);
+    }
+
+    // Questions attribute should not be serialized
+    if (parsedObject?.questions) {
+      throw new Error(
+        `Illegal questions attribute from ${raw}. Questions attribute should ` +
+          "not be serialized."
+      );
+    }
+
+    this.set(parsedObject);
+  }
+
   get idWithPrefix(): string {
     const id = this.get("id");
     return id ? `ib-points-${id}` : "";
-  }
-
-  get idSelector(): string {
-    const id = this.get("id");
-    return id ? `#ib-points-${id}` : "";
   }
 
   /**
