@@ -9,8 +9,6 @@ import * as views from "./views";
 
 // stylesheets
 import "./styles/main.css";
-import "./styles/question.css";
-import "./styles/points-panel.css";
 
 const Blocks = { ...models, ...views };
 

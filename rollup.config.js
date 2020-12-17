@@ -9,14 +9,10 @@
 import typescript from "rollup-plugin-typescript2";
 import cleanup from "rollup-plugin-cleanup";
 import { terser } from "rollup-plugin-terser";
-
-import postcss from "rollup-plugin-postcss";
-import cssnano from "cssnano";
 import image from "@rollup/plugin-image";
-import cssvariables from "postcss-css-variables";
+import styles from "rollup-plugin-styles";
 
 import pkg from "./package.json";
-import { variables } from "./src/config/cssvariables";
 
 const input = "src/index.ts";
 
@@ -41,15 +37,16 @@ export default [
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
-      postcss({
-        extensions: [".css"],
-        plugins: [
-          cssnano(),
-          cssvariables({
-            variables,
-          }),
+      styles({
+        mode: [
+          "inject",
+          {
+            container: "head",
+            singleTag: true,
+            prepend: true,
+            attributes: { id: "ib-styles" },
+          },
         ],
-        inject: { insertAt: "top" },
       }),
       cleanup({ sourcemap: true }),
       image(),
@@ -68,15 +65,16 @@ export default [
     },
     plugins: [
       typescript({ rollupCommonJSResolveHack: false, cleanup: true }),
-      postcss({
-        extensions: [".css"],
-        plugins: [
-          cssnano(),
-          cssvariables({
-            variables,
-          }),
+      styles({
+        mode: [
+          "inject",
+          {
+            container: "body",
+            singleTag: true,
+            prepend: true,
+            attributes: { id: "global" },
+          },
         ],
-        inject: { insertAt: "top" },
       }),
       image(),
       terser({

@@ -1,15 +1,6 @@
-/*
-  WARNING: This file is not used in the project. Do not edit the value
-  of entries.
-
-  This file was created to disable the warnings / errors shown by some IDEs.
-  The variables found in this file are declared in `src/config/cssvariables.js`.
-  Please update the values in that file.
- */
-
 :root {
-  --primary: "";
-  --secondary: "";
-  --green: "";
-  --red: "";
+  --primary: "#2196f3";
+  --secondary: "#fb8c00";
+  --green: "#36c247";
+  --red: "#e05316";
 }

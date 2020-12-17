@@ -1,3 +1,7 @@
+@import "./variables.css";
+@import "./question.css";
+@import "./points-panel.css";
+
 /* Form Button */
 .ib-btn {
   border: none;
