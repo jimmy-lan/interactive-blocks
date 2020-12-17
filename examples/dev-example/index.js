@@ -28,12 +28,16 @@ mc1 = new MultipleChoice(
     hint: "<b>Hint:</b> React hooks has nothing to do with UofT.",
     isShowingHint: true,
   },
-  sessionStorage
+  localStorage
 );
 
 try {
-  mc1.read("mc");
+  mc1.read("mc-key");
 } catch (error) {}
+
+mc1.on("change", () => {
+  mc1.save("mc-key");
+});
 
 new MultipleChoiceComponent(mc1Div, mc1).render();
 
@@ -46,7 +50,6 @@ const fb1 = new FillBlanks({
   worthPoints: 25,
   acceptableAnswers: ["forty two"],
   hintNumChars: true,
-  caseSensitive: true,
 });
 
 new FillBlanksComponent(fb1Div, fb1).render();
@@ -71,6 +74,7 @@ const mc2 = new MultipleChoice({
 new MultipleChoiceComponent(mc2Div, mc2).render();
 
 const panel = new PointsPanel({ questions: [mc1, fb1, mc2] });
+
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
 
 new QuestionList(document.querySelector("#points"), panel).render();

@@ -49,6 +49,7 @@ export default [
             variables,
           }),
         ],
+        inject: { insertAt: "top" },
       }),
       cleanup({ sourcemap: true }),
       image(),
