@@ -100,23 +100,22 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 36px;
   box-sizing: border-box;
 }
 
 .ib-question-list-item-panel .ib-btn {
   position: relative;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .ib-question-list-item-panel p.ib-question-score {
-  height: 100%;
-  padding: 6px 8px;
+  min-height: 36px;
+  padding: 5px 8px 4px;
   margin: 0 0 0 10px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.3);
   text-align: right;
-  min-width: 54px;
-  white-space: nowrap;
+  min-width: 69px;
   box-sizing: border-box;
 }

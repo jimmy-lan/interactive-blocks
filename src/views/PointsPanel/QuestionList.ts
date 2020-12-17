@@ -23,6 +23,15 @@ export class QuestionList extends BlockComponent<
     questionList: `${this.model.idWithPrefix} .ib-points.question`,
   };
 
+  componentDidRender() {
+    this.model.on("question-change", this.handleQuestionChange);
+  }
+
+  handleQuestionChange = () => {
+    // Rerender the entire component
+    this.render();
+  };
+
   eventsMap(): EventsMap {
     return {
       [`${this.selectors.closeButton}:click`]: this.handleCloseButtonClick,
