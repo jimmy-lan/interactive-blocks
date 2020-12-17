@@ -9,6 +9,8 @@
   border-bottom-left-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 4px 8px 2px rgba(0, 0, 0, 0.12);
   font-weight: normal;
+  transition: background-color 0.3s ease-in-out;
+  will-change: background-color;
 }
 
 .correct .ib-points {
