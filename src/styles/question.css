@@ -1,8 +1,6 @@
 :root {
   --option-border: #e8ebed;
   --container-background: #f8f9fa;
-  --correct-color: var(--success-color);
-  --warning-color: var(--warning-color);
   --textbox-border: #1c1c1c;
 }
 
@@ -65,7 +63,7 @@
 }
 
 .correct.ib-question-status {
-  border-color: var(--correct-color);
+  border-color: var(--success-color);
 }
 
 .warning.ib-question-status {
@@ -85,7 +83,7 @@
 }
 
 .correct .ib-status-container {
-  background: var(--correct-color);
+  background: var(--success-color);
 }
 
 .warning .ib-status-container {
