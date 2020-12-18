@@ -10,10 +10,11 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 3px 16px;
   transition: all 0.3s ease;
   box-sizing: border-box;
   font-family: var(--font-family);
+  /* Unfortunately, we currently do not support themes right out of the box. */
+  color: var(--font-color)
 }
 
 .ib-question-left {
@@ -119,26 +120,33 @@
 
 /* Common Question Components */
 
-.ib-question-text {
+.ib-question-right .ib-question-text {
   font-weight: normal;
   line-height: 1.5;
   margin: 0 0 9px;
+  color: inherit;
 }
 
-.ib-question-hint {
+.ib-question-right .ib-question-hint {
   font-style: italic;
   font-weight: normal;
   margin: 0 0 16px;
+  color: inherit;
 }
 
-.ib-question-error {
+/* Had to specify classes this way for compatibility reasons */
+.ib-question-error,
+.visible.ib-question-error {
   font-weight: normal;
   color: var(--warning-color);
   margin: 8px 0 0;
+}
+
+.ib-question-error {
   display: none;
 }
 
-.visible.ib-question-error {
+.ib-question-error.visible {
   display: block;
 }
 
@@ -168,6 +176,7 @@
 .ib-option-label > .ib-option-text {
   height: 24px;
   vertical-align: middle;
+  color: inherit;
 }
 
 .ib-option-label > input {
