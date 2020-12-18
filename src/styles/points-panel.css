@@ -111,6 +111,17 @@
   box-sizing: border-box;
 }
 
+/* Updated Dec 17 2020 */
+/*
+ * Style the button in the question list panel differently
+ * if mounted inside .ib-points-panel
+ */
+.ib-points-panel .ib-question-list-item-panel .ib-btn {
+  background-color: #efefef;
+  color: var(--secondary-color);
+  font-weight: bolder;
+}
+
 .ib-question-list-item-panel p.ib-question-score {
   min-height: 36px;
   padding: 5px 8px 4px;
@@ -120,4 +131,5 @@
   text-align: right;
   min-width: 69px;
   box-sizing: border-box;
+  color: inherit;
 }
