@@ -48,7 +48,7 @@ const fb1 = new FillBlanks({
   question:
     "What is the ultimate answer to the world, the universe, and everything?",
   worthPoints: 25,
-  acceptableAnswers: ["forty two"],
+  acceptableAnswers: ["hello"],
   hintNumChars: true,
 });
 
@@ -74,9 +74,11 @@ const mc2 = new MultipleChoice({
 const mc2View = new MultipleChoiceComponent(mc2Div, mc2);
 mc2View.render();
 
+const questions = [mc1, fb1, mc2];
+
 const panel = new PointsPanel({
   id: "hello",
-  questions: [mc1, fb1, mc2],
+  questions,
   displayPercentage: true,
 });
 

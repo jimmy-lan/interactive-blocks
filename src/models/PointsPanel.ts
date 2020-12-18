@@ -4,15 +4,15 @@
  */
 
 import { Question, QuestionProps } from "./Question";
-import { AttributeRegistry, BlockModel } from "./common";
+import { AttributeRegistry, BlockCollection, BlockModel } from "./common";
 import { ModelChangeEventOptions } from "../commonTypes";
 
-export interface PointsPanelProps {
+interface PointsPanelProps {
   /**
    * Id of this points panel.
    */
   id?: string;
-  questions: Question<QuestionProps>[];
+  questionCollection: BlockCollection<Question<QuestionProps>>;
   /**
    * Indicates whether a percentage should be shown in this panel.
    * If false, a numeric value representing score would be shown.
@@ -34,10 +34,12 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
    * Watch for changes in question models.
    */
   watchForQuestionsChange = () => {
-    const questions = this.get("questions");
+    const questionCollection = this.get("questionCollection");
+    const questions = questionCollection.getAll();
     questions.map((question) =>
       question.on("change", this.handleQuestionElementChange)
     );
+    questionCollection.on("change", () => this.set({ questionCollection }));
   };
 
   handleQuestionElementChange = (changedProps: unknown) => {
@@ -57,8 +59,8 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
 
   set(newData: Partial<PointsPanelProps>, options?: ModelChangeEventOptions) {
     // Remove old listeners
-    if (newData.questions) {
-      const questions = this.get("questions");
+    if (newData.questionCollection) {
+      const questions = this.get("questionCollection").getAll();
       questions.map((question) =>
         question.unregister("change", this.handleQuestionElementChange)
       );
@@ -67,14 +69,14 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     super.set(newData, options);
 
     // Add new listeners
-    if (newData.questions) {
+    if (newData.questionCollection) {
       this.watchForQuestionsChange();
     }
   }
 
   serialize(): string {
     const props: Partial<PointsPanelProps> = this.getAll();
-    delete props.questions;
+    delete props.questionCollection;
     return JSON.stringify(props);
   }
 
@@ -111,7 +113,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
    * Return total number of points of that the questions in the array are worth.
    */
   get totalWorthPoints(): number {
-    const questions = this.get("questions");
+    const questions = this.get("questionCollection").getAll();
     return questions.reduce(
       (accumulatedPoints, question) =>
         accumulatedPoints + (question.get("worthPoints") || 1),
@@ -124,7 +126,7 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
    * in the list.
    */
   get totalEarnedPoints(): number {
-    const questions = this.get("questions");
+    const questions = this.get("questionCollection").getAll();
     return questions.reduce(
       (accumulatedPoints, question) =>
         accumulatedPoints + question.currentPoints,
