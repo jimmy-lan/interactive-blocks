@@ -7,4 +7,4 @@ export * from "./Persistence";
 export * from "./BlockModel";
 export * from "./EventRegistry";
 export * from "./AttributeRegistry";
-export * from "./BlockCollection";
+export * from "./Collection";
