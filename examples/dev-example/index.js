@@ -9,6 +9,7 @@ const {
   PointsPanelComponent,
   PointsLabel,
   QuestionList,
+  Collection,
 } = Blocks;
 
 const mc1Div = document.getElementById("mc1");
@@ -48,7 +49,7 @@ const fb1 = new FillBlanks({
   question:
     "What is the ultimate answer to the world, the universe, and everything?",
   worthPoints: 25,
-  acceptableAnswers: ["hello"],
+  acceptableAnswers: ["forty two"],
   hintNumChars: true,
 });
 
@@ -74,12 +75,11 @@ const mc2 = new MultipleChoice({
 const mc2View = new MultipleChoiceComponent(mc2Div, mc2);
 mc2View.render();
 
-const questions = [mc1, fb1, mc2];
+const questionCollection = new Collection([mc1, fb1, mc2]);
 
 const panel = new PointsPanel({
   id: "hello",
-  questions,
-  displayPercentage: true,
+  questionCollection,
 });
 
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
