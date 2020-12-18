@@ -14,8 +14,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 3px;
-  height: 36px;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
 .ib-btn.primary {
