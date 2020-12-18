@@ -5,11 +5,11 @@
  */
 
 import { Component } from "./Component";
-import { BlockCollection, BlockModel } from "../../models/common";
+import { Collection, BlockModel } from "../../models/common";
 
 export abstract class CollectionComponent<T extends BlockModel<K>, K>
   implements Component {
-  constructor(public parent: Element, public collection: BlockCollection<T>) {}
+  constructor(public parent: Element, public collection: Collection<T>) {}
 
   /**
    * Render one component based on the model given.
