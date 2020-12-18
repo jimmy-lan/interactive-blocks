@@ -136,9 +136,9 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * Method triggered when the model changes.
    * @param changedProps
    */
-  rerender(changedProps: Partial<K>): void {
+  rerender = (changedProps: Partial<K>): void => {
     this.render();
-  }
+  };
 
   /**
    * Render the component by appending it to the parent component.
@@ -146,7 +146,7 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    *    children elements of the parent before this component is
    *    appended. Defaults to false.
    */
-  render(disableClean: boolean = false): void {
+  render = (disableClean: boolean = false): void => {
     // Clean up parent area
     if (!disableClean) {
       this.parent.innerHTML = "";
@@ -168,5 +168,5 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
 
     // Append template element to parent
     this.parent.appendChild(templateElement.content);
-  }
+  };
 }

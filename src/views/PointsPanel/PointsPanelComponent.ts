@@ -21,10 +21,10 @@ export class PointsPanelComponent extends BlockComponent<
   }
 
   componentDidRender() {
-    this.model.on("question-change", this.handleQuestionChange);
+    this.model.on("question-change", this.rerender);
   }
 
-  handleQuestionChange = () => {
+  rerender = (): void => {
     const earnedPoints = this.model.totalEarnedPoints;
     const worthPoints = this.model.totalWorthPoints;
 

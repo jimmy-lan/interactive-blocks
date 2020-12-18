@@ -39,10 +39,10 @@ export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
   /**
    * Update points label display based on current state.
    */
-  rerender(): void {
+  rerender = (): void => {
     const label = document.querySelector(this.selectors.label)!;
     label.textContent = this.display;
-  }
+  };
 
   get htmlStructure(): string {
     return `
