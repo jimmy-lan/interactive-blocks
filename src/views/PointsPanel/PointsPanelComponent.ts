@@ -5,8 +5,8 @@
 import { BlockComponent } from "../common";
 import { PointsPanel, PointsPanelProps } from "../../models";
 import { ComponentsMap, EventsMap } from "../../commonTypes";
-import { PointsLabel } from "./PointsLabel";
-import { QuestionList } from "./QuestionList";
+import { PointsLabelComponent } from "./PointsLabelComponent";
+import { PointsListComponent } from "./PointsListComponent";
 
 export class PointsPanelComponent extends BlockComponent<
   PointsPanel,
@@ -16,12 +16,15 @@ export class PointsPanelComponent extends BlockComponent<
     return {
       root: `${this.model.idSelector}.ib-points-panel`,
       pointsLabel: `${this.model.idSelector} .ib-points.label`,
-      questionList: `${this.model.idSelector} .ib-points.question`,
+      pointsList: `${this.model.idSelector} .ib-points.question`,
     };
   }
 
   componentDidRender() {
-    this.model.on("question-change", this.rerender);
+    this.model.on("question-change", () => {
+      console.log("received question change event");
+      this.rerender();
+    });
   }
 
   rerender = (): void => {
@@ -43,22 +46,22 @@ export class PointsPanelComponent extends BlockComponent<
   }
 
   handleLabelClick = (): void => {
-    const questionList = document.querySelector(this.selectors.questionList)!;
-    if (!questionList.classList.contains("visible")) {
-      questionList.classList.add("visible");
+    const pointsList = document.querySelector(this.selectors.pointsList)!;
+    if (!pointsList.classList.contains("visible")) {
+      pointsList.classList.add("visible");
     }
   };
 
   componentsMap(): ComponentsMap {
     return {
       pointsLabel: this.selectors.pointsLabel,
-      questionList: this.selectors.questionList,
+      pointsList: this.selectors.pointsList,
     };
   }
 
   bindComponents = () => {
-    new PointsLabel(this.components.pointsLabel, this.model).render();
-    new QuestionList(this.components.questionList, this.model).render();
+    new PointsLabelComponent(this.components.pointsLabel, this.model).render();
+    new PointsListComponent(this.components.pointsList, this.model).render();
   };
 
   get htmlStructure(): string {

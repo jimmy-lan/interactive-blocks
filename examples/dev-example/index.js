@@ -7,8 +7,8 @@ const {
   Persistence,
   PointsPanel,
   PointsPanelComponent,
-  PointsLabel,
-  QuestionList,
+  PointsLabelComponent,
+  PointsListComponent,
   Collection,
 } = Blocks;
 
@@ -84,4 +84,4 @@ const panel = new PointsPanel({
 
 new PointsPanelComponent(document.querySelector("#panel"), panel).render();
 
-new QuestionList(document.querySelector("#points"), panel).render();
+new PointsListComponent(document.querySelector("#points"), panel).render();

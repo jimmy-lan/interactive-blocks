@@ -37,25 +37,29 @@ export class Collection<T extends BlockModel> implements Serializable {
   }
 
   set(index: number, model: T): void {
+    const prev = [...this.elements];
     this.elements[index] = model;
-    this.events.trigger("change");
+    this.events.trigger("change", prev);
   }
 
   remove(model: T): T {
+    const prev = [...this.elements];
     this.elements = this.elements.filter((element) => element !== model);
-    this.events.trigger("change");
+    this.events.trigger("change", prev);
     return model;
   }
 
   removeAt(index: number): T {
+    const prev = [...this.elements];
     const model = this.elements.splice(index, 1)[0];
-    this.events.trigger("change");
+    this.events.trigger("change", prev);
     return model;
   }
 
   replace(models: T[]): void {
+    const prev = [...this.elements];
     this.elements = [...models];
-    this.events.trigger("change");
+    this.events.trigger("change", prev);
   }
 
   save(key: string): void {

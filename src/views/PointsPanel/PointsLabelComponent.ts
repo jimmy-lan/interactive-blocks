@@ -6,7 +6,10 @@
 import { BlockComponent } from "../common";
 import { PointsPanel, PointsPanelProps } from "../../models";
 
-export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
+export class PointsLabelComponent extends BlockComponent<
+  PointsPanel,
+  PointsPanelProps
+> {
   get selectors() {
     return {
       label: `${this.model.idSelector} .ib-points-score-label`,

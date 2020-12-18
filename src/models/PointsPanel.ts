@@ -63,15 +63,39 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
   }
 
   /**
+   * Stop listening to changes for questions in <collection>.
+   * this.handleQuestionElementChange will no longer be invoked when
+   * a question in <collection> changes.
+   * @param questions A questions array to unregister change listeners.
+   */
+  private unregisterChangeListeners = (
+    questions: Question<QuestionProps>[]
+  ) => {
+    questions.forEach((question) =>
+      question.unregister("change", this.handleQuestionElementChange)
+    );
+  };
+
+  /**
+   * Register change event listeners for questions in <collection>.
+   * When a question in <collection> changes, this.handleQuestionElementChange
+   * will be invoked.
+   * @param questions A questions array to register change listeners
+   */
+  private registerChangeListeners = (questions: Question<QuestionProps>[]) => {
+    questions.forEach((question) =>
+      question.on("change", this.handleQuestionElementChange)
+    );
+  };
+
+  /**
    * Watch for changes in question models.
    */
   watchForQuestionsChange = () => {
     const questionCollection = this.get("questionCollection");
     const questions = questionCollection.getAll();
-    questions.map((question) =>
-      question.on("change", this.handleQuestionElementChange)
-    );
-    questionCollection.on("change", () => this.set({ questionCollection }));
+    this.registerChangeListeners(questions);
+    questionCollection.on("change", this.handleQuestionCollectionChange);
   };
 
   handleQuestionElementChange = (changedProps: unknown) => {
@@ -89,18 +113,24 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
     }
   };
 
+  handleQuestionCollectionChange = (previousElements: unknown) => {
+    const currentQuestions = this.get("questionCollection").getAll();
+    const previousQuestions = previousElements as Question<QuestionProps>[];
+    this.unregisterChangeListeners(previousQuestions);
+    this.registerChangeListeners(currentQuestions);
+    this.trigger("change", { questionCollection: currentQuestions });
+  };
+
   set(newData: Partial<PointsPanelProps>, options?: ModelChangeEventOptions) {
     // Remove old listeners
     if (newData.questionCollection) {
       const questions = this.get("questionCollection").getAll();
-      questions.map((question) =>
-        question.unregister("change", this.handleQuestionElementChange)
-      );
+      this.unregisterChangeListeners(questions);
     }
 
     super.set(newData, options);
 
-    // Add new listeners
+    // Starting watching for new question collection events
     if (newData.questionCollection) {
       this.watchForQuestionsChange();
     }

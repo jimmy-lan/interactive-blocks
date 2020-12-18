@@ -41,14 +41,14 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * itself whenever the model changes.
    */
   bindModel = (): void => {
-    this.model.on("change", (previousProps, options) => {
+    this.model.on("change", (changedProps, options) => {
       if (options) {
         const { shouldRerender } = options as ModelChangeEventOptions;
         if (!shouldRerender) {
           return;
         }
       }
-      this.rerender(previousProps as Partial<K>);
+      this.rerender(changedProps as Partial<K>);
     });
   };
 

@@ -14,14 +14,14 @@ import {
 import arrowRightIcon from "../../graphics/arrow-right.svg";
 import { EventsMap } from "../../commonTypes";
 
-export class QuestionList extends BlockComponent<
+export class PointsListComponent extends BlockComponent<
   PointsPanel,
   PointsPanelProps
 > {
   get selectors() {
     return {
       closeButton: `${this.model.idSelector} .ib-question-list-header .ib-btn`,
-      questionList: `${this.model.idSelector} .ib-points.question`,
+      pointsList: `${this.model.idSelector} .ib-points.question`,
     };
   }
 
@@ -41,9 +41,9 @@ export class QuestionList extends BlockComponent<
   }
 
   handleCloseButtonClick = (): void => {
-    const questionList = document.querySelector(this.selectors.questionList)!;
-    if (questionList.classList.contains("visible")) {
-      questionList.classList.remove("visible");
+    const pointsList = document.querySelector(this.selectors.pointsList)!;
+    if (pointsList.classList.contains("visible")) {
+      pointsList.classList.remove("visible");
     }
   };
 

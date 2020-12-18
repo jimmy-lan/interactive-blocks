@@ -4,5 +4,5 @@
  */
 
 export * from "./PointsPanelComponent";
-export * from "./PointsLabel";
-export * from "./QuestionList";
+export * from "./PointsPanelComponent";
+export * from "./PointsListComponent";
