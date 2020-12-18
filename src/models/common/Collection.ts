@@ -7,11 +7,13 @@ import { BlockModel } from "./BlockModel";
 import { EventRegistry } from "./EventRegistry";
 import { Persistence, Serializable, StoragePersistence } from "./Persistence";
 
-export class BlockCollection<T extends BlockModel> implements Serializable {
+export class Collection<T extends BlockModel> implements Serializable {
+  private elements: T[];
   events: EventRegistry;
   persistence: Persistence<this> | undefined;
 
-  constructor(private elements: T[], persistenceStorage?: Storage) {
+  constructor(elements: T[], persistenceStorage?: Storage) {
+    this.elements = [...elements];
     this.events = new EventRegistry();
     if (persistenceStorage) {
       this.persistence = new StoragePersistence(this, persistenceStorage);
@@ -37,6 +39,18 @@ export class BlockCollection<T extends BlockModel> implements Serializable {
   set(index: number, model: T): void {
     this.elements[index] = model;
     this.events.trigger("change");
+  }
+
+  remove(model: T): T {
+    this.elements = this.elements.filter((element) => element !== model);
+    this.events.trigger("change");
+    return model;
+  }
+
+  removeAt(index: number): T {
+    const model = this.elements.splice(index, 1)[0];
+    this.events.trigger("change");
+    return model;
   }
 
   replace(models: T[]): void {
