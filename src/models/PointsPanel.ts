@@ -4,15 +4,14 @@
  */
 
 import { Question, QuestionProps } from "./Question";
-import { AttributeRegistry, BlockCollection, BlockModel } from "./common";
+import { AttributeRegistry, Collection, BlockModel } from "./common";
 import { ModelChangeEventOptions } from "../commonTypes";
 
-interface PointsPanelProps {
+interface PointsPanelPropsBlueprint {
   /**
    * Id of this points panel.
    */
   id?: string;
-  questionCollection: BlockCollection<Question<QuestionProps>>;
   /**
    * Indicates whether a percentage should be shown in this panel.
    * If false, a numeric value representing score would be shown.
@@ -21,12 +20,45 @@ interface PointsPanelProps {
   displayPercentage?: boolean;
 }
 
+export interface PointsPanelAcceptedProps extends PointsPanelPropsBlueprint {
+  questionCollection:
+    | Collection<Question<QuestionProps>>
+    | Question<QuestionProps>[];
+}
+
+export interface PointsPanelProps extends PointsPanelPropsBlueprint {
+  questionCollection: Collection<Question<QuestionProps>>;
+}
+
 export class PointsPanel extends BlockModel<PointsPanelProps> {
-  constructor(attributes: PointsPanelProps, persistenceStorage?: Storage) {
+  constructor(
+    attributes: PointsPanelAcceptedProps,
+    persistenceStorage?: Storage
+  ) {
     super(
-      new AttributeRegistry<PointsPanelProps>(attributes),
+      new AttributeRegistry<PointsPanelProps>(parseProps(attributes)),
       persistenceStorage
     );
+
+    function parseProps(
+      acceptedProps: PointsPanelAcceptedProps
+    ): PointsPanelProps {
+      if (Array.isArray(acceptedProps.questionCollection)) {
+        const questions = acceptedProps.questionCollection;
+        const questionCollection = new Collection<Question<QuestionProps>>(
+          questions
+        );
+        const otherData: any = { ...acceptedProps };
+        delete otherData.questionCollection;
+        return {
+          questionCollection,
+          ...otherData,
+        };
+      } else {
+        return acceptedProps as PointsPanelProps;
+      }
+    }
+
     this.watchForQuestionsChange();
   }
 

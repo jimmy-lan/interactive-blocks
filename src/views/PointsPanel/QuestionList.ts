@@ -75,7 +75,7 @@ export class QuestionList extends BlockComponent<
   };
 
   get htmlStructure(): string {
-    const questions = this.model.get("questions");
+    const questions = this.model.get("questionCollection").getAll();
 
     return `
       <div class="ib-points-question-panel">
