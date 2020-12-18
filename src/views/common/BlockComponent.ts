@@ -19,7 +19,9 @@ export abstract class BlockComponent<T extends BlockModel<K>, K>
    * An object mapping name to component selector for key elements
    * in this BlockComponent.
    */
-  selectors: Object = {};
+  get selectors(): Object {
+    return {};
+  }
 
   constructor(public parent: Element, public model: T) {
     this.bindModel();

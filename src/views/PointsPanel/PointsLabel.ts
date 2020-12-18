@@ -7,12 +7,14 @@ import { BlockComponent } from "../common";
 import { PointsPanel, PointsPanelProps } from "../../models";
 
 export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
-  selectors = {
-    label: `${this.model.idSelector} .ib-points-score-label`,
-  };
+  get selectors() {
+    return {
+      label: `${this.model.idSelector} .ib-points-score-label`,
+    };
+  }
 
   componentDidRender() {
-    this.model.on("question-change", this.updatePointsLabel);
+    this.model.on("question-change", this.rerender);
   }
 
   get display(): string {
@@ -37,11 +39,10 @@ export class PointsLabel extends BlockComponent<PointsPanel, PointsPanelProps> {
   /**
    * Update points label display based on current state.
    */
-  updatePointsLabel = () => {
-    // Change label display
+  rerender(): void {
     const label = document.querySelector(this.selectors.label)!;
     label.textContent = this.display;
-  };
+  }
 
   get htmlStructure(): string {
     return `

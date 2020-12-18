@@ -25,14 +25,16 @@ export class QuestionContainer<
 
   // Selectors begin with `this.model.idWithPrefix` so that
   // they only select elements corresponding to this question.
-  selectors: QuestionContainerSelectors = {
-    childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
-    statusDiv: `#${this.model.idWithPrefix} .ib-question-status`,
-    hintLabel: `#${this.model.idWithPrefix} .ib-question-hint`,
-    errorLabel: `#${this.model.idWithPrefix} .ib-question-error`,
-    checkAnswerButton: `#${this.model.idWithPrefix} .ib-question-right button.check-answer`,
-    hintButton: `#${this.model.idWithPrefix} .ib-question-right button.hint`,
-  };
+  get selectors(): QuestionContainerSelectors {
+    return {
+      childDiv: `#${this.model.idWithPrefix} .ib-question-child`,
+      statusDiv: `#${this.model.idWithPrefix} .ib-question-status`,
+      hintLabel: `#${this.model.idWithPrefix} .ib-question-hint`,
+      errorLabel: `#${this.model.idWithPrefix} .ib-question-error`,
+      checkAnswerButton: `#${this.model.idWithPrefix} .ib-question-right button.check-answer`,
+      hintButton: `#${this.model.idWithPrefix} .ib-question-right button.hint`,
+    };
+  }
 
   settings = {
     checkAnswerButtonText: "Check Answer",

@@ -23,10 +23,12 @@ export class OptionsForm extends BlockComponent<
 > {
   // Selectors begin with `this.model.idWithPrefix` so that
   // they only select elements corresponding to this question.
-  selectors: OptionsFormSelectors = {
-    optionInputs: `#${this.model.idWithPrefix} .ib-option-label input`,
-    optionLabels: `#${this.model.idWithPrefix} .ib-option-label`,
-  };
+  get selectors(): OptionsFormSelectors {
+    return {
+      optionInputs: `#${this.model.idWithPrefix} .ib-option-label input`,
+      optionLabels: `#${this.model.idWithPrefix} .ib-option-label`,
+    };
+  }
 
   eventsMap(): EventsMap {
     return { ".ib-option-label input:change": this.handleOptionInputChange };

@@ -12,11 +12,13 @@ export class PointsPanelComponent extends BlockComponent<
   PointsPanel,
   PointsPanelProps
 > {
-  selectors = {
-    root: `${this.model.idSelector}.ib-points-panel`,
-    pointsLabel: `${this.model.idSelector} .ib-points.label`,
-    questionList: `${this.model.idSelector} .ib-points.question`,
-  };
+  get selectors() {
+    return {
+      root: `${this.model.idSelector}.ib-points-panel`,
+      pointsLabel: `${this.model.idSelector} .ib-points.label`,
+      questionList: `${this.model.idSelector} .ib-points.question`,
+    };
+  }
 
   componentDidRender() {
     this.model.on("question-change", this.handleQuestionChange);

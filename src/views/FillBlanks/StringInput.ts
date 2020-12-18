@@ -3,7 +3,7 @@
  * Creation Date: 2020-11-25
  */
 
-import { BlockComponent } from "../common/BlockComponent";
+import { BlockComponent } from "../common";
 import { FillBlanks, FillBlanksProps } from "../../models";
 import { EventsMap } from "../../commonTypes";
 
@@ -12,9 +12,11 @@ interface StringInputSelectors {
 }
 
 export class StringInput extends BlockComponent<FillBlanks, FillBlanksProps> {
-  selectors: StringInputSelectors = {
-    input: `#${this.model.idWithPrefix} input.ib-fb-input`,
-  };
+  get selectors(): StringInputSelectors {
+    return {
+      input: `#${this.model.idWithPrefix} input.ib-fb-input`,
+    };
+  }
 
   eventsMap(): EventsMap {
     return {
