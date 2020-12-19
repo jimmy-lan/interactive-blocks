@@ -1,6 +1,7 @@
 /*
  * Created by Jimmy Lan
  * Creation Date: 2020-12-15
+ * Description: A collection of models.
  */
 
 import { BlockModel } from "./BlockModel";
@@ -28,11 +29,15 @@ export class Collection<T extends BlockModel> implements Serializable {
     return this.events.trigger;
   }
 
-  get(index: number) {
+  get unregister() {
+    return this.events.unregister;
+  }
+
+  get(index: number): T {
     return this.elements[index];
   }
 
-  getAll() {
+  getAll(): T[] {
     return [...this.elements];
   }
 

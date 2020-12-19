@@ -75,6 +75,8 @@ const mc2 = new MultipleChoice({
 const mc2View = new MultipleChoiceComponent(mc2Div, mc2);
 mc2View.render();
 
+mc1.get("options");
+
 const questionCollection = new Collection([mc1, fb1, mc2]);
 
 const panel = new PointsPanel({
