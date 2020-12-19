@@ -17,22 +17,26 @@ export interface QuestionProps {
    * Please ensure that this field is unique.
    */
   id: string;
+  /**
+   * Question text associating with this model. Supports html
+   * elements.
+   */
   question: string;
   /**
    * A hint string to be displayed below the question text.
    */
   hint?: string;
   /**
-   * A short, descriptive title associating to this question.
-   * Can be used to display a menu of questions.
-   */
-  title?: string;
-  /**
    * A boolean value indicating whether the question is currently
    * showing hint to the user. Users can toggle hint displays when a hint
    * text is provided. This attribute determines a state. Defaults to false.
    */
   isShowingHint?: boolean;
+  /**
+   * A short, descriptive title associating to this question.
+   * Can be used to display a menu of questions.
+   */
+  title?: string;
   /**
    * Status of this question.
    * If not provided, the question is unanswered.
@@ -53,7 +57,7 @@ export interface QuestionProps {
    */
   partialPoints?: number;
   /**
-   * If true, multiple attempts to the question is allowed until
+   * If false, multiple attempts to the question is allowed until
    * the question is correctly answered. Otherwise, the question
    * becomes disabled after one attempt. Defaults to false.
    */
@@ -66,8 +70,9 @@ export interface QuestionProps {
   allowEmptyResponse?: boolean;
   /**
    * Return a promise which resolves in a boolean value to indicate whether
-   * <userResponse> is correct. This function is called when the user clicks
-   * on the submit button in the form.
+   * <userResponse> is correct, or a number to indicate the number of marks that
+   * the user gets with <userResponse>. This function is called when the user
+   * clicks on the submit button in the form.
    * When this attribute is not specified, the question will determine whether
    * the user's answer is correct based on other attributes. Otherwise, only
    * the result from this function is used.
