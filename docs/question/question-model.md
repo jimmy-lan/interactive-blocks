@@ -97,3 +97,7 @@ You only need to call these methods when you are writing scripts to dynamically 
 // Update question status based the current question attributes.
 question.updateQuestionStatus();
 ```
+
+Please note the additional methods inherited from [BlockModel](/base-classes/block-model.md).
+These methods include `get`, `getAll`, `set`, `replace`, `on`, `unregister`, `trigger`, `save`, `read`,
+`serialize`, `deserialize`.

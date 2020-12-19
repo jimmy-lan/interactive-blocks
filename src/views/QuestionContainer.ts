@@ -1,7 +1,7 @@
 /*
  * Created by Jimmy Lan
  * Creation Date: 2020-11-25
- * Description: A question container with status tab and content tab.
+ * Description: A question container with status panel and content panel.
  */
 
 import { Question, QuestionProps, QuestionStatus } from "../models";
