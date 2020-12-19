@@ -54,9 +54,11 @@ export class PointsListComponent extends BlockComponent<
   /**
    * Return html structure for a question list item
    */
-  private getListItem = (question: Question<QuestionProps>): string => {
+  private getListItem = (
+    question: Question<QuestionProps>,
+    redirect: string
+  ): string => {
     // Obtain needed information
-    const id = question.idWithPrefix;
     const title = question.get("title");
     const questionText = question.get("question");
     const worthPoints = question.get("worthPoints");
@@ -71,7 +73,7 @@ export class PointsListComponent extends BlockComponent<
       <div class="ib-question-list-item">
         <p class="ib-question-list-item-title">${listItemTitle}</p>
         <div class="ib-question-list-item-panel">
-          <a href="#${id}" class="ib-btn primary">Go to question</a>
+          <a href="${redirect}" class="ib-btn primary">Go to question</a>
           <p class="ib-question-score"><span class="score">${
             listItemCurrentPoints ? listItemCurrentPoints : ""
           }</span> / ${listItemWorthPoints}</p>
@@ -83,6 +85,14 @@ export class PointsListComponent extends BlockComponent<
   get htmlStructure(): string {
     const { title } = this.settings;
     const questions = this.model.get("questionCollection").getAll();
+    const questionLinks = this.model.get("questionLinks");
+
+    let redirects: string[];
+    if (!questionLinks) {
+      redirects = questions.map((question) => `#${question.idWithPrefix}`);
+    } else {
+      redirects = questionLinks;
+    }
 
     return `
       <div class="ib-points-question-panel">
@@ -92,7 +102,11 @@ export class PointsListComponent extends BlockComponent<
             <img src="${arrowRightIcon}" alt="close panel icon" />
           </button>
         </div>
-        ${questions.map((question) => this.getListItem(question)).join("")}
+        ${questions
+          .map((question, index) =>
+            this.getListItem(question, redirects[index])
+          )
+          .join("")}
       </div>
     `;
   }

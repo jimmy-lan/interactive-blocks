@@ -18,6 +18,15 @@ interface PointsPanelPropsBlueprint {
    * Defaults to false.
    */
   displayPercentage?: boolean;
+  /**
+   * A link array corresponding to elements in `questionCollection`.
+   * When working when points list component, the component will try to
+   * redirect users to #`questionId` by default when they click on
+   * "Go to Question". If you have a different configuration or would
+   * like to redirect users to other places, provide a list of links to this
+   * attribute.
+   */
+  questionLinks?: string[];
 }
 
 export interface PointsPanelAcceptedProps extends PointsPanelPropsBlueprint {
@@ -59,8 +68,26 @@ export class PointsPanel extends BlockModel<PointsPanelProps> {
       }
     }
 
+    this.validateAttributes();
+
     this.watchForQuestionsChange();
   }
+
+  /**
+   * Check validity of attributes in this points panel model.
+   */
+  validateAttributes = () => {
+    const { questionCollection, questionLinks } = this.getAll();
+
+    if (questionLinks) {
+      const questions = questionCollection.getAll();
+      if (questions.length !== questionLinks.length) {
+        throw new Error(
+          `Question links array must have the same length as the number of elements in questionCollection.`
+        );
+      }
+    }
+  };
 
   /**
    * Stop listening to changes for questions in <collection>.
