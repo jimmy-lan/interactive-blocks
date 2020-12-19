@@ -57,23 +57,39 @@ new FillBlanksComponent(fb1Div, fb1).render();
 
 const mc2Div = document.getElementById("mc2");
 
+const checkAnswer = (userSelections) => {
+  const answersWorthFivePoints = ["0"];
+  const answersWorthTenPoints = ["1", "3"];
+  let marksToAssign = 0;
+  userSelections.forEach((selection) => {
+    if (answersWorthFivePoints.includes(selection)) {
+      marksToAssign += 5;
+    } else if (answersWorthTenPoints.includes(selection)) {
+      marksToAssign += 10;
+    }
+  });
+  console.log(marksToAssign);
+  return marksToAssign;
+};
 const mc2 = new MultipleChoice({
   id: "mc-2",
   question:
-    "Some random question here, I can't think of any right now. This is just a test!",
-  worthPoints: 25,
-  options: MultipleChoice.parseOptions(["Hi", "There", "Good", "Job"]),
+    "Which of the following factors can contribute to the ending of humanity?",
+  hint:
+    "<strong>Hint:</strong> This is a joke. the options " +
+    "'cats', 'the release of Angular', and 'the release of Linux 5.0' " +
+    "are correct.",
+  options: MultipleChoice.parseOptions([
+    "Cats",
+    "The release of Angular",
+    "Artificial Intelligence",
+    "The release of Linux 5.0",
+  ]),
   allowMultipleSelect: true,
-  checkAnswer: (userSelection) => {
-    console.log(userSelection);
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(userSelection.includes("1")), 3000);
-    });
-  },
+  worthPoints: 25,
+  checkAnswer,
 });
-
-const mc2View = new MultipleChoiceComponent(mc2Div, mc2);
-mc2View.render();
+new MultipleChoiceComponent(mc2Div, mc2).render();
 
 mc1.get("options");
 
@@ -81,9 +97,22 @@ const questionCollection = new Collection([mc1, fb1, mc2]);
 
 const panel = new PointsPanel({
   id: "hello",
-  questionCollection,
+  questionCollection: [mc1, fb1, mc2],
+  questionLinks: [
+    "https://google.com",
+    "https://google.com",
+    "https://google.com",
+  ],
 });
 
-new PointsPanelComponent(document.querySelector("#panel"), panel).render();
+const pointsPanelComponent = new PointsPanelComponent(
+  document.querySelector("#panel"),
+  panel
+);
+pointsPanelComponent.settings = {
+  listTitle: "Hello World",
+  showSuccessColor: false,
+};
+pointsPanelComponent.render();
 
 new PointsListComponent(document.querySelector("#points"), panel).render();
