@@ -97,14 +97,14 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
   updateQuestionStatus = async () => {
     // Check if the question is answered correctly
     let isCorrect: boolean;
-    let currentPoints: number;
+    let partialPoints: number;
 
     const result = await this.determineCorrectness();
     const worthPoints = this.getAll().worthPoints || 1;
 
     if (typeof result === "boolean") {
       isCorrect = result;
-      currentPoints = worthPoints;
+      partialPoints = worthPoints;
     } else {
       if (result > worthPoints) {
         throw new Error(
@@ -115,7 +115,7 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
             `checkAnswer: ${result}, worthPoints: ${worthPoints}.`
         );
       }
-      currentPoints = result;
+      partialPoints = result;
       isCorrect = result === worthPoints;
     }
 
@@ -126,7 +126,7 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
 
     this.set(
       // @ts-ignore
-      { questionStatus: newQuestionStatus, currentPoints },
+      { questionStatus: newQuestionStatus, partialPoints },
       { shouldRerender: false }
     );
   };

@@ -31,7 +31,6 @@ export class PointsPanelComponent extends BlockComponent<
 
   componentDidRender() {
     this.model.on("question-change", () => {
-      console.log("received question change event");
       this.rerender();
     });
   }
