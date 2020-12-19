@@ -11,6 +11,10 @@ export abstract class CollectionComponent<T extends BlockModel<K>, K>
   implements Component {
   constructor(public parent: Element, public collection: Collection<T>) {}
 
+  // Life cycle methods
+  componentWillRender(): void {}
+  componentDidRender(): void {}
+
   /**
    * Render one component based on the model given.
    * Append the component rendered to the parent element.
@@ -30,8 +34,12 @@ export abstract class CollectionComponent<T extends BlockModel<K>, K>
       this.parent.innerHTML = "";
     }
 
+    this.componentWillRender();
+
     for (let model of this.collection.getAll()) {
       this.appendComponent(model);
     }
+
+    this.componentDidRender();
   };
 }
