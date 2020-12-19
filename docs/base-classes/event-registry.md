@@ -2,6 +2,10 @@
 
 Event registry class to persist and trigger a set of events.
 
+## Alias
+
+* EventRegistry
+
 ## Constructor
 
 * `constructor(public events: EventsRecord = {})`

@@ -1,6 +1,10 @@
 # Block Model
 An interactive block model.
 
+## Alias
+
+* BlockModel\<T = any\>
+
 ## Implements
 * [Serializable](base-classes/persistence.md?id=types)
 

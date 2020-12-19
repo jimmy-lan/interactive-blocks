@@ -2,6 +2,11 @@
 
 General class to declare the required methods and/or attributes of a persistence object.
 
+## Alias
+
+* Persistence\<T\>
+* *abstract* Persistence\<T\>
+
 ## Constructor
 
 `protected constructor(protected model: T) {}`

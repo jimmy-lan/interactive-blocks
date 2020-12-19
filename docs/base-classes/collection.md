@@ -2,6 +2,10 @@
 
 A collection of models.
 
+## Alias
+
+* Collection\<T extends BlockModel\>
+
 ## Implements
 * [Serializable](base-classes/persistence.md?id=types)
 

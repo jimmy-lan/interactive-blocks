@@ -2,6 +2,11 @@
 
 An abstract representation of an interactive block component.
 
+## Alias
+
+* BlockComponent<T extends [BlockModel](base-classes/block-model.md)<K>, K>
+* *abstract* BlockComponent<T extends [BlockModel](base-classes/block-model.md)<K>, K>
+
 ## Constructor
 
 ```constructor(public parent: Element, public model: T)```
