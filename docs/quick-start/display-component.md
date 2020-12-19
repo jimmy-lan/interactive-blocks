@@ -39,6 +39,8 @@ In the remainder of this documentation, we will assume that the needed resources
 
 ## Display a Multiple Choice Question
 
+?> **Tips:** InteractiveBlocks.js has many pre-built components with complex features. The multiple choice that we are building in this guide does not represent all available features. You can visit the API documentation for more information after this series of guides.
+
 First, we will add a `div` element to the `html` page.
 
 ```html
@@ -101,12 +103,13 @@ We will see the following output:
 
 We specified an `id` property for the MultipleChoice model.
 The `id` property is mandatory for a Question model, because it helps us distinguish between different questions. Imagine when we eventually have a list of questions, the `id` properties may be crucial to us because otherwise we might not be able to tell the questions apart from each other.
-Please ensure that the questions on your page have unique `id`s.
+
+!> **Important:** Please ensure that the questions on your page have unique `id`s.
 
 We also specify an `id` for each multiple choice option above. These `id`s are there to help us distinguish what the user selects. For example, we may access the user selections for this particular multiple-choice question using `mc.get("userSelections")`, so that we obtain a list of option `id`s corresponding to the options that the user selects.
 This can be particularly useful when we are connecting to an external API.
 
-If we don't use any external APIs to determine the correctness for questions, and don't care about what the user selects too much in our app, a convenient helper method can be used to construct the options list.
+If we don't use any external APIs to determine the correctness for questions, and don't care too much about user selections in our app, a convenient helper method can be used to construct the options list.
 We can use the following syntax:
 
 ```javascript

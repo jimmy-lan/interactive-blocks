@@ -6,7 +6,7 @@ In this page, we will talk about how to use an external API to verify the correc
 ## Creating a Fake Async Function
 
 We will begin by creating a fake async function that verifies whether a multiple choice question has been answered correctly. We will use this function to check against the same multiple choice question that we seen on the last page.
-
+  
 ```javascript
 // userSelections is an array of multiple choice option ids
 const verifyResponseAsync = (userSelections) => {
@@ -32,10 +32,8 @@ const verifyResponseAsync = (userSelections) => {
 }
 ```
 
-You can replace this function with a real async function that makes a call to an external API.
-The function should return a promise (or use async/await) that eventually resolves to a boolean value.
-If the function resolves to true, the question is marked as correct. Otherwise, the question is marked
-as incorrect.
+?> **Tips:** You can replace the body of the function above to call an external API.
+   The function should return a promise (or use async/await) that eventually resolves to a boolean value indicating whether the user has correctly answered the multiple choice question.
 
 ## Creating a Multiple Choice
 
