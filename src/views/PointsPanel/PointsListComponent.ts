@@ -25,6 +25,10 @@ export class PointsListComponent extends BlockComponent<
     };
   }
 
+  settings = {
+    title: "Questions",
+  };
+
   componentDidRender() {
     this.model.on("question-change", this.handleQuestionChange);
   }
@@ -77,12 +81,13 @@ export class PointsListComponent extends BlockComponent<
   };
 
   get htmlStructure(): string {
+    const { title } = this.settings;
     const questions = this.model.get("questionCollection").getAll();
 
     return `
       <div class="ib-points-question-panel">
         <div class="ib-question-list-header">
-          <h3 class="ib-question-list-title">Questions</h3>
+          <h3 class="ib-question-list-title">${title}</h3>
           <button class="ib-btn white icon">
             <img src="${arrowRightIcon}" alt="close panel icon" />
           </button>

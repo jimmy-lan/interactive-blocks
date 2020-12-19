@@ -20,6 +20,15 @@ export class PointsPanelComponent extends BlockComponent<
     };
   }
 
+  settings = {
+    listTitle: "Questions",
+    /**
+     * Indicate whether to update panel color to the success color when user
+     * obtains all points
+     */
+    showSuccessColor: true,
+  };
+
   componentDidRender() {
     this.model.on("question-change", () => {
       console.log("received question change event");
@@ -32,7 +41,7 @@ export class PointsPanelComponent extends BlockComponent<
     const worthPoints = this.model.totalWorthPoints;
 
     const root = document.querySelector(this.selectors.root)!;
-    if (earnedPoints === worthPoints) {
+    if (earnedPoints === worthPoints && this.settings.showSuccessColor) {
       root.classList.add("correct");
     } else {
       root.classList.remove("correct");
@@ -60,8 +69,20 @@ export class PointsPanelComponent extends BlockComponent<
   }
 
   bindComponents = () => {
-    new PointsLabelComponent(this.components.pointsLabel, this.model).render();
-    new PointsListComponent(this.components.pointsList, this.model).render();
+    // Render label
+    const label = new PointsLabelComponent(
+      this.components.pointsLabel,
+      this.model
+    );
+    label.render();
+
+    // Render list
+    const list = new PointsListComponent(
+      this.components.pointsList,
+      this.model
+    );
+    list.settings.title = this.settings.listTitle;
+    list.render();
   };
 
   get htmlStructure(): string {

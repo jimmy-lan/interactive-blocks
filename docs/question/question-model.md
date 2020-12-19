@@ -54,8 +54,8 @@ question.on("change", (changedProps) => {
 
 // Recall: Question is a generic class that works with
 // type T which extends QuestionProps.
-question.on("change", (changedProps: Partial<T>) => {
-  console.log(changedProps);
+question.on("change", (changedProps: unknown) => {
+  console.log(changedProps as Partial<T>);
 });
 ```
 

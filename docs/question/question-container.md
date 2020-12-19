@@ -28,7 +28,7 @@ You can access these properties from a question container
 questionContainer.settings;
 ```
 
-Accessors inherited from [BlockComponent](/base-classes/block-component.md):
+Some accessors overridden from [BlockComponent](/base-classes/block-component.md):
 
 ?> **Tips**: Inherited attributes or methods are not always outlined.
 Please note that the inheritance information can typically be found at the top of the page.

@@ -107,8 +107,6 @@ Persistence on a block model can be freely substituted, which allows the develop
 
 ## Events
 
-## Events
-
 You can listen to these events: "change" | "save" | "read" | "question-change".
 
 <!-- tabs:start -->
@@ -120,14 +118,28 @@ You can listen to these events: "change" | "save" | "read" | "question-change".
 panel.on("change", (changedProps) => {
   console.log(changedProps);
 });
+
+// The question-change event is only triggered when one of
+// the question attributes `question`, `title`, `questionStatus`,
+// `worthPoints`, and `partialPoints` is changed for greater efficiency.
+panel.on("question-change", (changedQuestionProps) => {
+  console.log(changedQuestionProps);
+});
 ```
 
 #### **TS**
 
 ```typescript
 // Suppose `panel` is referring to a points panel instance.
-panel.on("change", (changedProps: Partial<PointsPanelProps>) => {
-  console.log(changedProps);
+panel.on("change", (changedProps: unknown) => {
+  console.log(changedProps as Partial<PointsPanelProps>);
+});
+
+// The question-change event is only triggered when one of
+// the question attributes `question`, `title`, `questionStatus`,
+// `worthPoints`, and `partialPoints` is changed for greater efficiency.
+panel.on("question-change", (changedQuestionProps: unknown) => {
+  console.log(changedQuestionProps as Partial<QuestionProps>);
 });
 ```
 
@@ -154,10 +166,35 @@ panel.totalWorthPoints;
 panel.totalEarnedPoints;
 ```
 
-## Notes
+## Methods
+
+See [BlockModel](base-classes/block-model.md)
+
+## The Use of Collection
+
+### Behaviour
 
 When instantiating a points panel model, you may provide a question collection or an array of questions.
 If a question collection is provided, the collection is stored in the points panel as it is.
 However, if an array of questions is provided, the array will first be converted to a question collection, then stored in the points panel model.
 
-This is done because the points panel concerns about changes on individual questions.
+### Why?
+
+The conversion is done because the points panel concerns about changes in individual questions **and** the question collection.
+If the points panel model is given a pointer to an array of questions, then the points panel model cannot tell whether the array changes later during program execution.
+
+If the points panel model is unable to tell whether the array of questions changes later in the program, a component using the points panel model will fail to rerender, and the points panel model will fail to manage event listeners properly.
+
+### An Example
+
+For example, suppose that we remove an element using `array.splice` and the points panel is unable to tell the difference.
+Then, the points panel model and the component will (1) fail to rerender itself immediately after the change, and (2) fail to unregister event listener on the element that we just removed, causing unnecessary re-renders and hence hurting performance.
+
+### Another Problem
+
+However, I don't want to enforce the use of question collection because it has a more complex syntax.
+You have to type `new Collection([...])` instead of just `[...]` even when you do not plan to change the question array later in the program.
+
+### The Solution
+
+Therefore, InteractiveBlocks.js accepts both syntaxes but will convert a question array to a question collection whenever a question array is supplied.
