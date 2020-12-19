@@ -3,7 +3,7 @@
 A collection of models.
 
 ## Implements
-* [Serializable](api-docs/persistence.md?id=types)
+* [Serializable](base-classes/persistence.md?id=types)
 
 ## Constructor
 
@@ -12,8 +12,8 @@ A collection of models.
 ## Data
 
 * *private* elements: T[]
-* events: [EventRegistry](api-docs/event-registry.md)
-* persistence: [Persistence](api-docs/persistence.md)\<this\> | undefined
+* events: [EventRegistry](base-classes/event-registry.md)
+* persistence: [Persistence](base-classes/persistence.md)\<this\> | undefined
 
 ## Methods
 
@@ -24,13 +24,13 @@ A collection of models.
 * removeAt(index: number): T
 * replace(models: T[]): void
 
-## Methods from &nbsp;[Event Registry](api-docs/event-registry.md)
+## Methods from &nbsp;[Event Registry](base-classes/event-registry.md)
 
 * on (alias: register)
 * unregister
 * trigger
 
-## Methods from &nbsp;[Persistence](api-docs/persistence.md)
+## Methods from &nbsp;[Persistence](base-classes/persistence.md)
 
 * save
 * read

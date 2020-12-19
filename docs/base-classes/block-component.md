@@ -32,7 +32,7 @@ type ComponentsMap = { [key: string]: string };
 
 ## Methods to Override (Optional)
 
-* eventsMap(): [EventsMap](api-docs/block-component?id=types)
+* eventsMap(): [EventsMap](base-classes/block-component?id=types)
 ```
 /**
    * Obtain a map of events in this view component.
@@ -43,7 +43,7 @@ type ComponentsMap = { [key: string]: string };
    * - End by the event type to register. The event type to register is one of the DOM events.
    */
 ```
-* componentsMap(): [ComponentsMap](api-docs/block-component?id=types)
+* componentsMap(): [ComponentsMap](base-classes/block-component?id=types)
 ```
 /**
    * A map of child components in the view component.
