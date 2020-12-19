@@ -73,15 +73,18 @@
 
 /* Score Panel */
 
-.ib-points-score-label {
+.ib-points-label-panel .ib-points-score-label {
   font-size: 16px;
-  margin: 0;
   line-height: 1.2;
+  /* Prevent these properties from being overridden */
+  color: inherit;
+  border: none;
+  margin: 0;
 }
 
 /* Question List Panel */
 
-.ib-question-list-header {
+.ib-points-question-panel .ib-question-list-header {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -92,6 +95,8 @@
 .ib-question-list-header .ib-question-list-title {
   margin: 0;
   font-weight: normal;
+  /* Prevent these properties from being overridden */
+  color: inherit;
 }
 
 .ib-question-list-header .icon.ib-btn {
@@ -126,9 +131,21 @@
 }
 
 .ib-question-list-item-panel .ib-btn {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   white-space: nowrap;
   box-sizing: border-box;
+  text-decoration: none;
+  /* Prevent these properties from overriding */
+  border: none;
+}
+
+.ib-question-list-item-panel .ib-btn:hover {
+  text-decoration: none;
+  border: none;
 }
 
 /* Updated Dec 17 2020 */
