@@ -5,7 +5,9 @@ InteractiveBlocks.js is a front-end javascript library allowing developers to ea
 # Documentation
 
 Landing Page: https://interactive-blocks.xyz
+
 API Docs: https://interactive-blocks.xyz/#/api-docs/base-classes/attribute-registry
+
 Guides: https://interactive-blocks.xyz/#/guides/multiple-choice
 
 # Installation
