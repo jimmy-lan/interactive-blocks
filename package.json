@@ -1,6 +1,6 @@
 {
   "name": "interactive-blocks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/interactive-blocks.min.js",
   "types": "dist/index.d.ts",
