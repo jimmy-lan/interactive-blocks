@@ -212,7 +212,7 @@ No problem! Just remember that `pointsPanelComponent.settings.showSuccessColor` 
 ## Using Child Components
 
 You don't always have to mount a points panel on the top-right corner of your page, and it doesn't always need to have a fixed position.
-As specified in the API docs, [PointsPanelComponent](points-panel/points-panel-component.md) internally renders [PointsLabelComponent](points-panel/points-label-component.md) and [PointsListComponent](points-panel/points-list-component.md) as child components.
+As specified in the API docs, [PointsPanelComponent](api-docs/points-panel/points-panel-component.md) internally renders [PointsLabelComponent](api-docs/points-panel/points-label-component.md) and [PointsListComponent](api-docs/points-panel/points-list-component.md) as child components.
 You can use these child components separately and position them anywhere you want.
 
 In this section, we will make use of the PointsListComponent.

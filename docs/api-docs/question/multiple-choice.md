@@ -3,24 +3,24 @@
 ## Alias
 
 - MultipleChoice
-- MultipleChoice extends [Question](question/question-model.md)\<MultipleChoiceProps\>
+- MultipleChoice extends [Question](api-docs/question/question-model.md)\<MultipleChoiceProps\>
 
 ## Parent Class
 
-- [Question](question/question-model.md)\<MultipleChoiceProps\>
+- [Question](api-docs/question/question-model.md)\<MultipleChoiceProps\>
 
 ## Multiple Choice Props
 
-| Property            | default     | Type                                        | Description                                                                                                                                         |
-| ------------------- | ----------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options\*           | /           | MultipleChoiceOption[]                      | A list of options corresponding to this multiple choice question. A more detailed description on `MultipleChoiceOption` follows this section.       |
-| userSelections      | _undefined_ | String[]                                    | A list storing `id` of options chosen by the user.                                                                                                  |
-| allowMultipleSelect | _guessed_   | Boolean                                     | If true, more than one option can be selected by the user. This attribute will be guessed if not specified.                                         |
-| checkAnswer         | _undefined_ | (p: string[]) => Promise<boolean \| number> | Please see `checkAnswer` property in [Question](question/question-model.md?id=question-props). This property is listed again due to change in type. |
+| Property            | default     | Type                                        | Description                                                                                                                                                  |
+| ------------------- | ----------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| options\*           | /           | MultipleChoiceOption[]                      | A list of options corresponding to this multiple choice question. A more detailed description on `MultipleChoiceOption` follows this section.                |
+| userSelections      | _undefined_ | String[]                                    | A list storing `id` of options chosen by the user.                                                                                                           |
+| allowMultipleSelect | _guessed_   | Boolean                                     | If true, more than one option can be selected by the user. This attribute will be guessed if not specified.                                                  |
+| checkAnswer         | _undefined_ | (p: string[]) => Promise<boolean \| number> | Please see `checkAnswer` property in [Question](api-docs/question/question-model.md?id=question-props). This property is listed again due to change in type. |
 
 ?> **Tips:** A star (\*) beside the property name means that the property is required.
 
-Please see [Question](question/question-model.md?id=question-props) for other properties that you can specify for a multiple choice question.
+Please see [Question](api-docs/question/question-model.md?id=question-props) for other properties that you can specify for a multiple choice question.
 
 ## Multiple Choice Option
 
@@ -34,7 +34,7 @@ Please see [Question](question/question-model.md?id=question-props) for other pr
 
 ## Constructor
 
-The constructor for multiple choice model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](base-classes/block-model.md).
+The constructor for multiple choice model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](api-docs/base-classes/block-model.md).
 
 <!-- tabs:start -->
 
@@ -94,11 +94,11 @@ Persistence on a block model can be freely substituted, which allows the develop
 
 ## Events
 
-See [Question](question/question-model.md?id=events).
+See [Question](api-docs/question/question-model.md?id=events).
 
 ## Accessors
 
-See [Question](question/question-model.md?id=accessors).
+See [Question](api-docs/question/question-model.md?id=accessors).
 
 ## Methods
 
@@ -117,16 +117,16 @@ MultipleChoice.parseOptions(["option 1", "option 2", "option 3"], [0]);
 MultipleChoice.parseOptions(["option 1", "option 2", "option 3"], [0, 2]);
 ```
 
-See also: [Question](question/question-model.md?id=methods).
+See also: [Question](api-docs/question/question-model.md?id=methods).
 
 ## Pre-build View Components
 
 Pre-build components that work with this model.
-You can also create your own component by extending [QuestionContainer](question/question-container.md) or [BlockComponent](base-classes/block-component.md).
+You can also create your own component by extending [QuestionContainer](api-docs/question/question-container.md) or [BlockComponent](api-docs/base-classes/block-component.md).
 
 ### Multiple Choice Component
 
-A subclass of [QuestionContainer](question/question-container.md) that mounts an [OptionsForm](question/multiple-choice?id=options-form.md) inside of the container.
+A subclass of [QuestionContainer](api-docs/question/question-container.md) that mounts an [OptionsForm](api-docs/question/multiple-choice?id=options-form.md) inside of the container.
 
 ### Options Form
 

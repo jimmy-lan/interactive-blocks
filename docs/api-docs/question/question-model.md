@@ -7,7 +7,7 @@
 
 ## Parent Class
 
-- [BlockModel](/base-classes/block-model.md)\<T extends QuestionProps\>
+- [BlockModel](/api-docs/base-classes/block-model.md)\<T extends QuestionProps\>
 
 ## Question Props
 
@@ -98,6 +98,6 @@ You only need to call these methods when you are writing scripts to dynamically 
 question.updateQuestionStatus();
 ```
 
-Please note the additional methods inherited from [BlockModel](/base-classes/block-model.md).
+Please note the additional methods inherited from [BlockModel](/api-docs/base-classes/block-model.md).
 These methods include `get`, `getAll`, `set`, `replace`, `on`, `unregister`, `trigger`, `save`, `read`,
 `serialize`, `deserialize`.

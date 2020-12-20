@@ -4,20 +4,21 @@ An abstract representation of an interactive block component.
 
 ## Alias
 
-* BlockComponent<T extends [BlockModel](base-classes/block-model.md)<K>, K>
-* *abstract* BlockComponent<T extends [BlockModel](base-classes/block-model.md)<K>, K>
+- BlockComponent<T extends [BlockModel](api-docs/base-classes/block-model.md)<K>, K>
+- _abstract_ BlockComponent<T extends [BlockModel](api-docs/base-classes/block-model.md)<K>, K>
 
 ## Constructor
 
-```constructor(public parent: Element, public model: T)```
+`constructor(public parent: Element, public model: T)`
 
 ## Data
 
-* selectors
-> An object mapping name to component selector for key elements in this BlockComponent.
+- selectors
 
-* htmlStructure
-> A string with html syntax that represents this view component.
+  > An object mapping name to component selector for key elements in this BlockComponent.
+
+- htmlStructure
+  > A string with html syntax that represents this view component.
 
 ## Types
 
@@ -37,7 +38,8 @@ type ComponentsMap = { [key: string]: string };
 
 ## Methods to Override (Optional)
 
-* eventsMap(): [EventsMap](base-classes/block-component?id=types)
+- eventsMap(): [EventsMap](api-docs/base-classes/block-component?id=types)
+
 ```
 /**
    * Obtain a map of events in this view component.
@@ -48,7 +50,9 @@ type ComponentsMap = { [key: string]: string };
    * - End by the event type to register. The event type to register is one of the DOM events.
    */
 ```
-* componentsMap(): [ComponentsMap](base-classes/block-component?id=types)
+
+- componentsMap(): [ComponentsMap](api-docs/base-classes/block-component?id=types)
+
 ```
 /**
    * A map of child components in the view component.
@@ -57,8 +61,10 @@ type ComponentsMap = { [key: string]: string };
    * - Values correspond to selectors of child components
    */
 ```
-* bindComponents(): void
-* rerender(changedProps: Partial\<K\>): void
+
+- bindComponents(): void
+- rerender(changedProps: Partial\<K\>): void
+
 ```
 /**
    * Method triggered when the model changes.
@@ -68,12 +74,12 @@ type ComponentsMap = { [key: string]: string };
 
 ## Other Methods
 
-* bindModel(): void
-* bindEvents(fragment: DocumentFragment): void
-* mapComponents(fragment: DocumentFragment): void
-* render(disableClean: boolean = false): void
+- bindModel(): void
+- bindEvents(fragment: DocumentFragment): void
+- mapComponents(fragment: DocumentFragment): void
+- render(disableClean: boolean = false): void
 
 ## Life-Cycle Methods
 
-* componentDidRender(): void
-* componentWillRender(): void
+- componentDidRender(): void
+- componentWillRender(): void

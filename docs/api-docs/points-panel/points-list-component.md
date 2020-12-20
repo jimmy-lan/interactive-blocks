@@ -3,11 +3,11 @@
 ## Alias
 
 - PointsListComponent
-- PointsListComponent extends [BlockComponent](base-classes/block-component.md)\<[PointsPanel](points-panel/points-panel-model.md),PointsPanelProps\>
+- PointsListComponent extends [BlockComponent](api-docs/base-classes/block-component.md)\<[PointsPanel](api-docs/points-panel/points-panel-model.md),PointsPanelProps\>
 
 ## Parent Class
 
-- [BlockComponent](base-classes/block-component.md)\<[PointsPanel](points-panel/points-panel-model.md),PointsPanelProps\>
+- [BlockComponent](api-docs/base-classes/block-component.md)\<[PointsPanel](api-docs/points-panel/points-panel-model.md),PointsPanelProps\>
 
 ## Settings
 
@@ -19,7 +19,7 @@ You can specify these settings by assigning to `list.settings`.
 
 ## Accessors
 
-Some accessors overridden from [BlockComponent](/base-classes/block-component.md):
+Some accessors overridden from [BlockComponent](/api-docs/base-classes/block-component.md):
 
 ?> **Tips**: Inherited attributes or methods are not always outlined.
 Please note that the inheritance information can typically be found at the top of the page.
@@ -35,4 +35,4 @@ list.selectors;
 
 ## Methods
 
-See [BlockComponent](/base-classes/block-component.md).
+See [BlockComponent](/api-docs/base-classes/block-component.md).

@@ -3,11 +3,11 @@
 ## Alias
 
 - FillBlanks
-- FillBlanks extends [Question](question/question-model.md)\<FillBlanksProps\>
+- FillBlanks extends [Question](api-docs/question/question-model.md)\<FillBlanksProps\>
 
 ## Parent Class
 
-- [Question](question/question-model.md)\<MultipleChoiceProps\>
+- [Question](api-docs/question/question-model.md)\<MultipleChoiceProps\>
 
 ## Fill Blanks Props
 
@@ -17,7 +17,7 @@
 | hintNumChars      | false       | Boolean or Number                           | A boolean value deciding whether to hint the user on the number of characters in the correct answer. If this option is provided and set to a number (or true), all answers in `acceptableAnswers` must have the same length, or `acceptableAnswers` should only contain one string. |
 | caseSensitive     | false       | Boolean                                     | Indicates whether the answers to this question are case-sensitive. Defaults to false.                                                                                                                                                                                               |
 | userInput         | _undefined_ | String                                      | A string storing the current user response to this fill in the blanks question.                                                                                                                                                                                                     |
-| checkAnswer       | _undefined_ | (p: string) => Promise\<boolean \| number\> | Please see `checkAnswer` property in [Question](question/question-model.md?id=question-props). This property is listed again due to change in type.                                                                                                                                 |
+| checkAnswer       | _undefined_ | (p: string) => Promise\<boolean \| number\> | Please see `checkAnswer` property in [Question](api-docs/question/question-model.md?id=question-props). This property is listed again due to change in type.                                                                                                                        |
 
 !> **Important**: You should provide either `acceptableAnswers` or `checkAnswers` to the props.
 
@@ -34,7 +34,7 @@ Please check the developer console often.
 
 ## Constructor
 
-The constructor for fill in the blanks model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](base-classes/block-model.md).
+The constructor for fill in the blanks model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](api-docs/base-classes/block-model.md).
 
 <!-- tabs:start -->
 
@@ -92,21 +92,21 @@ Persistence on a block model can be freely substituted, which allows the develop
 
 ## Events
 
-See [Question](question/question-model.md?id=events).
+See [Question](api-docs/question/question-model.md?id=events).
 
 ## Accessors
 
-See [Question](question/question-model.md?id=accessors).
+See [Question](api-docs/question/question-model.md?id=accessors).
 
 ## Methods
 
-See [Question](question/question-model.md?id=methods).
+See [Question](api-docs/question/question-model.md?id=methods).
 
 ## Pre-build View Components
 
 Pre-build components that work with this model.
-You can also create your own component by extending [QuestionContainer](question/question-container.md) or [BlockComponent](base-classes/block-component.md).
+You can also create your own component by extending [QuestionContainer](api-docs/question/question-container.md) or [BlockComponent](api-docs/base-classes/block-component.md).
 
 ### Fill Blanks Component
 
-A subclass of [QuestionContainer](questions/question-container.md) that mounts a fill in the blanks question.
+A subclass of [QuestionContainer](api-docs/question/question-container.md) that mounts a fill in the blanks question.

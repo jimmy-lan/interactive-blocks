@@ -8,7 +8,7 @@ A question container with status panel and content panel.
 
 ## Parent Class
 
-- [BlockComponent](/base-classes/block-component.md)\<T extends Question\<K\>, K extends QuestionProps\>
+- [BlockComponent](/api-docs/base-classes/block-component.md)\<T extends Question\<K\>, K extends QuestionProps\>
 
 ## Settings
 
@@ -28,7 +28,7 @@ You can access these properties from a question container
 questionContainer.settings;
 ```
 
-Some accessors overridden from [BlockComponent](/base-classes/block-component.md):
+Some accessors overridden from [BlockComponent](/api-docs/base-classes/block-component.md):
 
 ?> **Tips**: Inherited attributes or methods are not always outlined.
 Please note that the inheritance information can typically be found at the top of the page.
@@ -60,7 +60,7 @@ questionContainer.displayLoadingState(true);
 questionContainer.displayLoadingState(false);
 ```
 
-Some methods inherited from [BlockComponent](/base-classes/block-component.md):
+Some methods inherited from [BlockComponent](/api-docs/base-classes/block-component.md):
 
 ```javascript
 // Render or rerender the question component

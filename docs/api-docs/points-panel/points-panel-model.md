@@ -3,11 +3,11 @@
 ## Alias
 
 - PointsPanel
-- PointsPanel extends [BlockModel](base-classes/block-model.md)\<PointsPanelProps\>
+- PointsPanel extends [BlockModel](api-docs/base-classes/block-model.md)\<PointsPanelProps\>
 
 ## Parent Class
 
-- [BlockModel](base-classes/block-model.md)\<PointsPanelProps\>
+- [BlockModel](api-docs/base-classes/block-model.md)\<PointsPanelProps\>
 
 ## Points Panel Blueprint
 
@@ -21,31 +21,31 @@ These properties can be specified or obtained.
 
 ## Points Panel (Accepted) Props
 
-**Extends [Points Panel Blueprint](points-panel/points-panel-model.md?id=points-panel-blueprint)**.
+**Extends [Points Panel Blueprint](api-docs/points-panel/points-panel-model.md?id=points-panel-blueprint)**.
 
 Properties that points panel _accepts_ during initialization.
 
-| Property             | default | Type                                                                                                                                                               | Description                                                                                                                |
-| -------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| questionCollection\* | /       | [Collection](base-classes/collection.md)\<[Question](question/question-model.md)\<QuestionProps\>\> **or [Question](question/question-model.md)<QuestionProps>[]** | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown. |
+| Property             | default | Type                                                                                                                                                                                          | Description                                                                                                                |
+| -------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| questionCollection\* | /       | [Collection](api-docs/base-classes/collection.md)\<[Question](api-docs/question/question-model.md)\<QuestionProps\>\> **or [Question](api-docs/question/question-model.md)<QuestionProps>[]** | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown. |
 
 ?> **Tips:** A star (\*) beside the property name means that the property is required.
 
 ## Points Panel Props
 
-**Extends [Points Panel Blueprint](points-panel/points-panel-model.md?id=points-panel-blueprint)**.
+**Extends [Points Panel Blueprint](api-docs/points-panel/points-panel-model.md?id=points-panel-blueprint)**.
 
 Properties that you can access from the points panel.
 
-| Property             | default | Type                                                                                                | Description                                                                                                                |
-| -------------------- | ------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| questionCollection\* | /       | [Collection](base-classes/collection.md)\<[Question](question/question-model.md)\<QuestionProps\>\> | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown. |
+| Property             | default | Type                                                                                                                  | Description                                                                                                                |
+| -------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| questionCollection\* | /       | [Collection](api-docs/base-classes/collection.md)\<[Question](api-docs/question/question-model.md)\<QuestionProps\>\> | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown. |
 
 ?> **Tips:** A star (\*) beside the property name means that the property will exist in a points panel.
 
 ## Constructor
 
-The constructor for multiple choice model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](base-classes/block-model.md).
+The constructor for multiple choice model takes one or two arguments, and is slightly different from the constructor of its parent class, [BlockModel](api-docs/base-classes/block-model.md).
 
 <!-- tabs:start -->
 
@@ -168,7 +168,7 @@ panel.totalEarnedPoints;
 
 ## Methods
 
-See [BlockModel](base-classes/block-model.md)
+See [BlockModel](api-docs/base-classes/block-model.md)
 
 ## The Use of Collection
 
