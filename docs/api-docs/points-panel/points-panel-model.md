@@ -14,10 +14,11 @@
 Properties that exists on points panel.
 These properties can be specified or obtained.
 
-| Property          | default     | Type    | Description                                                                                                                |
-| ----------------- | ----------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| id                | _undefined_ | String  | Id of this points panel. Optional.                                                                                         |
-| displayPercentage | false       | Boolean | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown. |
+| Property          | default     | Type     | Description                                                                                                                                                                                                                                                                                                                                          |
+| ----------------- | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                | _undefined_ | String   | Id of this points panel. Optional.                                                                                                                                                                                                                                                                                                                   |
+| questionLinks     | /           | String[] | A link array corresponding to elements in `questionCollection`. When working when points list component, the component will try to redirect users to #`questionId` by default when they click on "Go to Question". If you have a different configuration or would like to redirect users to other places, provide a list of links to this attribute. |
+| displayPercentage | false       | Boolean  | Indicates whether a percentage should be shown in this panel. If false, a numeric value representing score would be shown.                                                                                                                                                                                                                           |
 
 ## Points Panel (Accepted) Props
 
