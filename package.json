@@ -1,6 +1,6 @@
 {
   "name": "interactive-blocks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A front-end javascript library to easily create interactive components.",
   "main": "dist/interactive-blocks.min.js",
   "types": "dist/index.d.ts",
