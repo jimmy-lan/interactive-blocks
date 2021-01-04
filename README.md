@@ -55,3 +55,19 @@ You may also include a copy of the source map file for `interactive-blocks.min.j
 InteractiveBlocks.js is written with Typescript.
 You can find a copy of the type definition files in the `dist` folder.
 Please start by looking at `index.d.ts`.
+
+## Local Compilation
+
+You can compile the `dist` folder locally on your machine, by running the following commands.
+
+**One-time Build:**
+
+```bash
+npm run build
+```
+
+**Automatic Builds:**
+
+```bash
+npm run dev
+```
