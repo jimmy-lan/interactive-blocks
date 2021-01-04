@@ -182,7 +182,7 @@ new MultipleChoiceComponent(document.getElementById("mc"), mc).render();
 // Here we sync the multiple choice with the server when the question
 // status updates. However, when to call the `save` method is up to you.
 mc.on("change", (changedProps) => {
-  if (changeProps.questionStatus) {
+  if (changedProps.questionStatus) {
     // Sends a POST request to "http://your-url-here.com/multiple-choice-1"
     mc.save(mc.get("id"));
   }
