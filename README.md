@@ -75,3 +75,11 @@ npm run build
 ```bash
 npm run dev
 ```
+
+## Credit
+
+The design of some prebuilt components were inspired by Google's material design.
+
+The left-arrow icon was taken from Google's Material Design Icons. Thanks to Google!
+
+**Note: InteractiveBlocks.js has no production dependencies.**
