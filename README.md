@@ -4,7 +4,7 @@ InteractiveBlocks.js is a front-end javascript library allowing developers to ea
 Currently, you can mount questions and score panels on your page using the pre-built components.
 You may also extend the library and use it as a "lightweight" React.
 
-Please check out this quick start guide on what the library can do: https://interactive-blocks.xyz/quick-start.
+Please check out this quick start guide on what the library can do: https://interactive-blocks.xyz/#/quick-start/installation.
 
 # Documentation
 
