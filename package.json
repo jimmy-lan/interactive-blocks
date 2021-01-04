@@ -1,7 +1,7 @@
 {
   "name": "interactive-blocks",
   "version": "1.0.3",
-  "description": "",
+  "description": "A front-end javascript library to easily create interactive components.",
   "main": "dist/interactive-blocks.min.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -14,15 +14,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/csc309-fall-2020/js-library-lanyanxi.git"
+    "url": "git+https://github.com/lanyanxiang/interactive-blocks.git"
   },
-  "keywords": [],
+  "keywords": [
+    "Interactive Blocks",
+    "Questions",
+    "Quiz",
+    "Survey",
+    "Reusable Components"
+  ],
   "author": "Jimmy Lan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/csc309-fall-2020/js-library-lanyanxi/issues"
+    "url": "https://github.com/lanyanxiang/interactive-blocks/issues"
   },
-  "homepage": "https://github.com/csc309-fall-2020/js-library-lanyanxi#readme",
+  "homepage": "https://github.com/lanyanxiang/interactive-blocks#readme",
   "devDependencies": {
     "@rollup/plugin-image": "^2.0.6",
     "cssnano": "^4.1.10",
