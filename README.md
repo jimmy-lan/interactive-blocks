@@ -41,7 +41,7 @@ npm install interactive-blocks
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/interactive-blocks@1.0.5/dist/interactive-blocks.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/interactive-blocks@1.0.8/dist/interactive-blocks.min.js"></script>
 ```
 
 ## Source Maps
@@ -51,7 +51,7 @@ Source maps are provided with the library. If you install InteractiveBlocks.js v
 You may also include a copy of the source map file for `interactive-blocks.min.js` via the following cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/interactive-blocks@1.0.5/dist/interactive-blocks.min.js.map"></script>
+<script src="https://cdn.jsdelivr.net/npm/interactive-blocks@1.0.8/dist/interactive-blocks.min.js.map"></script>
 ```
 
 ## Type Definitions
