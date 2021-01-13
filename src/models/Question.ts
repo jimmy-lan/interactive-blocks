@@ -104,7 +104,7 @@ export abstract class Question<T extends QuestionProps> extends BlockModel<T> {
 
     if (typeof result === "boolean") {
       isCorrect = result;
-      partialPoints = worthPoints;
+      partialPoints = isCorrect ? worthPoints : 0;
     } else {
       if (result > worthPoints) {
         throw new Error(
