@@ -4,7 +4,7 @@ InteractiveBlocks.js is a front-end javascript library allowing developers to ea
 
 # Documentation
 
-https://interactive-blocks.xyz
+https://blocks.jimmy-lan.com
 
 # Installation
 
