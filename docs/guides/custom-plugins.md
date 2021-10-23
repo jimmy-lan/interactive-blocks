@@ -116,7 +116,7 @@ class ApiSyncPersistence extends Persistence {
 
 <!-- tabs:end -->
 
-## Update Save Method
+## Implement Save Method
 
 Similarly, we implement the save method as follows:
 
